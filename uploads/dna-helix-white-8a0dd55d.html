@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNA Capital</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;background:#ffffff;overflow-x:hidden;font-family:Georgia,serif}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.page{position:relative;z-index:1;min-height:500vh}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 8vw;max-width:680px}
+h1{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;color:#1a2340;line-height:1.26;letter-spacing:-0.01em}
+h1 em{color:#1565c0;font-style:normal}
+.cue{margin-top:56px;font-family:'Courier New',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:10px}
+.cue-line{width:1px;height:30px;background:rgba(0,30,100,.2)}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="page">
+  <div class="hero">
+    <h1>Nos empoderamos times e companhias <em>excepcionais</em> em saude e tecnologia</h1>
+    <div class="cue"><div class="cue-line"></div>role para ver mais</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+window.addEventListener('load', function() {
+  try { init(); } catch(e) { console.error('DNA init error:', e); }
+});
+
+function init() {
+  var canvas = document.getElementById('c');
+  var W = window.innerWidth, H = window.innerHeight;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false });
+  renderer.setPixelRatio(dpr);
+  renderer.setSize(W, H);
+  renderer.setClearColor(0xffffff, 1);
+
+  var scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x000000, 0.00025);
+
+  // EXACT from site: camera [0,0,4], FOV 60, lookAt [0,0,0]
+  var camera = new THREE.PerspectiveCamera(60, W / H, 0.01, 100);
+  camera.position.set(0, 0, 4);
+  camera.lookAt(0, 0, 0);
+
+  // ---- SHADERS (exact from live site, decoded from base64) ----
+  var pVert = [
+    'uniform float uSize;',
+    'varying vec2 vUv;',
+    'varying float vColorId;',
+    'varying float vAlpha;',
+    'float random(vec2 st){return fract(sin(dot(st.xy,vec2(12.9898,78.233)))*43758.5453123);}',
+    'void main(){',
+    '  vUv=uv;',
+    '  vec4 mv=modelViewMatrix*vec4(position,1.0);',
+    '  gl_Position=projectionMatrix*mv;',
+    '  vColorId=random(uv);',
+    '  vAlpha=random(uv+50.0);',
+    '  gl_PointSize=min(uSize*(1.0/-mv.z),18.0);',
+    '}'
+  ].join('\n');
+
+  var pFrag = [
+    'uniform vec3 uColor1,uColor2,uColor3;',
+    'uniform float uAlpha,uGradientInner,uGradientOuter;',
+    'uniform vec2 uVerticalGradient;',
+    'varying vec2 vUv;',
+    'varying float vColorId,vAlpha;',
+    'float circle(vec2 st,float r){',
+    '  vec2 d=st-0.5;',
+    '  return 1.0-smoothstep(r-(r*uGradientInner),r+(r*uGradientOuter),dot(d,d)*4.0);',
+    '}',
+    'void main(){',
+    '  float s=circle(gl_PointCoord,0.5);',
+    '  float v=smoothstep(0.0,uVerticalGradient.x,vUv.y)*(1.0-smoothstep(uVerticalGradient.y,1.0,vUv.y));',
+    '  vec3 col=mix(uColor1,uColor2,smoothstep(0.0,0.5,vColorId));',
+    '  col=mix(col,uColor3,smoothstep(0.5,1.0,vColorId));',
+    '  gl_FragColor=vec4(col,s*vAlpha*uAlpha*v);',
+    '}'
+  ].join('\n');
+
+  // ---- GEOMETRY (verified from live site data) ----
+  // Structure: 100 radial strips x 374 heights = 37,370
+  // r(U,V) = 3.3 * sin(PI*V) * 2 * |U-0.5|
+  // theta(V) = -PI/2 - 2*PI*1.5*V  (strand 2 adds PI)
+  var TOTAL = 37370;
+  var YMIN = 1.66, YMAX = 21.44, YSPAN = YMAX - YMIN;
+  var VROWS = 374;
+  var USTEPS = 50; // per strand
+  var AMP = 3.3, TURNS = 1.5;
+
+  var pos = new Float32Array(TOTAL * 3);
+  var uvs = new Float32Array(TOTAL * 2);
+  var pi = 0;
+
+  for (var strand = 0; strand < 2 && pi < TOTAL; strand++) {
+    for (var vi = 0; vi < VROWS && pi < TOTAL; vi++) {
+      var v = vi / (VROWS - 1);
+      var yL = YMIN + v * YSPAN;
+      var rMax = AMP * Math.sin(Math.PI * v);
+      var theta = -Math.PI / 2 - 2 * Math.PI * TURNS * v + strand * Math.PI;
+
+      for (var ui = 0; ui < USTEPS && pi < TOTAL; ui++) {
+        var u = strand === 0 ? 0.5 - (ui + 1) * 0.01 : 0.5 + (ui + 1) * 0.01;
+        var r = rMax * 2 * Math.abs(u - 0.5);
+        var da = (Math.random() - 0.5) * 0.10;
+        var dy = (Math.random() - 0.5) * 0.06;
+
+        pos[pi * 3]     = Math.cos(theta + da) * r;
+        pos[pi * 3 + 1] = yL + dy;
+        pos[pi * 3 + 2] = Math.sin(theta + da) * r;
+        uvs[pi * 2]     = u;
+        uvs[pi * 2 + 1] = v;
+        pi++;
+      }
+    }
+  }
+
+  var pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  pGeo.setAttribute('uv',       new THREE.BufferAttribute(uvs, 2));
+
+  // uSize: site uses 15 at 1130px/1x DPR. Scale proportionally + boost for visibility.
+  var uSize = 26 * (H * dpr / 1130);
+
+  var pMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uSize:             { value: uSize },
+      uAlpha:            { value: 0.92 },
+      uColor1:           { value: new THREE.Color(0x0a2466) },
+      uColor2:           { value: new THREE.Color(0x1565c0) },
+      uColor3:           { value: new THREE.Color(0x42a5f5) },
+      uGradientInner:    { value: 1.20 },
+      uGradientOuter:    { value: 0.0 },
+      uVerticalGradient: { value: new THREE.Vector2(0.41, 0.72) }
+    },
+    vertexShader:   pVert,
+    fragmentShader: pFrag,
+    transparent:    true,
+    depthWrite:     false,
+    blending:       THREE.NormalBlending
+  });
+
+  var pMesh = new THREE.Points(pGeo, pMat);
+  pMesh.position.y = -10.89;  // exact from site
+  pMesh.rotation.y =  1.36;   // exact from site
+
+  // ---- CONTAINER ----
+  // ---- CONTAINER ----
+  var container = new THREE.Group();
+  container.add(pMesh);
+  scene.add(container);
+
+  // ---- SCROLL (exact site formula: 5e-4 * scrollY * 1.8, lerp 0.5) ----
+  var tCY = 0, cCY = 0, tRY = 1.36, cRY = 1.36;
+  window.addEventListener('scroll', function() {
+    var sy = window.scrollY || window.pageYOffset;
+    tCY = 5e-4 * sy * 1.8;
+    tRY = 1.36 + -0.001 * sy;
+  });
+
+  // ---- MOUSE ----
+  var mTx=0, mTy=0, mCx=0, mCy=0;
+  window.addEventListener('mousemove', function(e) {
+    mTx = (e.clientX / W - 0.5) * 2;
+    mTy = (e.clientY / H - 0.5) * 2;
+  });
+
+  // ---- RESIZE ----
+  window.addEventListener('resize', function() {
+    W = window.innerWidth; H = window.innerHeight;
+    camera.aspect = W / H;
+    camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+    pMat.uniforms.uSize.value = 26 * (H * dpr / 1130);
+  });
+
+  // ---- LOOP ----
+  var clock = new THREE.Clock();
+  function L(a,b,t){ return a + (b-a)*t; }
+
+  function tick() {
+    requestAnimationFrame(tick);
+    var elapsed = clock.getElapsedTime();
+
+    cCY = L(cCY, tCY, 0.5);
+    cRY = L(cRY, tRY, 0.5);
+    mCx = L(mCx, mTx, 0.05);
+    mCy = L(mCy, mTy, 0.05);
+
+    container.position.y = cCY;
+    pMesh.rotation.y     = cRY;
+
+    camera.position.x = L(-0.2, 0.2, (mCx + 1) / 2);
+    camera.position.y = L(-0.1, 0.1, (mCy + 1) / 2);
+    camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+  }
+  tick();
+}
+</script>
+</body>
+</html>

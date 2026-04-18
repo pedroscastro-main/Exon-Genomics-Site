@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt" data-lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hormônios & Metabolismo — Exon Genomics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f2ec;--bg-panel:#fff;--bg-warm:#ebe4d4;--bg-dark:#1a2340;
+  --ink:#1a2340;--ink-soft:#3a4560;--muted:#6b7a95;
+  --accent:#c64c2e;--accent-deep:#8a2f1a;--accent-soft:#f5b68f;
+  --blue:#1565c0;--blue-deep:#0a3d7a;
+  --line:rgba(26,35,64,.12);--line-soft:rgba(26,35,64,.06);
+  --font-heading:'Fraunces',Georgia,serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-size:16px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+em{font-style:italic;color:var(--accent)}
+.mono{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted)}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 4vw;display:flex;justify-content:space-between;align-items:center;background:rgba(245,242,236,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:44px;width:auto;display:block}
+.nav-right{display:flex;align-items:center;gap:24px;font-size:13.5px}
+.back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase}
+.back:hover{color:var(--ink)}
+.nav-cta{padding:10px 18px;border-radius:100px;background:var(--ink);color:var(--bg);font-size:13px;font-weight:500}
+
+/* HERO */
+.hero{padding:128px 4vw 80px;position:relative;overflow:hidden}
+.hero-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+@media(max-width:1000px){.hero-inner{grid-template-columns:1fr}}
+
+.hero-mono{margin-bottom:20px;color:var(--accent);display:flex;align-items:center;gap:12px}
+.hero-mono::before{content:'';width:30px;height:1px;background:var(--accent)}
+.hero h1{font-family:var(--font-heading);font-weight:400;font-size:clamp(2.8rem,6vw,6rem);line-height:.98;letter-spacing:-0.03em;margin-bottom:32px;text-wrap:balance}
+.hero h1 em{font-style:italic}
+.hero .lede{font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:46ch;margin-bottom:36px}
+
+.hero-stats{display:grid;grid-template-columns:repeat(3,auto);gap:32px;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:36px}
+.hero-stats .s b{font-family:var(--font-heading);font-size:30px;font-weight:400;line-height:1;letter-spacing:-0.02em;display:block;margin-bottom:4px}
+.hero-stats .s b em{color:var(--accent);font-style:italic}
+.hero-stats .s span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;display:block;line-height:1.4}
+
+.hero-ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:#fff;padding:18px 28px;border-radius:100px;font-weight:600;font-size:15px;transition:all .25s}
+.btn-primary:hover{background:var(--accent-deep);transform:translateY(-1px);box-shadow:0 18px 40px -15px rgba(198,76,46,.5)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;color:var(--ink);font-size:14px;padding:16px 4px;border-bottom:1px solid var(--line)}
+.btn-ghost:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Hero visual: double helix product box */
+.hero-product{position:relative;aspect-ratio:4/5;background:var(--bg-dark);border-radius:14px;overflow:hidden}
+.hero-product canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-product .tag{position:absolute;top:24px;left:24px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;color:rgba(255,255,255,.85);text-transform:uppercase;padding:8px 14px;background:rgba(0,0,0,.4);border-radius:100px;backdrop-filter:blur(8px);z-index:3;display:flex;align-items:center;gap:8px}
+.hero-product .tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.hero-product .price{position:absolute;right:28px;top:28px;color:#fff;text-align:right;z-index:3}
+.hero-product .price small{font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:rgba(255,255,255,.7);text-transform:uppercase;display:block}
+.hero-product .price b{font-family:var(--font-heading);font-size:40px;font-weight:300;letter-spacing:-0.02em;display:block;line-height:1}
+.hero-product .price span{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.7);letter-spacing:0.1em;text-transform:uppercase;display:block;margin-top:2px}
+.hero-product .foot{position:absolute;left:28px;right:28px;bottom:28px;z-index:3;color:#fff}
+.hero-product .foot .big{font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,42px);line-height:1;letter-spacing:-0.02em;margin-bottom:10px;text-wrap:balance}
+.hero-product .foot .small{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.7);letter-spacing:0.18em;text-transform:uppercase}
+
+/* Section shell */
+section{padding:120px 4vw;position:relative}
+.sec-inner{max-width:1320px;margin:0 auto}
+.sec-head{margin-bottom:64px}
+.sec-head .num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.sec-head .num::before{content:'';width:20px;height:1px;background:var(--accent)}
+.sec-head h2{font-family:var(--font-heading);font-weight:400;font-size:clamp(2rem,4vw,3.8rem);line-height:1.04;letter-spacing:-0.022em;max-width:22ch;text-wrap:balance}
+.sec-head h2 em{font-style:italic;color:var(--accent)}
+.sec-head p.sub{margin-top:20px;font-size:17px;color:var(--ink-soft);line-height:1.55;max-width:56ch}
+
+/* WHO — 3 persona cards with photos */
+.who{background:var(--bg-panel)}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.who-card{background:var(--bg);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s}
+.who-card:hover{transform:translateY(-4px)}
+.who-card .photo{aspect-ratio:4/3;position:relative;overflow:hidden}
+.who-card .photo::before{content:'';position:absolute;inset:0;background:var(--gradient,linear-gradient(160deg,#1a2340,#0a3d7a))}
+/* persona SVG replaces retrato placeholder */
+.who-card .body{padding:28px 28px 32px;flex:1;display:flex;flex-direction:column}
+.who-card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+.who-card h3{font-family:var(--font-heading);font-size:24px;font-weight:400;line-height:1.1;letter-spacing:-0.015em;margin-bottom:12px;text-wrap:balance}
+.who-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:20px;flex:1}
+.who-card .key{padding-top:20px;border-top:1px solid var(--line-soft);font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase}
+.who-card .key b{color:var(--ink);font-family:var(--font-heading);font-size:14px;text-transform:none;letter-spacing:-0.01em;font-weight:400}
+@media(max-width:900px){.who-grid{grid-template-columns:1fr}}
+
+/* WHAT — list of findings with chart */
+.what{background:var(--bg)}
+.what-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:start}
+.findings{background:var(--bg-panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.findings .f-head{padding:24px 28px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+.findings .f-head b{font-family:var(--font-heading);font-size:18px;font-weight:400;letter-spacing:-0.01em}
+.findings .f-head small{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase}
+.f-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:18px;padding:18px 28px;border-bottom:1px solid var(--line-soft);align-items:center;transition:background .2s}
+.f-row:hover{background:var(--bg-warm)}
+.f-row:last-child{border-bottom:0}
+.f-row .circle{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--font-mono);font-size:11px;color:var(--ink);font-weight:600}
+.f-row .lbl b{font-family:var(--font-heading);font-size:16px;font-weight:400;letter-spacing:-0.01em;display:block}
+.f-row .lbl span{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+.f-row .bar{width:120px;height:6px;background:var(--line-soft);border-radius:3px;overflow:hidden;flex-shrink:0}
+.f-row .bar div{height:100%;border-radius:3px}
+.f-row .bar.low div{background:#8ec997}
+.f-row .bar.mod div{background:var(--accent-soft)}
+.f-row .bar.high div{background:var(--accent)}
+.f-row .score{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;font-weight:500;text-transform:uppercase;padding:4px 10px;border-radius:100px;min-width:56px;text-align:center}
+.f-row .score.low{background:rgba(142,201,151,.2);color:#2f6b3a}
+.f-row .score.mod{background:rgba(245,182,143,.3);color:var(--accent-deep)}
+.f-row .score.high{background:var(--accent);color:#fff}
+
+.what-right h3{font-family:var(--font-heading);font-size:26px;font-weight:400;line-height:1.15;letter-spacing:-0.015em;margin-bottom:16px;text-wrap:balance}
+.what-right h3 em{font-style:italic;color:var(--accent)}
+.what-right p{font-size:15.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:16px}
+.what-right ul{list-style:none;margin-top:24px}
+.what-right li{padding:14px 0;border-top:1px solid var(--line-soft);font-size:14px;color:var(--ink-soft);display:flex;gap:14px;align-items:baseline}
+.what-right li:first-child{border-top-color:var(--ink)}
+.what-right li b{font-family:var(--font-heading);font-weight:500;color:var(--ink);font-size:15px;letter-spacing:-0.01em;min-width:140px;flex-shrink:0}
+@media(max-width:900px){.what-grid{grid-template-columns:1fr;gap:40px}}
+
+/* HOW — 5 phases across a horizontal track */
+.how{background:var(--bg-dark);color:var(--bg);overflow:hidden}
+.how .sec-head .num{color:var(--accent-soft)}
+.how .sec-head h2{color:#fff}
+.how .sec-head p.sub{color:rgba(255,255,255,.75)}
+.how-track{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(255,255,255,.08);border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.how-step{background:var(--bg-dark);padding:36px 28px;display:flex;flex-direction:column;min-height:320px;position:relative}
+.how-step .day{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.how-step .n{font-family:var(--font-heading);font-size:48px;font-weight:300;letter-spacing:-0.03em;color:rgba(255,255,255,.18);line-height:1;margin-bottom:24px}
+.how-step h4{font-family:var(--font-heading);font-size:20px;font-weight:400;letter-spacing:-0.01em;margin-bottom:10px;color:#fff}
+.how-step p{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.7);flex:1}
+.how-step .item{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-soft)}
+@media(max-width:1000px){.how-track{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.how-track{grid-template-columns:1fr}}
+
+/* PRICE — big editorial block */
+.price-sec{background:var(--bg-warm)}
+.price-inner{max-width:1100px;margin:0 auto}
+.price-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;background:var(--bg-panel);border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.price-left{padding:56px 56px 56px}
+.price-left .mono{margin-bottom:18px;color:var(--accent)}
+.price-left h3{font-family:var(--font-heading);font-size:clamp(1.8rem,3.4vw,3rem);font-weight:400;line-height:1.05;letter-spacing:-0.022em;margin-bottom:20px;text-wrap:balance}
+.price-left h3 em{font-style:italic;color:var(--accent)}
+.price-left .price{display:flex;align-items:baseline;gap:12px;margin:32px 0 12px;padding-top:32px;border-top:1px solid var(--line)}
+.price-left .price .amount{font-family:var(--font-heading);font-size:clamp(48px,6vw,80px);font-weight:300;letter-spacing:-0.03em;line-height:1;color:var(--ink)}
+.price-left .price .amount em{font-style:italic;color:var(--accent)}
+.price-left .price small{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase}
+.price-left .installment{font-size:14px;color:var(--ink-soft);margin-bottom:28px}
+.price-left .installment b{color:var(--ink);font-weight:500}
+.price-left .btn-primary{width:100%;justify-content:center}
+.price-left .fine{margin-top:16px;font-size:12.5px;color:var(--muted);line-height:1.5;text-align:center}
+
+.price-right{padding:56px 48px;background:var(--bg-warm);display:flex;flex-direction:column;justify-content:center}
+.price-right h4{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:24px}
+.price-right ul{list-style:none}
+.price-right li{padding:14px 0;border-top:1px solid var(--line);display:flex;gap:12px;align-items:baseline;font-size:15px;color:var(--ink)}
+.price-right li:first-child{border-top:0;padding-top:0}
+.price-right li::before{content:'✓';color:var(--accent);font-family:var(--font-mono);font-weight:700}
+.price-right li b{font-weight:500}
+@media(max-width:900px){.price-grid{grid-template-columns:1fr}.price-left,.price-right{padding:40px 32px}}
+
+/* FAQ mini */
+.faq-mini{padding:120px 4vw;background:var(--bg)}
+.faq-mini-inner{max-width:900px;margin:0 auto}
+.faq-mini h2{font-family:var(--font-heading);font-size:clamp(2rem,3.4vw,3.2rem);font-weight:400;letter-spacing:-0.02em;line-height:1.05;margin-bottom:48px;text-wrap:balance}
+.faq-mini h2 em{color:var(--accent);font-style:italic}
+.faq-mini details{border-top:1px solid var(--line);padding:24px 0;cursor:pointer}
+.faq-mini details:last-of-type{border-bottom:1px solid var(--line)}
+.faq-mini summary{list-style:none;display:flex;justify-content:space-between;gap:24px;font-family:var(--font-heading);font-size:clamp(18px,1.8vw,22px);font-weight:400;letter-spacing:-0.01em;align-items:baseline}
+.faq-mini summary::-webkit-details-marker{display:none}
+.faq-mini summary::after{content:'+';font-family:var(--font-mono);color:var(--accent);font-size:18px;flex-shrink:0}
+.faq-mini details[open] summary::after{content:'–'}
+.faq-mini p{margin-top:14px;color:var(--ink-soft);font-size:14.5px;line-height:1.6;max-width:65ch}
+
+/* Final CTA band */
+.final{background:var(--bg-dark);color:var(--bg);padding:140px 4vw;position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,var(--accent) 0,transparent 50%);opacity:.15;filter:blur(60px)}
+.final-inner{max-width:1100px;margin:0 auto;text-align:center;position:relative}
+.final h2{font-family:var(--font-heading);font-size:clamp(2.4rem,5vw,5rem);line-height:1;font-weight:400;letter-spacing:-0.025em;margin-bottom:24px;text-wrap:balance}
+.final h2 em{color:var(--accent);font-style:italic}
+.final p{font-size:17px;color:rgba(255,255,255,.78);max-width:52ch;margin:0 auto 40px;line-height:1.55}
+.final .ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.final .btn-primary{background:var(--accent)}
+.final .btn-secondary{display:inline-flex;align-items:center;gap:10px;color:#fff;padding:18px 28px;border-radius:100px;font-size:15px;border:1px solid rgba(255,255,255,.25);transition:all .2s}
+.final .btn-secondary:hover{background:rgba(255,255,255,.08);border-color:#fff}
+
+/* Footer */
+footer{padding:48px 4vw 32px;border-top:1px solid rgba(255,255,255,.08);background:var(--bg-dark);color:var(--bg)}
+footer .foot-inner{max-width:1260px;margin:0 auto;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:rgba(255,255,255,.5);text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo" aria-label="Exon Genomics">
+    <img src="assets/exon-wordmark-blue.svg" alt="Exon Genomics">
+  </a>
+  <div class="nav-right">
+    <a class="back" href="home-editorial.html">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2L3.5 6L7.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Todos os exames
+    </a>
+    <a href="equipe.html" style="color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Equipe</a>
+    <a href="#price" class="nav-cta">Começar →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-mono mono">05 · Endocrinogenética · Exame direcionado</div>
+      <h1>Seus <em>hormônios</em>, lidos no <em>código</em>.</h1>
+      <p class="lede">Painel de endocrinogenética com 70+ genes ligados a diabetes monogênica (MODY), obesidade de origem genética, tireoide hereditária, distúrbios adrenais e farmacogenômica hormonal. Para quem nunca emagrece, cujo exame nunca fecha, ou que responde estranho a hormônios.</p>
+
+      <div class="hero-stats">
+        <div class="s"><b>70+</b><span>genes endócrinos</span></div>
+        <div class="s"><b>5%</b><span>diabetes é MODY</span></div>
+        <div class="s"><b>1/1000</b><span>tem obesidade monogênica</span></div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#price" class="btn-primary">
+          Começar o exame
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="upload.html" class="btn-ghost">Já tenho arquivo ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-product" style="background:#1a1204;background-image:linear-gradient(170deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.7) 100%),url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=1400&q=90');background-size:cover;background-position:center">
+      <div class="tag">Endocrinogenética · NGS + PGx</div>
+      <div class="price">
+        <small>a partir de</small>
+        <b>R$ 4.990</b>
+        <span>12x sem juros</span>
+      </div>
+      <div class="foot">
+        <div class="big">Saliva em casa.<br/>Resultado em 3 semanas.</div>
+        <div class="small">Kit + coleta + painel endócrino + farmacogenômica</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO — 3 personas -->
+<section class="who">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="num mono">02 · Para quem</div>
+      <h2>Quem costuma procurar <em>este painel</em>.</h2>
+      <p class="sub">Adultos com diabetes desde jovem e sem sobrepeso. Pessoas que não emagrecem por nenhum método. Mulheres com tireoide instável há décadas. Cada um tem um gene pedindo pra ser lido.</p>
+    </div>
+
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="photo" style="--gradient:linear-gradient(165deg,#5a4a1a,#181204)">
+<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1">
+  <defs>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.3"/></filter>
+  </defs>
+  
+  <g fill="rgba(255,255,255,0.08)"><circle cx="20" cy="20" r="1"/><circle cx="47" cy="20" r="1"/><circle cx="74" cy="20" r="1"/><circle cx="101" cy="20" r="1"/><circle cx="128" cy="20" r="1"/><circle cx="155" cy="20" r="1"/><circle cx="182" cy="20" r="1"/><circle cx="209" cy="20" r="1"/><circle cx="236" cy="20" r="1"/><circle cx="263" cy="20" r="1"/><circle cx="290" cy="20" r="1"/><circle cx="317" cy="20" r="1"/><circle cx="344" cy="20" r="1"/><circle cx="371" cy="20" r="1"/><circle cx="20" cy="53" r="1"/><circle cx="47" cy="53" r="1"/><circle cx="74" cy="53" r="1"/><circle cx="101" cy="53" r="1"/><circle cx="128" cy="53" r="1"/><circle cx="155" cy="53" r="1"/><circle cx="182" cy="53" r="1"/><circle cx="209" cy="53" r="1"/><circle cx="236" cy="53" r="1"/><circle cx="263" cy="53" r="1"/><circle cx="290" cy="53" r="1"/><circle cx="317" cy="53" r="1"/><circle cx="344" cy="53" r="1"/><circle cx="371" cy="53" r="1"/><circle cx="20" cy="86" r="1"/><circle cx="47" cy="86" r="1"/><circle cx="74" cy="86" r="1"/><circle cx="101" cy="86" r="1"/><circle cx="128" cy="86" r="1"/><circle cx="155" cy="86" r="1"/><circle cx="182" cy="86" r="1"/><circle cx="209" cy="86" r="1"/><circle cx="236" cy="86" r="1"/><circle cx="263" cy="86" r="1"/><circle cx="290" cy="86" r="1"/><circle cx="317" cy="86" r="1"/><circle cx="344" cy="86" r="1"/><circle cx="371" cy="86" r="1"/><circle cx="20" cy="119" r="1"/><circle cx="47" cy="119" r="1"/><circle cx="74" cy="119" r="1"/><circle cx="101" cy="119" r="1"/><circle cx="128" cy="119" r="1"/><circle cx="155" cy="119" r="1"/><circle cx="182" cy="119" r="1"/><circle cx="209" cy="119" r="1"/><circle cx="236" cy="119" r="1"/><circle cx="263" cy="119" r="1"/><circle cx="290" cy="119" r="1"/><circle cx="317" cy="119" r="1"/><circle cx="344" cy="119" r="1"/><circle cx="371" cy="119" r="1"/><circle cx="20" cy="152" r="1"/><circle cx="47" cy="152" r="1"/><circle cx="74" cy="152" r="1"/><circle cx="101" cy="152" r="1"/><circle cx="128" cy="152" r="1"/><circle cx="155" cy="152" r="1"/><circle cx="182" cy="152" r="1"/><circle cx="209" cy="152" r="1"/><circle cx="236" cy="152" r="1"/><circle cx="263" cy="152" r="1"/><circle cx="290" cy="152" r="1"/><circle cx="317" cy="152" r="1"/><circle cx="344" cy="152" r="1"/><circle cx="371" cy="152" r="1"/><circle cx="20" cy="185" r="1"/><circle cx="47" cy="185" r="1"/><circle cx="74" cy="185" r="1"/><circle cx="101" cy="185" r="1"/><circle cx="128" cy="185" r="1"/><circle cx="155" cy="185" r="1"/><circle cx="182" cy="185" r="1"/><circle cx="209" cy="185" r="1"/><circle cx="236" cy="185" r="1"/><circle cx="263" cy="185" r="1"/><circle cx="290" cy="185" r="1"/><circle cx="317" cy="185" r="1"/><circle cx="344" cy="185" r="1"/><circle cx="371" cy="185" r="1"/><circle cx="20" cy="218" r="1"/><circle cx="47" cy="218" r="1"/><circle cx="74" cy="218" r="1"/><circle cx="101" cy="218" r="1"/><circle cx="128" cy="218" r="1"/><circle cx="155" cy="218" r="1"/><circle cx="182" cy="218" r="1"/><circle cx="209" cy="218" r="1"/><circle cx="236" cy="218" r="1"/><circle cx="263" cy="218" r="1"/><circle cx="290" cy="218" r="1"/><circle cx="317" cy="218" r="1"/><circle cx="344" cy="218" r="1"/><circle cx="371" cy="218" r="1"/><circle cx="20" cy="251" r="1"/><circle cx="47" cy="251" r="1"/><circle cx="74" cy="251" r="1"/><circle cx="101" cy="251" r="1"/><circle cx="128" cy="251" r="1"/><circle cx="155" cy="251" r="1"/><circle cx="182" cy="251" r="1"/><circle cx="209" cy="251" r="1"/><circle cx="236" cy="251" r="1"/><circle cx="263" cy="251" r="1"/><circle cx="290" cy="251" r="1"/><circle cx="317" cy="251" r="1"/><circle cx="344" cy="251" r="1"/><circle cx="371" cy="251" r="1"/><circle cx="20" cy="284" r="1"/><circle cx="47" cy="284" r="1"/><circle cx="74" cy="284" r="1"/><circle cx="101" cy="284" r="1"/><circle cx="128" cy="284" r="1"/><circle cx="155" cy="284" r="1"/><circle cx="182" cy="284" r="1"/><circle cx="209" cy="284" r="1"/><circle cx="236" cy="284" r="1"/><circle cx="263" cy="284" r="1"/><circle cx="290" cy="284" r="1"/><circle cx="317" cy="284" r="1"/><circle cx="344" cy="284" r="1"/><circle cx="371" cy="284" r="1"/></g>
+  <!-- Glucose curve (atypical diabetes) -->
+  <g stroke="rgba(255,255,255,0.85)" stroke-width="1" opacity="0.3" fill="none">
+    <line x1="40" y1="240" x2="360" y2="240"/>
+    <line x1="40" y1="60" x2="40" y2="240"/>
+    <line x1="40" y1="100" x2="360" y2="100" stroke-dasharray="2,4"/><line x1="40" y1="140" x2="360" y2="140" stroke-dasharray="2,4"/><line x1="40" y1="180" x2="360" y2="180" stroke-dasharray="2,4"/><line x1="40" y1="220" x2="360" y2="220" stroke-dasharray="2,4"/>
+  </g>
+  <!-- Normal curve (ghost) -->
+  <path d="M 40 200 Q 80 140 140 120 Q 200 110 260 150 Q 320 190 360 200"
+        fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" opacity="0.3" stroke-dasharray="4,4"/>
+  <!-- Atypical curve -->
+  <path d="M 40 210 Q 80 80 140 70 Q 200 75 260 100 Q 320 140 360 170"
+        fill="none" stroke="#f5b68f" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Peak marker -->
+  <circle cx="140" cy="70" r="5" fill="#f5b68f"/>
+  <text x="150" y="65" font-family="monospace" font-size="9" fill="#f5b68f" opacity="0.85">MODY</text>
+  <text x="200" y="45" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="3" fill="#f5b68f" opacity="0.85">DIABETES · ATÍPICO</text>
+  <text x="40" y="275" font-family="monospace" font-size="9" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" opacity="0.55">HNF1A · HNF4A · GCK</text>
+
+</svg></div>
+        <div class="body">
+          <div class="tag">Perfil 01 · Diabetes atípico</div>
+          <h3>Diagnóstico de T2 aos 22, magro, sem história.</h3>
+          <p>Você não é T1, mas também não encaixa no T2 clássico. Pode ser MODY — diabetes monogênica. O tratamento muda: muita gente sai da insulina e passa a usar sulfonilureia oral.</p>
+          <div class="key">MODY · <b>HNF1A, GCK, HNF4A</b></div>
+        </div>
+      </div>
+
+      <div class="who-card">
+        <div class="photo" style="--gradient:linear-gradient(165deg,#4a2a1a,#180804)">
+<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1">
+  <defs>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.3"/></filter>
+  </defs>
+  
+  <g fill="rgba(255,255,255,0.08)"><circle cx="20" cy="20" r="1"/><circle cx="47" cy="20" r="1"/><circle cx="74" cy="20" r="1"/><circle cx="101" cy="20" r="1"/><circle cx="128" cy="20" r="1"/><circle cx="155" cy="20" r="1"/><circle cx="182" cy="20" r="1"/><circle cx="209" cy="20" r="1"/><circle cx="236" cy="20" r="1"/><circle cx="263" cy="20" r="1"/><circle cx="290" cy="20" r="1"/><circle cx="317" cy="20" r="1"/><circle cx="344" cy="20" r="1"/><circle cx="371" cy="20" r="1"/><circle cx="20" cy="53" r="1"/><circle cx="47" cy="53" r="1"/><circle cx="74" cy="53" r="1"/><circle cx="101" cy="53" r="1"/><circle cx="128" cy="53" r="1"/><circle cx="155" cy="53" r="1"/><circle cx="182" cy="53" r="1"/><circle cx="209" cy="53" r="1"/><circle cx="236" cy="53" r="1"/><circle cx="263" cy="53" r="1"/><circle cx="290" cy="53" r="1"/><circle cx="317" cy="53" r="1"/><circle cx="344" cy="53" r="1"/><circle cx="371" cy="53" r="1"/><circle cx="20" cy="86" r="1"/><circle cx="47" cy="86" r="1"/><circle cx="74" cy="86" r="1"/><circle cx="101" cy="86" r="1"/><circle cx="128" cy="86" r="1"/><circle cx="155" cy="86" r="1"/><circle cx="182" cy="86" r="1"/><circle cx="209" cy="86" r="1"/><circle cx="236" cy="86" r="1"/><circle cx="263" cy="86" r="1"/><circle cx="290" cy="86" r="1"/><circle cx="317" cy="86" r="1"/><circle cx="344" cy="86" r="1"/><circle cx="371" cy="86" r="1"/><circle cx="20" cy="119" r="1"/><circle cx="47" cy="119" r="1"/><circle cx="74" cy="119" r="1"/><circle cx="101" cy="119" r="1"/><circle cx="128" cy="119" r="1"/><circle cx="155" cy="119" r="1"/><circle cx="182" cy="119" r="1"/><circle cx="209" cy="119" r="1"/><circle cx="236" cy="119" r="1"/><circle cx="263" cy="119" r="1"/><circle cx="290" cy="119" r="1"/><circle cx="317" cy="119" r="1"/><circle cx="344" cy="119" r="1"/><circle cx="371" cy="119" r="1"/><circle cx="20" cy="152" r="1"/><circle cx="47" cy="152" r="1"/><circle cx="74" cy="152" r="1"/><circle cx="101" cy="152" r="1"/><circle cx="128" cy="152" r="1"/><circle cx="155" cy="152" r="1"/><circle cx="182" cy="152" r="1"/><circle cx="209" cy="152" r="1"/><circle cx="236" cy="152" r="1"/><circle cx="263" cy="152" r="1"/><circle cx="290" cy="152" r="1"/><circle cx="317" cy="152" r="1"/><circle cx="344" cy="152" r="1"/><circle cx="371" cy="152" r="1"/><circle cx="20" cy="185" r="1"/><circle cx="47" cy="185" r="1"/><circle cx="74" cy="185" r="1"/><circle cx="101" cy="185" r="1"/><circle cx="128" cy="185" r="1"/><circle cx="155" cy="185" r="1"/><circle cx="182" cy="185" r="1"/><circle cx="209" cy="185" r="1"/><circle cx="236" cy="185" r="1"/><circle cx="263" cy="185" r="1"/><circle cx="290" cy="185" r="1"/><circle cx="317" cy="185" r="1"/><circle cx="344" cy="185" r="1"/><circle cx="371" cy="185" r="1"/><circle cx="20" cy="218" r="1"/><circle cx="47" cy="218" r="1"/><circle cx="74" cy="218" r="1"/><circle cx="101" cy="218" r="1"/><circle cx="128" cy="218" r="1"/><circle cx="155" cy="218" r="1"/><circle cx="182" cy="218" r="1"/><circle cx="209" cy="218" r="1"/><circle cx="236" cy="218" r="1"/><circle cx="263" cy="218" r="1"/><circle cx="290" cy="218" r="1"/><circle cx="317" cy="218" r="1"/><circle cx="344" cy="218" r="1"/><circle cx="371" cy="218" r="1"/><circle cx="20" cy="251" r="1"/><circle cx="47" cy="251" r="1"/><circle cx="74" cy="251" r="1"/><circle cx="101" cy="251" r="1"/><circle cx="128" cy="251" r="1"/><circle cx="155" cy="251" r="1"/><circle cx="182" cy="251" r="1"/><circle cx="209" cy="251" r="1"/><circle cx="236" cy="251" r="1"/><circle cx="263" cy="251" r="1"/><circle cx="290" cy="251" r="1"/><circle cx="317" cy="251" r="1"/><circle cx="344" cy="251" r="1"/><circle cx="371" cy="251" r="1"/><circle cx="20" cy="284" r="1"/><circle cx="47" cy="284" r="1"/><circle cx="74" cy="284" r="1"/><circle cx="101" cy="284" r="1"/><circle cx="128" cy="284" r="1"/><circle cx="155" cy="284" r="1"/><circle cx="182" cy="284" r="1"/><circle cx="209" cy="284" r="1"/><circle cx="236" cy="284" r="1"/><circle cx="263" cy="284" r="1"/><circle cx="290" cy="284" r="1"/><circle cx="317" cy="284" r="1"/><circle cx="344" cy="284" r="1"/><circle cx="371" cy="284" r="1"/></g>
+  <!-- Leptin/satiety pathway: brain + arrow + appetite -->
+  <g transform="translate(200 150)">
+    <!-- Head outline -->
+    <ellipse cx="-70" cy="0" rx="35" ry="42" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.3" opacity="0.75"/>
+    <circle cx="-70" cy="-5" r="8" fill="#f5b68f" opacity="0.6"/>
+    <text x="-70" y="-1" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.85)" font-weight="600">MC4R</text>
+    <!-- Arrow broken -->
+    <line x1="-30" y1="0" x2="30" y2="0" stroke="#f5b68f" stroke-width="2" stroke-dasharray="5,4"/>
+    <text x="0" y="-10" text-anchor="middle" font-family="monospace" font-size="8" fill="#f5b68f" opacity="0.8">saciedade</text>
+    <!-- Stomach / body -->
+    <path d="M 50 -30 Q 90 -30 95 0 Q 100 30 70 35 Q 40 30 45 0 Z" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.3" opacity="0.75"/>
+    <!-- Scale ticks -->
+    <g transform="translate(70 50)">
+      <rect x="-20" y="0" width="40" height="12" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1" opacity="0.6"/>
+      <line x1="-15" y1="0" x2="-15" y2="4" stroke="rgba(255,255,255,0.85)" opacity="0.6"/>
+      <line x1="0" y1="0" x2="0" y2="4" stroke="rgba(255,255,255,0.85)" opacity="0.6"/>
+      <line x1="15" y1="0" x2="15" y2="4" stroke="rgba(255,255,255,0.85)" opacity="0.6"/>
+    </g>
+  </g>
+  <text x="200" y="45" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="3" fill="#f5b68f" opacity="0.85">OBESIDADE MONOGÊNICA</text>
+  <text x="200" y="275" text-anchor="middle" font-family="monospace" font-size="9" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" opacity="0.55">MC4R · LEP · POMC</text>
+
+</svg></div>
+        <div class="body">
+          <div class="tag">Perfil 02 · Obesidade que não cede</div>
+          <h3>Obesidade <em>resistente</em> a toda abordagem.</h3>
+          <p>Dieta, exercício, medicação, cirurgia bariátrica — e ainda assim o ponteiro volta. Algumas pessoas têm variante em MC4R, LEPR, POMC. Tratamento muda — inclusive com setmelanotida em alguns casos.</p>
+          <div class="key">MC4R · <b>obesidade monogênica</b></div>
+        </div>
+      </div>
+
+      <div class="who-card">
+        <div class="photo" style="--gradient:linear-gradient(165deg,#4a1a3a,#180418)">
+<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1">
+  <defs>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.3"/></filter>
+  </defs>
+  
+  <g fill="rgba(255,255,255,0.08)"><circle cx="20" cy="20" r="1"/><circle cx="47" cy="20" r="1"/><circle cx="74" cy="20" r="1"/><circle cx="101" cy="20" r="1"/><circle cx="128" cy="20" r="1"/><circle cx="155" cy="20" r="1"/><circle cx="182" cy="20" r="1"/><circle cx="209" cy="20" r="1"/><circle cx="236" cy="20" r="1"/><circle cx="263" cy="20" r="1"/><circle cx="290" cy="20" r="1"/><circle cx="317" cy="20" r="1"/><circle cx="344" cy="20" r="1"/><circle cx="371" cy="20" r="1"/><circle cx="20" cy="53" r="1"/><circle cx="47" cy="53" r="1"/><circle cx="74" cy="53" r="1"/><circle cx="101" cy="53" r="1"/><circle cx="128" cy="53" r="1"/><circle cx="155" cy="53" r="1"/><circle cx="182" cy="53" r="1"/><circle cx="209" cy="53" r="1"/><circle cx="236" cy="53" r="1"/><circle cx="263" cy="53" r="1"/><circle cx="290" cy="53" r="1"/><circle cx="317" cy="53" r="1"/><circle cx="344" cy="53" r="1"/><circle cx="371" cy="53" r="1"/><circle cx="20" cy="86" r="1"/><circle cx="47" cy="86" r="1"/><circle cx="74" cy="86" r="1"/><circle cx="101" cy="86" r="1"/><circle cx="128" cy="86" r="1"/><circle cx="155" cy="86" r="1"/><circle cx="182" cy="86" r="1"/><circle cx="209" cy="86" r="1"/><circle cx="236" cy="86" r="1"/><circle cx="263" cy="86" r="1"/><circle cx="290" cy="86" r="1"/><circle cx="317" cy="86" r="1"/><circle cx="344" cy="86" r="1"/><circle cx="371" cy="86" r="1"/><circle cx="20" cy="119" r="1"/><circle cx="47" cy="119" r="1"/><circle cx="74" cy="119" r="1"/><circle cx="101" cy="119" r="1"/><circle cx="128" cy="119" r="1"/><circle cx="155" cy="119" r="1"/><circle cx="182" cy="119" r="1"/><circle cx="209" cy="119" r="1"/><circle cx="236" cy="119" r="1"/><circle cx="263" cy="119" r="1"/><circle cx="290" cy="119" r="1"/><circle cx="317" cy="119" r="1"/><circle cx="344" cy="119" r="1"/><circle cx="371" cy="119" r="1"/><circle cx="20" cy="152" r="1"/><circle cx="47" cy="152" r="1"/><circle cx="74" cy="152" r="1"/><circle cx="101" cy="152" r="1"/><circle cx="128" cy="152" r="1"/><circle cx="155" cy="152" r="1"/><circle cx="182" cy="152" r="1"/><circle cx="209" cy="152" r="1"/><circle cx="236" cy="152" r="1"/><circle cx="263" cy="152" r="1"/><circle cx="290" cy="152" r="1"/><circle cx="317" cy="152" r="1"/><circle cx="344" cy="152" r="1"/><circle cx="371" cy="152" r="1"/><circle cx="20" cy="185" r="1"/><circle cx="47" cy="185" r="1"/><circle cx="74" cy="185" r="1"/><circle cx="101" cy="185" r="1"/><circle cx="128" cy="185" r="1"/><circle cx="155" cy="185" r="1"/><circle cx="182" cy="185" r="1"/><circle cx="209" cy="185" r="1"/><circle cx="236" cy="185" r="1"/><circle cx="263" cy="185" r="1"/><circle cx="290" cy="185" r="1"/><circle cx="317" cy="185" r="1"/><circle cx="344" cy="185" r="1"/><circle cx="371" cy="185" r="1"/><circle cx="20" cy="218" r="1"/><circle cx="47" cy="218" r="1"/><circle cx="74" cy="218" r="1"/><circle cx="101" cy="218" r="1"/><circle cx="128" cy="218" r="1"/><circle cx="155" cy="218" r="1"/><circle cx="182" cy="218" r="1"/><circle cx="209" cy="218" r="1"/><circle cx="236" cy="218" r="1"/><circle cx="263" cy="218" r="1"/><circle cx="290" cy="218" r="1"/><circle cx="317" cy="218" r="1"/><circle cx="344" cy="218" r="1"/><circle cx="371" cy="218" r="1"/><circle cx="20" cy="251" r="1"/><circle cx="47" cy="251" r="1"/><circle cx="74" cy="251" r="1"/><circle cx="101" cy="251" r="1"/><circle cx="128" cy="251" r="1"/><circle cx="155" cy="251" r="1"/><circle cx="182" cy="251" r="1"/><circle cx="209" cy="251" r="1"/><circle cx="236" cy="251" r="1"/><circle cx="263" cy="251" r="1"/><circle cx="290" cy="251" r="1"/><circle cx="317" cy="251" r="1"/><circle cx="344" cy="251" r="1"/><circle cx="371" cy="251" r="1"/><circle cx="20" cy="284" r="1"/><circle cx="47" cy="284" r="1"/><circle cx="74" cy="284" r="1"/><circle cx="101" cy="284" r="1"/><circle cx="128" cy="284" r="1"/><circle cx="155" cy="284" r="1"/><circle cx="182" cy="284" r="1"/><circle cx="209" cy="284" r="1"/><circle cx="236" cy="284" r="1"/><circle cx="263" cy="284" r="1"/><circle cx="290" cy="284" r="1"/><circle cx="317" cy="284" r="1"/><circle cx="344" cy="284" r="1"/><circle cx="371" cy="284" r="1"/></g>
+  <!-- Oscillating thyroid levels -->
+  <g stroke="rgba(255,255,255,0.85)" stroke-width="1" opacity="0.3" fill="none">
+    <line x1="40" y1="150" x2="360" y2="150" stroke-dasharray="2,4"/>
+  </g>
+  <!-- Zig-zag oscillation -->
+  <path d="M 40 170 Q 70 110 100 180 Q 130 100 160 170 Q 190 85 220 180 Q 250 105 280 165 Q 310 95 340 175"
+        fill="none" stroke="#f5b68f" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Markers -->
+  <circle cx="100" cy="180" r="3" fill="#f5b68f"/><circle cx="160" cy="170" r="3" fill="#f5b68f"/><circle cx="220" cy="180" r="3" fill="#f5b68f"/><circle cx="280" cy="165" r="3" fill="#f5b68f"/>
+  <!-- Thyroid butterfly shape -->
+  <g transform="translate(200 250)">
+    <path d="M -25 0 Q -25 -12 -12 -10 Q -5 -8 0 -5 Q 5 -8 12 -10 Q 25 -12 25 0 Q 25 12 0 15 Q -25 12 -25 0 Z"
+          fill="#f5b68f" fill-opacity="0.3" stroke="#f5b68f" stroke-width="1.3"/>
+  </g>
+  <text x="200" y="45" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="3" fill="#f5b68f" opacity="0.85">TIREOIDE · INSTÁVEL</text>
+  <text x="200" y="290" text-anchor="middle" font-family="monospace" font-size="9" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" opacity="0.55">TPO · TG · DUOX2</text>
+
+</svg></div>
+        <div class="body">
+          <div class="tag">Perfil 03 · Tireoide instável</div>
+          <h3>T4, TSH e anti-TPO que nunca fecham.</h3>
+          <p>Você troca de endócrino, troca de remédio, faz ultrassom de 6 em 6 meses. Algumas variantes em TPO, TG e DUOX2 explicam tireoidite hereditária — e mudam a conduta de longo prazo.</p>
+          <div class="key">Tireoide · <b>TPO, TG, DUOX</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT — findings -->
+<section class="what">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="num mono">03 · O que aparece no painel</div>
+      <h2>Ajuste a <em>terapia hormonal</em> pelo gene, não pela tentativa.</h2>
+      <p class="sub">O painel inclui farmacogenômica específica para medicamentos hormonais: tamoxifeno, levotiroxina, metformina, sulfonilureias, anticoncepcionais. A endocrinologista recebe uma carta com recomendação de dose e alternativa específica.</p>
+    </div>
+
+    <div class="what-grid">
+      <div class="findings">
+        <div class="f-head">
+          <b>Amostra · Paula, 29</b>
+          <small>painel-endocrino-paula.xon</small>
+        </div>
+        <div class="f-row">
+          <div class="circle">1</div>
+          <div class="lbl"><b>HNF1A · c.872dupC (patogênica)</b><span>MODY 3 · responde a sulfonilureia (sem insulina)</span></div>
+          <div class="bar high"><div style="width:93%"></div></div>
+          <div class="score high">ALTO</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">2</div>
+          <div class="lbl"><b>MC4R · heterozigoto</b><span>Apetite aumentado · setmelanotida se IMC>30</span></div>
+          <div class="bar mod"><div style="width:70%"></div></div>
+          <div class="score mod">MOD</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">3</div>
+          <div class="lbl"><b>Farmacogenômica · CYP2D6</b><span>Metabolizador intermediário · dose padrão OK</span></div>
+          <div class="bar low"><div style="width:40%"></div></div>
+          <div class="score low">INFO</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">4</div>
+          <div class="lbl"><b>TPO · benigna</b><span>Tireoide hereditária · negativo</span></div>
+          <div class="bar low"><div style="width:18%"></div></div>
+          <div class="score low">OK</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">5</div>
+          <div class="lbl"><b>CYP21A2 · portadora</b><span>Hiperplasia adrenal · portadora sem doença</span></div>
+          <div class="bar mod"><div style="width:50%"></div></div>
+          <div class="score mod">INFO</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">6</div>
+          <div class="lbl"><b>PPARG · benigna</b><span>Sensibilidade insulínica · padrão</span></div>
+          <div class="bar low"><div style="width:20%"></div></div>
+          <div class="score low">OK</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">7</div>
+          <div class="lbl"><b>+ 64 genes avaliados</b><span>Outros endócrinos — todos negativos</span></div>
+          <div class="bar low"><div style="width:10%"></div></div>
+          <div class="score low">…</div>
+        </div>
+      </div>
+
+      <div class="what-right">
+        <h3>Ajuste a terapia hormonal pelo gene, não pela tentativa.</h3>
+        <p>A diferença entre um arquivo bruto e um painel útil é interpretação. A Exon combina motor de IA com geneticista humano — cada variante de alto impacto passa pelos dois antes de chegar a você.</p>
+        <p>Você escolhe o nível de detalhe. Pode ver só os achados acionáveis. Ou mergulhar no relatório molecular. Ou pedir para a gente explicar na conversa de 45min.</p>
+        <ul>
+          <li><b>Nível de evidência</b>Classificação ACMG para cada variante clinicamente relevante.</li>
+          <li><b>Contexto populacional</b>Comparado com brasileiros, quando disponível. Sem viés anglo-saxão.</li>
+          <li><b>Plano de ação</b>O que fazer com o achado. Link para exame de confirmação ou especialista, quando cabe.</li>
+          <li><b>Reclassificação automática</b>Se uma variante mudar de status em 2030, seu painel atualiza. Sem cobrança extra.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="num mono">04 · Como funciona</div>
+      <h2>22. Zero <em>jargão</em>.</h2>
+      <p class="sub">Da hora que você clica em "começar" até o painel pronto. Sem agulha, sem deslocamento, sem surpresa.</p>
+    </div>
+    <div class="how-track">
+      <div class="how-step">
+        <div class="day">Dia 0</div>
+        <div class="n">01</div>
+        <h4>Pedido online</h4>
+        <p>Formulário endócrino: histórico, medicações atuais, exames recentes. 15 min.</p>
+        <div class="item">15 min · online</div>
+      </div>
+      <div class="how-step">
+        <div class="day">Dia 2 – 5</div>
+        <div class="n">02</div>
+        <h4>Kit em casa</h4>
+        <p>Chega pelos Correios. Cuspe e devolva.</p>
+        <div class="item">sem agulha</div>
+      </div>
+      <div class="how-step">
+        <div class="day">Dia 7 – 15</div>
+        <div class="n">03</div>
+        <h4>Sequenciamento + PGx</h4>
+        <p>NGS em 70+ genes + painel farmacogenômico para hormonais.</p>
+        <div class="item">laboratório próprio · SP</div>
+      </div>
+      <div class="how-step">
+        <div class="day">Dia 16 – 19</div>
+        <div class="n">04</div>
+        <h4>Análise ACMG + revisão</h4>
+        <p>Motor Exon + guidelines CPIC. Endocrinogeneticista revisa.</p>
+        <div class="item">AI + humano</div>
+      </div>
+      <div class="how-step">
+        <div class="day">Dia 20 – 22</div>
+        <div class="n">05</div>
+        <h4>Consulta + carta médica</h4>
+        <p>Consulta de 60 min. Carta com recomendação de dose para sua endocrino.</p>
+        <div class="item">45 min · online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="price-sec" id="price">
+  <div class="price-inner">
+    <div class="price-grid">
+      <div class="price-left">
+        <div class="mono">05 · Investimento</div>
+        <h3>Um exame. Um <em>ajuste fino</em>. Anos de saúde diferente.</h3>
+        <div class="price">
+          <span class="amount"><em>R$ 4.990</em></span>
+          <small>pagamento único</small>
+        </div>
+        <div class="installment">ou <b>12x de R$ 416</b> sem juros no cartão</div>
+        <a href="#" class="btn-primary">
+          Começar agora
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <div class="fine">Reembolso integral se a coleta falhar · sem taxa por atualização futura · sem mensalidade</div>
+      </div>
+      <div class="price-right">
+        <h4>Está incluso</h4>
+        <ul>
+          <li>Kit de coleta de saliva entregue em casa</li>
+          <li>Sequenciamento NGS de <b>70+ genes</b> endócrinos</li>
+          <li>Farmacogenômica para <b>medicamentos hormonais</b></li>
+          <li>Classificação ACMG + guidelines CPIC</li>
+          <li>Sessão de <b>60 min</b> com endocrinogeneticista</li>
+          <li>Carta clínica para a sua endocrinologista</li>
+          <li>Reclassificação automática <b>para sempre</b></li>
+          <li>Reavaliação do painel a cada 2 anos sem custo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ MINI -->
+<section class="faq-mini">
+  <div class="faq-mini-inner">
+    <h2>Perguntas que <em>todo mundo</em> faz antes.</h2>
+    <details open>
+      <summary>Tenho diabetes tipo 2 desde os 25 e sou magro. Preciso deste exame?</summary>
+      <p>Forte suspeita de MODY — diabetes monogênica. Vale muito a pena. Se der positivo para HNF1A ou HNF4A, em muitos casos você pode sair da insulina e usar sulfonilureia oral, com controle glicêmico ótimo.</p>
+    </details>
+    <details>
+      <summary>Meu IMC é 38 e não consigo emagrecer. Este exame ajuda?</summary>
+      <p>Em ~5% dos casos de obesidade resistente, há variante genética. Identificar abre porta para medicação específica (setmelanotida para POMC/LEPR/MC4R, por exemplo) e muda a abordagem terapêutica.</p>
+    </details>
+    <details>
+      <summary>E a farmacogenômica? Como é usada?</summary>
+      <p>Cobrimos enzimas ligadas a medicamentos endócrinos: tamoxifeno (CYP2D6), levotiroxina, metformina, sulfonilureias. A carta da endocrinologista vem com recomendação de dose e alternativa específica para seu metabolismo.</p>
+    </details>
+    <details>
+      <summary>Quanto tempo leva?</summary>
+      <p>3 semanas do envio até consulta.</p>
+    </details>
+    <details>
+      <summary>Preciso de pedido médico?</summary>
+      <p>Não é obrigatório para contratar — mas a devolutiva com carta é feita de médico para médico, e a sua endocrinologista vai saber usar melhor que nós.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="final-inner">
+    <h2>Pare de <em>tentar e errar</em> com hormônio.</h2>
+    <p>Se você já fez painel endócrino em outro lab, reanalisamos com novas classificações. Se quer começar do zero, este painel vem com farmacogenômica e carta para sua endócrino.</p>
+    <div class="ctas">
+      <a href="#price" class="btn-primary">
+        Painel Endócrino — R$ 4.990
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="upload.html" class="btn-secondary">
+        Reanalisar arquivo — grátis (Genera)
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <span>© 2026 Exon Genomics</span>
+    <span>Brasil · LGPD · ISO 27001</span>
+  </div>
+</footer>
+
+
+</body>
+</html>

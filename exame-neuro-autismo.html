@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt" data-lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurogenética & Autismo — Exon Genomics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f2ec;--bg-panel:#fff;--bg-warm:#ebe4d4;--bg-dark:#1a2340;
+  --ink:#1a2340;--ink-soft:#3a4560;--muted:#6b7a95;
+  --accent:#c64c2e;--accent-deep:#8a2f1a;--accent-soft:#f5b68f;
+  --blue:#1565c0;--blue-deep:#0a3d7a;
+  --line:rgba(26,35,64,.12);--line-soft:rgba(26,35,64,.06);
+  --font-heading:'Fraunces',Georgia,serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-size:16px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+em{font-style:italic;color:var(--accent)}
+.mono{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted)}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 4vw;display:flex;justify-content:space-between;align-items:center;background:rgba(245,242,236,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:44px;width:auto;display:block}
+.nav-right{display:flex;align-items:center;gap:24px;font-size:13.5px}
+.back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase}
+.back:hover{color:var(--ink)}
+.nav-cta{padding:10px 18px;border-radius:100px;background:var(--ink);color:var(--bg);font-size:13px;font-weight:500}
+
+/* HERO */
+.hero{padding:128px 4vw 80px;position:relative;overflow:hidden}
+.hero-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+@media(max-width:1000px){.hero-inner{grid-template-columns:1fr}}
+
+.hero-mono{margin-bottom:20px;color:var(--accent);display:flex;align-items:center;gap:12px}
+.hero-mono::before{content:'';width:30px;height:1px;background:var(--accent)}
+.hero h1{font-family:var(--font-heading);font-weight:400;font-size:clamp(2.8rem,6vw,6rem);line-height:.98;letter-spacing:-0.03em;margin-bottom:32px;text-wrap:balance}
+.hero h1 em{font-style:italic}
+.hero .lede{font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:46ch;margin-bottom:36px}
+
+.hero-stats{display:grid;grid-template-columns:repeat(3,auto);gap:32px;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:36px}
+.hero-stats .s b{font-family:var(--font-heading);font-size:30px;font-weight:400;line-height:1;letter-spacing:-0.02em;display:block;margin-bottom:4px}
+.hero-stats .s b em{color:var(--accent);font-style:italic}
+.hero-stats .s span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;display:block;line-height:1.4}
+
+.hero-ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:#fff;padding:18px 28px;border-radius:100px;font-weight:600;font-size:15px;transition:all .25s}
+.btn-primary:hover{background:var(--accent-deep);transform:translateY(-1px);box-shadow:0 18px 40px -15px rgba(198,76,46,.5)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;color:var(--ink);font-size:14px;padding:16px 4px;border-bottom:1px solid var(--line)}
+.btn-ghost:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Hero visual: double helix product box */
+.hero-product{position:relative;aspect-ratio:4/5;background:var(--bg-dark);border-radius:14px;overflow:hidden}
+.hero-product canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-product .tag{position:absolute;top:24px;left:24px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;color:rgba(255,255,255,.85);text-transform:uppercase;padding:8px 14px;background:rgba(0,0,0,.4);border-radius:100px;backdrop-filter:blur(8px);z-index:3;display:flex;align-items:center;gap:8px}
+.hero-product .tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.hero-product .price{position:absolute;right:28px;top:28px;color:#fff;text-align:right;z-index:3}
+.hero-product .price small{font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:rgba(255,255,255,.7);text-transform:uppercase;display:block}
+.hero-product .price b{font-family:var(--font-heading);font-size:40px;font-weight:300;letter-spacing:-0.02em;display:block;line-height:1}
+.hero-product .price span{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.7);letter-spacing:0.1em;text-transform:uppercase;display:block;margin-top:2px}
+.hero-product .foot{position:absolute;left:28px;right:28px;bottom:28px;z-index:3;color:#fff}
+.hero-product .foot .big{font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,42px);line-height:1;letter-spacing:-0.02em;margin-bottom:10px;text-wrap:balance}
+.hero-product .foot .small{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,.7);letter-spacing:0.18em;text-transform:uppercase}
+
+/* Section shell */
+section{padding:120px 4vw;position:relative}
+.sec-inner{max-width:1320px;margin:0 auto}
+.sec-head{margin-bottom:64px}
+.sec-head .num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.sec-head .num::before{content:'';width:20px;height:1px;background:var(--accent)}
+.sec-head h2{font-family:var(--font-heading);font-weight:400;font-size:clamp(2rem,4vw,3.8rem);line-height:1.04;letter-spacing:-0.022em;max-width:22ch;text-wrap:balance}
+.sec-head h2 em{font-style:italic;color:var(--accent)}
+.sec-head p.sub{margin-top:20px;font-size:17px;color:var(--ink-soft);line-height:1.55;max-width:56ch}
+
+/* WHO — 3 persona cards with photos */
+.who{background:var(--bg-panel)}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.who-card{background:var(--bg);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s}
+.who-card:hover{transform:translateY(-4px)}
+.who-card .photo{aspect-ratio:4/3;position:relative;overflow:hidden}
+.who-card .photo::before{content:'';position:absolute;inset:0;background:var(--gradient,linear-gradient(160deg,#1a2340,#0a3d7a))}
+/* persona SVG replaces retrato placeholder */
+.who-card .body{padding:28px 28px 32px;flex:1;display:flex;flex-direction:column}
+.who-card .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+.who-card h3{font-family:var(--font-heading);font-size:24px;font-weight:400;line-height:1.1;letter-spacing:-0.015em;margin-bottom:12px;text-wrap:balance}
+.who-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:20px;flex:1}
+.who-card .key{padding-top:20px;border-top:1px solid var(--line-soft);font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase}
+.who-card .key b{color:var(--ink);font-family:var(--font-heading);font-size:14px;text-transform:none;letter-spacing:-0.01em;font-weight:400}
+@media(max-width:900px){.who-grid{grid-template-columns:1fr}}
+
+/* WHAT — list of findings with chart */
+.what{background:var(--bg)}
+.what-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:start}
+.findings{background:var(--bg-panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.findings .f-head{padding:24px 28px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+.findings .f-head b{font-family:var(--font-heading);font-size:18px;font-weight:400;letter-spacing:-0.01em}
+.findings .f-head small{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase}
+.f-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:18px;padding:18px 28px;border-bottom:1px solid var(--line-soft);align-items:center;transition:background .2s}
+.f-row:hover{background:var(--bg-warm)}
+.f-row:last-child{border-bottom:0}
+.f-row .circle{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--font-mono);font-size:11px;color:var(--ink);font-weight:600}
+.f-row .lbl b{font-family:var(--font-heading);font-size:16px;font-weight:400;letter-spacing:-0.01em;display:block}
+.f-row .lbl span{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+.f-row .bar{width:120px;height:6px;background:var(--line-soft);border-radius:3px;overflow:hidden;flex-shrink:0}
+.f-row .bar div{height:100%;border-radius:3px}
+.f-row .bar.low div{background:#8ec997}
+.f-row .bar.mod div{background:var(--accent-soft)}
+.f-row .bar.high div{background:var(--accent)}
+.f-row .score{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;font-weight:500;text-transform:uppercase;padding:4px 10px;border-radius:100px;min-width:56px;text-align:center}
+.f-row .score.low{background:rgba(142,201,151,.2);color:#2f6b3a}
+.f-row .score.mod{background:rgba(245,182,143,.3);color:var(--accent-deep)}
+.f-row .score.high{background:var(--accent);color:#fff}
+
+.what-right h3{font-family:var(--font-heading);font-size:26px;font-weight:400;line-height:1.15;letter-spacing:-0.015em;margin-bottom:16px;text-wrap:balance}
+.what-right h3 em{font-style:italic;color:var(--accent)}
+.what-right p{font-size:15.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:16px}
+.what-right ul{list-style:none;margin-top:24px}
+.what-right li{padding:14px 0;border-top:1px solid var(--line-soft);font-size:14px;color:var(--ink-soft);display:flex;gap:14px;align-items:baseline}
+.what-right li:first-child{border-top-color:var(--ink)}
+.what-right li b{font-family:var(--font-heading);font-weight:500;color:var(--ink);font-size:15px;letter-spacing:-0.01em;min-width:140px;flex-shrink:0}
+@media(max-width:900px){.what-grid{grid-template-columns:1fr;gap:40px}}
+
+/* HOW — 5 phases across a horizontal track */
+.how{background:var(--bg-dark);color:var(--bg);overflow:hidden}
+.how .sec-head .num{color:var(--accent-soft)}
+.how .sec-head h2{color:#fff}
+.how .sec-head p.sub{color:rgba(255,255,255,.75)}
+.how-track{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(255,255,255,.08);border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.how-step{background:var(--bg-dark);padding:36px 28px;display:flex;flex-direction:column;min-height:320px;position:relative}
+.how-step .day{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.how-step .n{font-family:var(--font-heading);font-size:48px;font-weight:300;letter-spacing:-0.03em;color:rgba(255,255,255,.18);line-height:1;margin-bottom:24px}
+.how-step h4{font-family:var(--font-heading);font-size:20px;font-weight:400;letter-spacing:-0.01em;margin-bottom:10px;color:#fff}
+.how-step p{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.7);flex:1}
+.how-step .item{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-soft)}
+@media(max-width:1000px){.how-track{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.how-track{grid-template-columns:1fr}}
+
+/* PRICE — big editorial block */
+.price-sec{background:var(--bg-warm)}
+.price-inner{max-width:1100px;margin:0 auto}
+.price-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;background:var(--bg-panel);border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.price-left{padding:56px 56px 56px}
+.price-left .mono{margin-bottom:18px;color:var(--accent)}
+.price-left h3{font-family:var(--font-heading);font-size:clamp(1.8rem,3.4vw,3rem);font-weight:400;line-height:1.05;letter-spacing:-0.022em;margin-bottom:20px;text-wrap:balance}
+.price-left h3 em{font-style:italic;color:var(--accent)}
+.price-left .price{display:flex;align-items:baseline;gap:12px;margin:32px 0 12px;padding-top:32px;border-top:1px solid var(--line)}
+.price-left .price .amount{font-family:var(--font-heading);font-size:clamp(48px,6vw,80px);font-weight:300;letter-spacing:-0.03em;line-height:1;color:var(--ink)}
+.price-left .price .amount em{font-style:italic;color:var(--accent)}
+.price-left .price small{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase}
+.price-left .installment{font-size:14px;color:var(--ink-soft);margin-bottom:28px}
+.price-left .installment b{color:var(--ink);font-weight:500}
+.price-left .btn-primary{width:100%;justify-content:center}
+.price-left .fine{margin-top:16px;font-size:12.5px;color:var(--muted);line-height:1.5;text-align:center}
+
+.price-right{padding:56px 48px;background:var(--bg-warm);display:flex;flex-direction:column;justify-content:center}
+.price-right h4{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:24px}
+.price-right ul{list-style:none}
+.price-right li{padding:14px 0;border-top:1px solid var(--line);display:flex;gap:12px;align-items:baseline;font-size:15px;color:var(--ink)}
+.price-right li:first-child{border-top:0;padding-top:0}
+.price-right li::before{content:'✓';color:var(--accent);font-family:var(--font-mono);font-weight:700}
+.price-right li b{font-weight:500}
+@media(max-width:900px){.price-grid{grid-template-columns:1fr}.price-left,.price-right{padding:40px 32px}}
+
+/* FAQ mini */
+.faq-mini{padding:120px 4vw;background:var(--bg)}
+.faq-mini-inner{max-width:900px;margin:0 auto}
+.faq-mini h2{font-family:var(--font-heading);font-size:clamp(2rem,3.4vw,3.2rem);font-weight:400;letter-spacing:-0.02em;line-height:1.05;margin-bottom:48px;text-wrap:balance}
+.faq-mini h2 em{color:var(--accent);font-style:italic}
+.faq-mini details{border-top:1px solid var(--line);padding:24px 0;cursor:pointer}
+.faq-mini details:last-of-type{border-bottom:1px solid var(--line)}
+.faq-mini summary{list-style:none;display:flex;justify-content:space-between;gap:24px;font-family:var(--font-heading);font-size:clamp(18px,1.8vw,22px);font-weight:400;letter-spacing:-0.01em;align-items:baseline}
+.faq-mini summary::-webkit-details-marker{display:none}
+.faq-mini summary::after{content:'+';font-family:var(--font-mono);color:var(--accent);font-size:18px;flex-shrink:0}
+.faq-mini details[open] summary::after{content:'–'}
+.faq-mini p{margin-top:14px;color:var(--ink-soft);font-size:14.5px;line-height:1.6;max-width:65ch}
+
+/* Final CTA band */
+.final{background:var(--bg-dark);color:var(--bg);padding:140px 4vw;position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,var(--accent) 0,transparent 50%);opacity:.15;filter:blur(60px)}
+.final-inner{max-width:1100px;margin:0 auto;text-align:center;position:relative}
+.final h2{font-family:var(--font-heading);font-size:clamp(2.4rem,5vw,5rem);line-height:1;font-weight:400;letter-spacing:-0.025em;margin-bottom:24px;text-wrap:balance}
+.final h2 em{color:var(--accent);font-style:italic}
+.final p{font-size:17px;color:rgba(255,255,255,.78);max-width:52ch;margin:0 auto 40px;line-height:1.55}
+.final .ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.final .btn-primary{background:var(--accent)}
+.final .btn-secondary{display:inline-flex;align-items:center;gap:10px;color:#fff;padding:18px 28px;border-radius:100px;font-size:15px;border:1px solid rgba(255,255,255,.25);transition:all .2s}
+.final .btn-secondary:hover{background:rgba(255,255,255,.08);border-color:#fff}
+
+/* Footer */
+footer{padding:48px 4vw 32px;border-top:1px solid rgba(255,255,255,.08);background:var(--bg-dark);color:var(--bg)}
+footer .foot-inner{max-width:1260px;margin:0 auto;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:rgba(255,255,255,.5);text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo" aria-label="Exon Genomics">
+    <img src="assets/exon-wordmark-blue.svg" alt="Exon Genomics">
+  </a>
+  <div class="nav-right">
+    <a class="back" href="home-editorial.html">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2L3.5 6L7.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Todos os exames
+    </a>
+    <a href="equipe.html" style="color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Equipe</a>
+    <a href="#price" class="nav-cta">Começar →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-mono mono">04 · Neurogenética · Exame direcionado</div>
+      <h1>Um nome para <em>entender</em>. Um plano para <em>caminhar</em>.</h1>
+      <p class="lede">Painel de neurogenética que inclui TEA (Transtorno do Espectro Autista), deficiência intelectual, epilepsia e atraso de desenvolvimento. Para famílias em investigação diagnóstica, ou pais que querem refinar conduta terapêutica com base genética.</p>
+
+      <div class="hero-stats">
+        <div class="s"><b>200+</b><span>genes neurológicos</span></div>
+        <div class="s"><b>1/45</b><span>crianças com TEA no Brasil</span></div>
+        <div class="s"><b>30%</b><span>casos com achado acionável</span></div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#price" class="btn-primary">
+          Começar o exame
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="upload.html" class="btn-ghost">Já tenho arquivo ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-product" style="background:#0a1a0f;background-image:linear-gradient(170deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.7) 100%),url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1400&q=90');background-size:cover;background-position:center">
+      <div class="tag">Neurogenética · CNV + SNV</div>
+      <div class="price">
+        <small>a partir de</small>
+        <b>R$ 4.990</b>
+        <span>12x sem juros</span>
+      </div>
+      <div class="foot">
+        <div class="big">Saliva em casa.<br/>Resultado em 4 semanas.</div>
+        <div class="small">Kit + coleta + painel neurogenética + aconselhamento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO — 3 personas -->
+<section class="who">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="num mono">02 · Para quem</div>
+      <h2>Famílias que costumam <em>chegar até aqui</em>.</h2>
+      <p class="sub">Pais em investigação diagnóstica. Adultos que descobriram TEA tarde. Neuropediatras que querem orientar conduta com base em genes. A gente atende os três.</p>
+    </div>
+
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="photo" style="--gradient:linear-gradient(165deg,#2a4a1a,#081806)">
+<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1">
+  <defs>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.3"/></filter>
+  </defs>
+  
+  <g fill="rgba(255,255,255,0.08)"><circle cx="20" cy="20" r="1"/><circle cx="47" cy="20" r="1"/><circle cx="74" cy="20" r="1"/><circle cx="101" cy="20" r="1"/><circle cx="128" cy="20" r="1"/><circle cx="155" cy="20" r="1"/><circle cx="182" cy="20" r="1"/><circle cx="209" cy="20" r="1"/><circle cx="236" cy="20" r="1"/><circle cx="263" cy="20" r="1"/><circle cx="290" cy="20" r="1"/><circle cx="317" cy="20" r="1"/><circle cx="344" cy="20" r="1"/><circle cx="371" cy="20" r="1"/><circle cx="20" cy="53" r="1"/><circle cx="47" cy="53" r="1"/><circle cx="74" cy="53" r="1"/><circle cx="101" cy="53" r="1"/><circle cx="128" cy="53" r="1"/><circle cx="155" cy="53" r="1"/><circle cx="182" cy="53" r="1"/><circle cx="209" cy="53" r="1"/><circle cx="236" cy="53" r="1"/><circle cx="263" cy="53" r="1"/><circle cx="290" cy="53" r="1"/><circle cx="317" cy="53" r="1"/><circle cx="344" cy="53" r="1"/><circle cx="371" cy="53" r="1"/><circle cx="20" cy="86" r="1"/><circle cx="47" cy="86" r="1"/><circle cx="74" cy="86" r="1"/><circle cx="101" cy="86" r="1"/><circle cx="128" cy="86" r="1"/><circle cx="155" cy="86" r="1"/><circle cx="182" cy="86" r="1"/><circle cx="209" cy="86" r="1"/><circle cx="236" cy="86" r="1"/><circle cx="263" cy="86" r="1"/><circle cx="290" cy="86" r="1"/><circle cx="317" cy="86" r="1"/><circle cx="344" cy="86" r="1"/><circle cx="371" cy="86" r="1"/><circle cx="20" cy="119" r="1"/><circle cx="47" cy="119" r="1"/><circle cx="74" cy="119" r="1"/><circle cx="101" cy="119" r="1"/><circle cx="128" cy="119" r="1"/><circle cx="155" cy="119" r="1"/><circle cx="182" cy="119" r="1"/><circle cx="209" cy="119" r="1"/><circle cx="236" cy="119" r="1"/><circle cx="263" cy="119" r="1"/><circle cx="290" cy="119" r="1"/><circle cx="317" cy="119" r="1"/><circle cx="344" cy="119" r="1"/><circle cx="371" cy="119" r="1"/><circle cx="20" cy="152" r="1"/><circle cx="47" cy="152" r="1"/><circle cx="74" cy="152" r="1"/><circle cx="101" cy="152" r="1"/><circle cx="128" cy="152" r="1"/><circle cx="155" cy="152" r="1"/><circle cx="182" cy="152" r="1"/><circle cx="209" cy="152" r="1"/><circle cx="236" cy="152" r="1"/><circle cx="263" cy="152" r="1"/><circle cx="290" cy="152" r="1"/><circle cx="317" cy="152" r="1"/><circle cx="344" cy="152" r="1"/><circle cx="371" cy="152" r="1"/><circle cx="20" cy="185" r="1"/><circle cx="47" cy="185" r="1"/><circle cx="74" cy="185" r="1"/><circle cx="101" cy="185" r="1"/><circle cx="128" cy="185" r="1"/><circle cx="155" cy="185" r="1"/><circle cx="182" cy="185" r="1"/><circle cx="209" cy="185" r="1"/><circle cx="236" cy="185" r="1"/><circle cx="263" cy="185" r="1"/><circle cx="290" cy="185" r="1"/><circle cx="317" cy="185" r="1"/><circle cx="344" cy="185" r="1"/><circle cx="371" cy="185" r="1"/><circle cx="20" cy="218" r="1"/><circle cx="47" cy="218" r="1"/><circle cx="74" cy="218" r="1"/><circle cx="101" cy="218" r="1"/><circle cx="128" cy="218" r="1"/><circle cx="155" cy="218" r="1"/><circle cx="182" cy="218" r="1"/><circle cx="209" cy="218" r="1"/><circle cx="236" cy="218" r="1"/><circle cx="263" cy="218" r="1"/><circle cx="290" cy="218" r="1"/><circle cx="317" cy="218" r="1"/><circle cx="344" cy="218" r="1"/><circle cx="371" cy="218" r="1"/><circle cx="20" cy="251" r="1"/><circle cx="47" cy="251" r="1"/><circle cx="74" cy="251" r="1"/><circle cx="101" cy="251" r="1"/><circle cx="128" cy="251" r="1"/><circle cx="155" cy="251" r="1"/><circle cx="182" cy="251" r="1"/><circle cx="209" cy="251" r="1"/><circle cx="236" cy="251" r="1"/><circle cx="263" cy="251" r="1"/><circle cx="290" cy="251" r="1"/><circle cx="317" cy="251" r="1"/><circle cx="344" cy="251" r="1"/><circle cx="371" cy="251" r="1"/><circle cx="20" cy="284" r="1"/><circle cx="47" cy="284" r="1"/><circle cx="74" cy="284" r="1"/><circle cx="101" cy="284" r="1"/><circle cx="128" cy="284" r="1"/><circle cx="155" cy="284" r="1"/><circle cx="182" cy="284" r="1"/><circle cx="209" cy="284" r="1"/><circle cx="236" cy="284" r="1"/><circle cx="263" cy="284" r="1"/><circle cx="290" cy="284" r="1"/><circle cx="317" cy="284" r="1"/><circle cx="344" cy="284" r="1"/><circle cx="371" cy="284" r="1"/></g>
+  <!-- Child-sized figure abstract + diagnostic net -->
+  <g transform="translate(200 165)">
+    <!-- Neural net puzzle -->
+    <line x1="-23.270318930041157" y1="46.79818244170096" x2="-28.76748971193416" y2="-9.956189986282581" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.19081829038060866"/><line x1="-23.270318930041157" y1="46.79818244170096" x2="-32.61805555555554" y2="19.24468449931412" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.3177455941397634"/><line x1="-23.270318930041157" y1="46.79818244170096" x2="28.8070987654321" y2="3.5649005486968406" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.14234376753029448"/><line x1="-28.76748971193416" y1="-9.956189986282581" x2="-59.21836419753086" y2="-63.1457475994513" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.17141203163783203"/><line x1="-28.76748971193416" y1="-9.956189986282581" x2="-22.956275720164598" y2="-54.437157064471876" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.24609561873325342"/><line x1="-28.76748971193416" y1="-9.956189986282581" x2="-48.31455761316872" y2="-65.49708504801097" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.1823626911534184"/><line x1="-28.76748971193416" y1="-9.956189986282581" x2="-43.626543209876544" y2="-37.992198216735254" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.3057715577252299"/><line x1="-28.76748971193416" y1="-9.956189986282581" x2="-17.44495884773663" y2="-53.95464677640604" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.24349104510426317"/><line x1="-28.76748971193416" y1="-9.956189986282581" x2="-32.61805555555554" y2="19.24468449931412" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.31611973956908235"/><line x1="-28.76748971193416" y1="-9.956189986282581" x2="28.8070987654321" y2="3.5649005486968406" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.18117745539582714"/><line x1="-28.76748971193416" y1="-9.956189986282581" x2="-49.51414609053498" y2="-25.643175582990395" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.3317740232845967"/><line x1="-59.21836419753086" y1="-63.1457475994513" x2="-22.956275720164598" y2="-54.437157064471876" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.28048570784515636"/><line x1="-59.21836419753086" y1="-63.1457475994513" x2="-48.31455761316872" y2="-65.49708504801097" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.39929794822435805"/><line x1="-59.21836419753086" y1="-63.1457475994513" x2="-43.626543209876544" y2="-37.992198216735254" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.3154817342996852"/><line x1="-59.21836419753086" y1="-63.1457475994513" x2="-17.44495884773663" y2="-53.95464677640604" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.2555791749636843"/><line x1="-59.21836419753086" y1="-63.1457475994513" x2="-91.07818930041152" y2="-55.65783607681756" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.30123669067411285"/><line x1="-59.21836419753086" y1="-63.1457475994513" x2="-49.51414609053498" y2="-25.643175582990395" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.27391923124201045"/><line x1="-22.956275720164598" y1="-54.437157064471876" x2="-48.31455761316872" y2="-65.49708504801097" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.32424899425618403"/><line x1="-22.956275720164598" y1="-54.437157064471876" x2="-43.626543209876544" y2="-37.992198216735254" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.3299366016646431"/><line x1="-22.956275720164598" y1="-54.437157064471876" x2="-17.44495884773663" y2="-53.95464677640604" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.42485273545329855"/><line x1="-22.956275720164598" y1="-54.437157064471876" x2="-91.07818930041152" y2="-55.65783607681756" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.14030523000924894"/><line x1="-22.956275720164598" y1="-54.437157064471876" x2="-49.51414609053498" y2="-25.643175582990395" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.2719472958420439"/><line x1="-48.31455761316872" y1="-65.49708504801097" x2="-43.626543209876544" y2="-37.992198216735254" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.3231747901387977"/><line x1="-48.31455761316872" y1="-65.49708504801097" x2="-17.44495884773663" y2="-53.95464677640604" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.300195719340271"/><line x1="-48.31455761316872" y1="-65.49708504801097" x2="-91.07818930041152" y2="-55.65783607681756" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.25054107201097586"/><line x1="-48.31455761316872" y1="-65.49708504801097" x2="-49.51414609053498" y2="-25.643175582990395" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.2687638228604601"/><line x1="-43.626543209876544" y1="-37.992198216735254" x2="-17.44495884773663" y2="-53.95464677640604" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.31061860964270166"/><line x1="-43.626543209876544" y1="-37.992198216735254" x2="-32.61805555555554" y2="19.24468449931412" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.18506403613691758"/><line x1="-43.626543209876544" y1="-37.992198216735254" x2="-91.07818930041152" y2="-55.65783607681756" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.21984852824154752"/><line x1="-43.626543209876544" y1="-37.992198216735254" x2="-49.51414609053498" y2="-25.643175582990395" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.38781488783161827"/><line x1="-17.44495884773663" y1="-53.95464677640604" x2="-49.51414609053498" y2="-25.643175582990395" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.25555375450428086"/><line x1="-32.61805555555554" y1="19.24468449931412" x2="28.8070987654321" y2="3.5649005486968406" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.16184165538333872"/><line x1="-32.61805555555554" y1="19.24468449931412" x2="-49.51414609053498" y2="-25.643175582990395" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.23198880449293244"/><line x1="-91.07818930041152" y1="-55.65783607681756" x2="-49.51414609053498" y2="-25.643175582990395" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.21696178741893166"/><circle cx="85.6064814814815" cy="48.78403635116598" r="3.2122942386831275" fill="#f5b68f" opacity="0.7555349794238683"/><circle cx="-23.270318930041157" cy="46.79818244170096" r="3.4174254115226335" fill="rgba(255,255,255,0.85)" opacity="0.9153720850480109"/><circle cx="-28.76748971193416" cy="-9.956189986282581" r="4.865612139917696" fill="rgba(255,255,255,0.85)" opacity="0.7602914951989026"/><circle cx="-59.21836419753086" cy="-63.1457475994513" r="5.806854423868312" fill="#f5b68f" opacity="0.7557253086419753"/><circle cx="-22.956275720164598" cy="-54.437157064471876" r="4.491152263374485" fill="rgba(255,255,255,0.85)" opacity="0.6856241426611797"/><circle cx="-48.31455761316872" cy="-65.49708504801097" r="5.168505658436214" fill="rgba(255,255,255,0.85)" opacity="0.6746793552812071"/><circle cx="-43.626543209876544" cy="-37.992198216735254" r="3.088914609053498" fill="#f5b68f" opacity="0.8772119341563787"/><circle cx="82.77443415637859" cy="-53.58916323731138" r="5.502379115226337" fill="rgba(255,255,255,0.85)" opacity="0.6327280521262002"/><circle cx="-17.44495884773663" cy="-53.95464677640604" r="4.6588991769547325" fill="rgba(255,255,255,0.85)" opacity="0.6881412894375857"/><circle cx="-32.61805555555554" cy="19.24468449931412" r="4.808474794238683" fill="#f5b68f" opacity="0.8866615226337449"/><circle cx="-91.07818930041152" cy="-55.65783607681756" r="4.201105967078189" fill="rgba(255,255,255,0.85)" opacity="0.9233504801097394"/><circle cx="-101.15869341563786" cy="59.67112482853224" r="4.086792695473251" fill="rgba(255,255,255,0.85)" opacity="0.967343964334705"/><circle cx="28.8070987654321" cy="3.5649005486968406" r="5.715534979423868" fill="#f5b68f" opacity="0.9507407407407408"/><circle cx="-49.51414609053498" cy="-25.643175582990395" r="4.337332818930041" fill="rgba(255,255,255,0.85)" opacity="0.9241580932784637"/>
+  </g>
+  <text x="200" y="45" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="3" fill="#f5b68f" opacity="0.85">INVESTIGAÇÃO · DIAGNÓSTICO</text>
+  <text x="40" y="280" font-family="monospace" font-size="9" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" opacity="0.6">SHANK3 CHD8 MECP2</text>
+
+</svg></div>
+        <div class="body">
+          <div class="tag">Perfil 01 · Criança em investigação diagnóstica</div>
+          <h3>Filho(a) com <em>TEA</em> e atraso de linguagem.</h3>
+          <p>Neuro pediu painel. Vocês querem entender se é síndromic — Fragile-X, SHANK3, MECP2 — porque isso muda terapia, muda expectativa, muda o plano de vida.</p>
+          <div class="key">TEA · DI · atraso · <b>CMA + WES parcial</b></div>
+        </div>
+      </div>
+
+      <div class="who-card">
+        <div class="photo" style="--gradient:linear-gradient(165deg,#1a3a3a,#040c0c)">
+<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1">
+  <defs>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.3"/></filter>
+  </defs>
+  
+  <g fill="rgba(255,255,255,0.08)"><circle cx="20" cy="20" r="1"/><circle cx="47" cy="20" r="1"/><circle cx="74" cy="20" r="1"/><circle cx="101" cy="20" r="1"/><circle cx="128" cy="20" r="1"/><circle cx="155" cy="20" r="1"/><circle cx="182" cy="20" r="1"/><circle cx="209" cy="20" r="1"/><circle cx="236" cy="20" r="1"/><circle cx="263" cy="20" r="1"/><circle cx="290" cy="20" r="1"/><circle cx="317" cy="20" r="1"/><circle cx="344" cy="20" r="1"/><circle cx="371" cy="20" r="1"/><circle cx="20" cy="53" r="1"/><circle cx="47" cy="53" r="1"/><circle cx="74" cy="53" r="1"/><circle cx="101" cy="53" r="1"/><circle cx="128" cy="53" r="1"/><circle cx="155" cy="53" r="1"/><circle cx="182" cy="53" r="1"/><circle cx="209" cy="53" r="1"/><circle cx="236" cy="53" r="1"/><circle cx="263" cy="53" r="1"/><circle cx="290" cy="53" r="1"/><circle cx="317" cy="53" r="1"/><circle cx="344" cy="53" r="1"/><circle cx="371" cy="53" r="1"/><circle cx="20" cy="86" r="1"/><circle cx="47" cy="86" r="1"/><circle cx="74" cy="86" r="1"/><circle cx="101" cy="86" r="1"/><circle cx="128" cy="86" r="1"/><circle cx="155" cy="86" r="1"/><circle cx="182" cy="86" r="1"/><circle cx="209" cy="86" r="1"/><circle cx="236" cy="86" r="1"/><circle cx="263" cy="86" r="1"/><circle cx="290" cy="86" r="1"/><circle cx="317" cy="86" r="1"/><circle cx="344" cy="86" r="1"/><circle cx="371" cy="86" r="1"/><circle cx="20" cy="119" r="1"/><circle cx="47" cy="119" r="1"/><circle cx="74" cy="119" r="1"/><circle cx="101" cy="119" r="1"/><circle cx="128" cy="119" r="1"/><circle cx="155" cy="119" r="1"/><circle cx="182" cy="119" r="1"/><circle cx="209" cy="119" r="1"/><circle cx="236" cy="119" r="1"/><circle cx="263" cy="119" r="1"/><circle cx="290" cy="119" r="1"/><circle cx="317" cy="119" r="1"/><circle cx="344" cy="119" r="1"/><circle cx="371" cy="119" r="1"/><circle cx="20" cy="152" r="1"/><circle cx="47" cy="152" r="1"/><circle cx="74" cy="152" r="1"/><circle cx="101" cy="152" r="1"/><circle cx="128" cy="152" r="1"/><circle cx="155" cy="152" r="1"/><circle cx="182" cy="152" r="1"/><circle cx="209" cy="152" r="1"/><circle cx="236" cy="152" r="1"/><circle cx="263" cy="152" r="1"/><circle cx="290" cy="152" r="1"/><circle cx="317" cy="152" r="1"/><circle cx="344" cy="152" r="1"/><circle cx="371" cy="152" r="1"/><circle cx="20" cy="185" r="1"/><circle cx="47" cy="185" r="1"/><circle cx="74" cy="185" r="1"/><circle cx="101" cy="185" r="1"/><circle cx="128" cy="185" r="1"/><circle cx="155" cy="185" r="1"/><circle cx="182" cy="185" r="1"/><circle cx="209" cy="185" r="1"/><circle cx="236" cy="185" r="1"/><circle cx="263" cy="185" r="1"/><circle cx="290" cy="185" r="1"/><circle cx="317" cy="185" r="1"/><circle cx="344" cy="185" r="1"/><circle cx="371" cy="185" r="1"/><circle cx="20" cy="218" r="1"/><circle cx="47" cy="218" r="1"/><circle cx="74" cy="218" r="1"/><circle cx="101" cy="218" r="1"/><circle cx="128" cy="218" r="1"/><circle cx="155" cy="218" r="1"/><circle cx="182" cy="218" r="1"/><circle cx="209" cy="218" r="1"/><circle cx="236" cy="218" r="1"/><circle cx="263" cy="218" r="1"/><circle cx="290" cy="218" r="1"/><circle cx="317" cy="218" r="1"/><circle cx="344" cy="218" r="1"/><circle cx="371" cy="218" r="1"/><circle cx="20" cy="251" r="1"/><circle cx="47" cy="251" r="1"/><circle cx="74" cy="251" r="1"/><circle cx="101" cy="251" r="1"/><circle cx="128" cy="251" r="1"/><circle cx="155" cy="251" r="1"/><circle cx="182" cy="251" r="1"/><circle cx="209" cy="251" r="1"/><circle cx="236" cy="251" r="1"/><circle cx="263" cy="251" r="1"/><circle cx="290" cy="251" r="1"/><circle cx="317" cy="251" r="1"/><circle cx="344" cy="251" r="1"/><circle cx="371" cy="251" r="1"/><circle cx="20" cy="284" r="1"/><circle cx="47" cy="284" r="1"/><circle cx="74" cy="284" r="1"/><circle cx="101" cy="284" r="1"/><circle cx="128" cy="284" r="1"/><circle cx="155" cy="284" r="1"/><circle cx="182" cy="284" r="1"/><circle cx="209" cy="284" r="1"/><circle cx="236" cy="284" r="1"/><circle cx="263" cy="284" r="1"/><circle cx="290" cy="284" r="1"/><circle cx="317" cy="284" r="1"/><circle cx="344" cy="284" r="1"/><circle cx="371" cy="284" r="1"/></g>
+  <!-- Abstract brain sectors with one highlighted (diagnosis for adult) -->
+  <g transform="translate(200 160)">
+    <!-- Brain-like concentric arcs divided into sectors -->
+    <g stroke="rgba(255,255,255,0.85)" stroke-width="1.2" fill="none" opacity="0.7">
+      <circle cx="0" cy="0" r="80"/>
+      <circle cx="0" cy="0" r="55"/>
+      <circle cx="0" cy="0" r="30"/>
+      <line x1="-80" y1="0" x2="80" y2="0" stroke-dasharray="2,3"/>
+      <line x1="0" y1="-80" x2="0" y2="80" stroke-dasharray="2,3"/>
+    </g>
+    <!-- Highlighted sector (TEA nível 1) -->
+    <path d="M 0 0 L 80 0 A 80 80 0 0 0 56 -56 Z" fill="#f5b68f" fill-opacity="0.35" stroke="#f5b68f" stroke-width="1.5"/>
+    <!-- Dots on sectors -->
+    <circle cx="-50" cy="-30" r="2.5" fill="rgba(255,255,255,0.85)" opacity="0.7"/><circle cx="-30" cy="40" r="2.5" fill="rgba(255,255,255,0.85)" opacity="0.7"/><circle cx="40" cy="50" r="2.5" fill="rgba(255,255,255,0.85)" opacity="0.7"/><circle cx="-60" cy="40" r="2.5" fill="rgba(255,255,255,0.85)" opacity="0.7"/>
+    <circle cx="40" cy="-30" r="3.5" fill="#f5b68f"/>
+  </g>
+  <text x="200" y="45" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="3" fill="#f5b68f" opacity="0.85">TEA NÍVEL 1 · ADULTO</text>
+  <text x="360" y="285" text-anchor="end" font-family="monospace" font-size="9" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" opacity="0.55">WES · 80+ GENES</text>
+
+</svg></div>
+        <div class="body">
+          <div class="tag">Perfil 02 · Adulto com TEA nível 1</div>
+          <h3>Descobriu TEA <em>depois dos 30</em>.</h3>
+          <p>Diagnóstico recente. Você quer entender a raiz — e, se for o caso, preparar a família antes de ter filhos. Algumas variantes têm 50% de herança.</p>
+          <div class="key">TEA herdado · <b>risco familiar</b></div>
+        </div>
+      </div>
+
+      <div class="who-card">
+        <div class="photo" style="--gradient:linear-gradient(165deg,#3a2a1a,#0c0604)">
+<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1">
+  <defs>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.3"/></filter>
+  </defs>
+  
+  <g fill="rgba(255,255,255,0.08)"><circle cx="20" cy="20" r="1"/><circle cx="47" cy="20" r="1"/><circle cx="74" cy="20" r="1"/><circle cx="101" cy="20" r="1"/><circle cx="128" cy="20" r="1"/><circle cx="155" cy="20" r="1"/><circle cx="182" cy="20" r="1"/><circle cx="209" cy="20" r="1"/><circle cx="236" cy="20" r="1"/><circle cx="263" cy="20" r="1"/><circle cx="290" cy="20" r="1"/><circle cx="317" cy="20" r="1"/><circle cx="344" cy="20" r="1"/><circle cx="371" cy="20" r="1"/><circle cx="20" cy="53" r="1"/><circle cx="47" cy="53" r="1"/><circle cx="74" cy="53" r="1"/><circle cx="101" cy="53" r="1"/><circle cx="128" cy="53" r="1"/><circle cx="155" cy="53" r="1"/><circle cx="182" cy="53" r="1"/><circle cx="209" cy="53" r="1"/><circle cx="236" cy="53" r="1"/><circle cx="263" cy="53" r="1"/><circle cx="290" cy="53" r="1"/><circle cx="317" cy="53" r="1"/><circle cx="344" cy="53" r="1"/><circle cx="371" cy="53" r="1"/><circle cx="20" cy="86" r="1"/><circle cx="47" cy="86" r="1"/><circle cx="74" cy="86" r="1"/><circle cx="101" cy="86" r="1"/><circle cx="128" cy="86" r="1"/><circle cx="155" cy="86" r="1"/><circle cx="182" cy="86" r="1"/><circle cx="209" cy="86" r="1"/><circle cx="236" cy="86" r="1"/><circle cx="263" cy="86" r="1"/><circle cx="290" cy="86" r="1"/><circle cx="317" cy="86" r="1"/><circle cx="344" cy="86" r="1"/><circle cx="371" cy="86" r="1"/><circle cx="20" cy="119" r="1"/><circle cx="47" cy="119" r="1"/><circle cx="74" cy="119" r="1"/><circle cx="101" cy="119" r="1"/><circle cx="128" cy="119" r="1"/><circle cx="155" cy="119" r="1"/><circle cx="182" cy="119" r="1"/><circle cx="209" cy="119" r="1"/><circle cx="236" cy="119" r="1"/><circle cx="263" cy="119" r="1"/><circle cx="290" cy="119" r="1"/><circle cx="317" cy="119" r="1"/><circle cx="344" cy="119" r="1"/><circle cx="371" cy="119" r="1"/><circle cx="20" cy="152" r="1"/><circle cx="47" cy="152" r="1"/><circle cx="74" cy="152" r="1"/><circle cx="101" cy="152" r="1"/><circle cx="128" cy="152" r="1"/><circle cx="155" cy="152" r="1"/><circle cx="182" cy="152" r="1"/><circle cx="209" cy="152" r="1"/><circle cx="236" cy="152" r="1"/><circle cx="263" cy="152" r="1"/><circle cx="290" cy="152" r="1"/><circle cx="317" cy="152" r="1"/><circle cx="344" cy="152" r="1"/><circle cx="371" cy="152" r="1"/><circle cx="20" cy="185" r="1"/><circle cx="47" cy="185" r="1"/><circle cx="74" cy="185" r="1"/><circle cx="101" cy="185" r="1"/><circle cx="128" cy="185" r="1"/><circle cx="155" cy="185" r="1"/><circle cx="182" cy="185" r="1"/><circle cx="209" cy="185" r="1"/><circle cx="236" cy="185" r="1"/><circle cx="263" cy="185" r="1"/><circle cx="290" cy="185" r="1"/><circle cx="317" cy="185" r="1"/><circle cx="344" cy="185" r="1"/><circle cx="371" cy="185" r="1"/><circle cx="20" cy="218" r="1"/><circle cx="47" cy="218" r="1"/><circle cx="74" cy="218" r="1"/><circle cx="101" cy="218" r="1"/><circle cx="128" cy="218" r="1"/><circle cx="155" cy="218" r="1"/><circle cx="182" cy="218" r="1"/><circle cx="209" cy="218" r="1"/><circle cx="236" cy="218" r="1"/><circle cx="263" cy="218" r="1"/><circle cx="290" cy="218" r="1"/><circle cx="317" cy="218" r="1"/><circle cx="344" cy="218" r="1"/><circle cx="371" cy="218" r="1"/><circle cx="20" cy="251" r="1"/><circle cx="47" cy="251" r="1"/><circle cx="74" cy="251" r="1"/><circle cx="101" cy="251" r="1"/><circle cx="128" cy="251" r="1"/><circle cx="155" cy="251" r="1"/><circle cx="182" cy="251" r="1"/><circle cx="209" cy="251" r="1"/><circle cx="236" cy="251" r="1"/><circle cx="263" cy="251" r="1"/><circle cx="290" cy="251" r="1"/><circle cx="317" cy="251" r="1"/><circle cx="344" cy="251" r="1"/><circle cx="371" cy="251" r="1"/><circle cx="20" cy="284" r="1"/><circle cx="47" cy="284" r="1"/><circle cx="74" cy="284" r="1"/><circle cx="101" cy="284" r="1"/><circle cx="128" cy="284" r="1"/><circle cx="155" cy="284" r="1"/><circle cx="182" cy="284" r="1"/><circle cx="209" cy="284" r="1"/><circle cx="236" cy="284" r="1"/><circle cx="263" cy="284" r="1"/><circle cx="290" cy="284" r="1"/><circle cx="317" cy="284" r="1"/><circle cx="344" cy="284" r="1"/><circle cx="371" cy="284" r="1"/></g>
+  <!-- EEG-like irregular wave + pharmacogenomics dots -->
+  <g stroke="rgba(255,255,255,0.85)" stroke-width="0.5" opacity="0.12">
+    <line x1="0" y1="30" x2="400" y2="30"/><line x1="0" y1="54" x2="400" y2="54"/><line x1="0" y1="78" x2="400" y2="78"/><line x1="0" y1="102" x2="400" y2="102"/><line x1="0" y1="126" x2="400" y2="126"/><line x1="0" y1="150" x2="400" y2="150"/><line x1="0" y1="174" x2="400" y2="174"/><line x1="0" y1="198" x2="400" y2="198"/><line x1="0" y1="222" x2="400" y2="222"/><line x1="0" y1="246" x2="400" y2="246"/><line x1="0" y1="270" x2="400" y2="270"/>
+  </g>
+  <!-- Irregular spike wave (epilepsy) -->
+  <path d="M 20 170 Q 40 165 60 170 L 75 120 L 85 210 L 95 150 Q 110 170 125 170 L 140 130 L 150 205 L 160 160 Q 180 170 200 170 L 215 115 L 225 215 L 235 155 Q 260 170 280 170 L 295 125 L 305 210 L 315 155 Q 350 170 380 170"
+        fill="none" stroke="#f5b68f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Drug response marker dots below -->
+  <g transform="translate(0 240)">
+    <circle cx="80" cy="0" r="5" fill="#8ec997" opacity="0.85"/><circle cx="140" cy="0" r="5" fill="#f5b68f" opacity="0.85"/><circle cx="200" cy="0" r="5" fill="#8ec997" opacity="0.85"/><circle cx="260" cy="0" r="5" fill="#f5b68f" opacity="0.85"/><circle cx="320" cy="0" r="5" fill="#8ec997" opacity="0.85"/>
+    <line x1="60" y1="0" x2="340" y2="0" stroke="rgba(255,255,255,0.85)" stroke-width="0.8" opacity="0.3"/>
+  </g>
+  <text x="200" y="45" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="3" fill="#f5b68f" opacity="0.85">EPILEPSIA · FARMACOGEN.</text>
+  <text x="200" y="275" text-anchor="middle" font-family="monospace" font-size="9" letter-spacing="1.5" fill="rgba(255,255,255,0.85)" opacity="0.55">SCN1A · resposta a fármacos</text>
+
+</svg></div>
+        <div class="body">
+          <div class="tag">Perfil 03 · Epilepsia refratária</div>
+          <h3>Convulsões que <em>não respondem</em> a medicação.</h3>
+          <p>SCN1A, KCNQ2, STXBP1. Identificar o gene pode mudar radicalmente a conduta — alguns casos pioram com certos antiepilépticos e melhoram com outros.</p>
+          <div class="key">Epilepsia genética · <b>conduta dirigida</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT — findings -->
+<section class="what">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="num mono">03 · O que aparece no painel</div>
+      <h2>Um achado pode <em>mudar</em> a terapia da semana que vem.</h2>
+      <p class="sub">Variantes em SHANK3, SCN1A, MECP2 não são só classificação — são pista clínica. Em muitos casos, a neuropediatra troca medicação, ajusta intensidade terapêutica e redefine o plano escolar no mês seguinte à consulta.</p>
+    </div>
+
+    <div class="what-grid">
+      <div class="findings">
+        <div class="f-head">
+          <b>Amostra · Théo, 4</b>
+          <small>painel-neuro-theo.xon · ACMG</small>
+        </div>
+        <div class="f-row">
+          <div class="circle">1</div>
+          <div class="lbl"><b>SHANK3 · deleção 22q13.33</b><span>Síndrome Phelan-McDermid · TEA sindrômico</span></div>
+          <div class="bar high"><div style="width:92%"></div></div>
+          <div class="score high">ALTO</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">2</div>
+          <div class="lbl"><b>FMR1 · CGG normal (28 repetições)</b><span>X-Frágil · negativo</span></div>
+          <div class="bar low"><div style="width:18%"></div></div>
+          <div class="score low">OK</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">3</div>
+          <div class="lbl"><b>MECP2 · sem variante</b><span>Síndrome de Rett · negativo</span></div>
+          <div class="bar low"><div style="width:15%"></div></div>
+          <div class="score low">OK</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">4</div>
+          <div class="lbl"><b>CHD8 · sem variante</b><span>TEA sindrômico · negativo</span></div>
+          <div class="bar low"><div style="width:14%"></div></div>
+          <div class="score low">OK</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">5</div>
+          <div class="lbl"><b>SCN1A · VUS</b><span>Significado incerto · acompanhar</span></div>
+          <div class="bar mod"><div style="width:48%"></div></div>
+          <div class="score mod">MOD</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">6</div>
+          <div class="lbl"><b>Microarray CNV</b><span>Deleção confirmada por array</span></div>
+          <div class="bar high"><div style="width:75%"></div></div>
+          <div class="score high">CONF</div>
+        </div>
+        <div class="f-row">
+          <div class="circle">7</div>
+          <div class="lbl"><b>+ 194 genes avaliados</b><span>Demais genes de TEA/DI/epilepsia — negativos</span></div>
+          <div class="bar low"><div style="width:10%"></div></div>
+          <div class="score low">…</div>
+        </div>
+      </div>
+
+      <div class="what-right">
+        <h3>Um achado pode mudar a terapia da semana que vem.</h3>
+        <p>A diferença entre um arquivo bruto e um painel útil é interpretação. A Exon combina motor de IA com geneticista humano — cada variante de alto impacto passa pelos dois antes de chegar a você.</p>
+        <p>Você escolhe o nível de detalhe. Pode ver só os achados acionáveis. Ou mergulhar no relatório molecular. Ou pedir para a gente explicar na conversa de 45min.</p>
+        <ul>
+          <li><b>Nível de evidência</b>Classificação ACMG para cada variante clinicamente relevante.</li>
+          <li><b>Contexto populacional</b>Comparado com brasileiros, quando disponível. Sem viés anglo-saxão.</li>
+          <li><b>Plano de ação</b>O que fazer com o achado. Link para exame de confirmação ou especialista, quando cabe.</li>
+          <li><b>Reclassificação automática</b>Se uma variante mudar de status em 2030, seu painel atualiza. Sem cobrança extra.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="num mono">04 · Como funciona</div>
+      <h2>28. Zero <em>jargão</em>.</h2>
+      <p class="sub">Da hora que você clica em "começar" até o painel pronto. Sem agulha, sem deslocamento, sem surpresa.</p>
+    </div>
+    <div class="how-track">
+      <div class="how-step">
+        <div class="day">Dia 0</div>
+        <div class="n">01</div>
+        <h4>Pedido online</h4>
+        <p>Formulário neurológico: marcos, terapias, histórico. 20 min.</p>
+        <div class="item">15 min · online</div>
+      </div>
+      <div class="how-step">
+        <div class="day">Dia 2 – 5</div>
+        <div class="n">02</div>
+        <h4>Kit em casa</h4>
+        <p>Chega pelos Correios. Cuspe (ou swab para crianças) e devolva.</p>
+        <div class="item">sem agulha</div>
+      </div>
+      <div class="how-step">
+        <div class="day">Dia 7 – 20</div>
+        <div class="n">03</div>
+        <h4>Sequenciamento + CNV</h4>
+        <p>NGS em 200+ genes + microarray para detectar deleções/duplicações.</p>
+        <div class="item">laboratório próprio · SP</div>
+      </div>
+      <div class="how-step">
+        <div class="day">Dia 21 – 25</div>
+        <div class="n">04</div>
+        <h4>Análise ACMG + revisão</h4>
+        <p>Motor Exon classifica em ACMG. Neurogeneticista revisa caso a caso.</p>
+        <div class="item">AI + humano</div>
+      </div>
+      <div class="how-step">
+        <div class="day">Dia 26 – 28</div>
+        <div class="n">05</div>
+        <h4>Consulta + carta médica</h4>
+        <p>Consulta de 90 min. Carta médica para a equipe de neuropediatria.</p>
+        <div class="item">45 min · online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="price-sec" id="price">
+  <div class="price-inner">
+    <div class="price-grid">
+      <div class="price-left">
+        <div class="mono">05 · Investimento</div>
+        <h3>Um exame. Um nome. Uma <em>terapia</em> mais precisa.</h3>
+        <div class="price">
+          <span class="amount"><em>R$ 4.990</em></span>
+          <small>pagamento único</small>
+        </div>
+        <div class="installment">ou <b>12x de R$ 416</b> sem juros no cartão</div>
+        <a href="#" class="btn-primary">
+          Começar agora
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <div class="fine">Reembolso integral se a coleta falhar · sem taxa por atualização futura · sem mensalidade</div>
+      </div>
+      <div class="price-right">
+        <h4>Está incluso</h4>
+        <ul>
+          <li>Kit de coleta de saliva entregue em casa</li>
+          <li>Sequenciamento NGS de <b>200+ genes</b> neurológicos</li>
+          <li>Análise de <b>CNVs</b> (deleções/duplicações) + SNVs</li>
+          <li>Classificação ACMG revisada por geneticista clínico</li>
+          <li>Sessão de <b>90 min</b> com neurogeneticista</li>
+          <li>Carta clínica para neuropediatra / neurologista</li>
+          <li>Reclassificação automática <b>para sempre</b></li>
+          <li>Reavaliação bianual do painel sem custo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ MINI -->
+<section class="faq-mini">
+  <div class="faq-mini-inner">
+    <h2>Perguntas que <em>todo mundo</em> faz antes.</h2>
+    <details open>
+      <summary>Meu(minha) filho(a) tem TEA. Vale fazer este exame?</summary>
+      <p>Em ~30% dos casos de TEA com atraso de desenvolvimento, o painel encontra algo acionável — seja um gene específico que muda terapia, seja um CNV que indica síndrome conhecida. Se não encontra, ajuda a descartar causas genéticas e focar em outras investigações.</p>
+    </details>
+    <details>
+      <summary>Qual a diferença entre este painel e um exoma?</summary>
+      <p>O exoma lê todos os genes codificantes — mais amplo, mas mais caro (R$ 6.500+) e com mais achados incidentais. Este painel é direcionado para genes de TEA, DI, epilepsia e atraso. Para investigação inicial, costuma ser o primeiro passo.</p>
+    </details>
+    <details>
+      <summary>Descobri SHANK3 no meu filho. E agora?</summary>
+      <p>A neurogeneticista faz a devolutiva junto com plano: terapias mais intensivas, acompanhamento específico para Phelan-McDermid, carta para escola, grupos de apoio de famílias com a mesma síndrome. E orientação sobre planejamento familiar, se for o caso.</p>
+    </details>
+    <details>
+      <summary>E se o resultado for VUS?</summary>
+      <p>Significado incerto é comum em neuro. A gente explica exatamente o que isso quer dizer, recomenda ou não investigação de pais (trio), e reavalia a variante automaticamente quando houver nova evidência.</p>
+    </details>
+    <details>
+      <summary>Planos de saúde cobrem?</summary>
+      <p>Para crianças com CID de TEA ou atraso, muitos cobrem. Temos equipe que ajuda a montar a documentação para o reembolso.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="final-inner">
+    <h2>Um nome para <em>entender</em>. Um plano para <em>caminhar</em>.</h2>
+    <p>Se vocês já têm um exoma feito em outro lab, podemos reanalisar com foco neuro. Se querem começar pelo painel direcionado, ele já resolve 30% dos casos em 4 semanas.</p>
+    <div class="ctas">
+      <a href="#price" class="btn-primary">
+        Painel Neurogenética — R$ 4.990
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="upload.html" class="btn-secondary">
+        Reanalisar exoma existente
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <span>© 2026 Exon Genomics</span>
+    <span>Brasil · LGPD · ISO 27001</span>
+  </div>
+</footer>
+
+
+</body>
+</html>

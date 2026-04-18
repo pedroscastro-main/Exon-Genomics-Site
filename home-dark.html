@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt" data-lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exon Genomics — Conheça o seu código</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/*EDITMODE-BEGIN*/
+/* TWEAK_DEFAULTS:
+{
+  "palette": "noite",
+  "heading_font": "fraunces",
+  "hero_layout": "split"
+}
+*/
+/*EDITMODE-END*/
+
+:root{
+  --bg:#0a0e1f;
+  --bg-soft:#141a3a;
+  --bg-panel:#1a2142;
+  --ink:#f5f2ec;
+  --ink-soft:#c8cde0;
+  --muted:#8a93b5;
+  --accent:#7dd3fc;
+  --accent-deep:#a78bfa;
+  --accent-soft:#fbbf24;
+  --warm:#fbbf24;
+  --line:rgba(255,255,255,.12);
+  --line-soft:rgba(255,255,255,.06);
+  --font-heading:'Fraunces',Georgia,serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+[data-palette="aurora"]{
+  --bg:#0c0b1e;--bg-soft:#1a1838;--bg-panel:#231f47;
+  --accent:#c084fc;--accent-deep:#7dd3fc;--accent-soft:#f0abfc;
+}
+[data-palette="mintnight"]{
+  --bg:#041815;--bg-soft:#0a2a25;--bg-panel:#103b34;
+  --accent:#6ee7b7;--accent-deep:#34d399;--accent-soft:#fde68a;
+}
+[data-palette="plasma"]{
+  --bg:#120518;--bg-soft:#220a2a;--bg-panel:#320e3e;
+  --accent:#f0abfc;--accent-deep:#fb7185;--accent-soft:#fbbf24;
+}
+[data-heading="fraunces"]{--font-heading:'Fraunces',Georgia,serif}
+[data-heading="instrument"]{--font-heading:'Instrument Serif',Georgia,serif}
+[data-heading="sans"]{--font-heading:'Inter',-apple-system,sans-serif}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-size:16px;line-height:1.6;transition:background .4s ease, color .4s ease}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img{max-width:100%;display:block}
+em{font-style:italic;color:var(--accent)}
+
+.mono{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted)}
+
+/* --- Header --- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 4vw;display:flex;justify-content:space-between;align-items:center;background:rgba(10,14,31,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line-soft)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:46px;width:auto;display:block}
+.nav-links{display:flex;gap:28px;align-items:center;font-size:13.5px;color:var(--ink-soft)}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{padding:10px 18px;border-radius:100px;background:var(--accent);color:var(--bg);font-size:13px;font-weight:500;transition:all .2s}
+.nav-cta:hover{background:var(--ink);transform:translateY(-1px)}
+.lang{display:flex;gap:2px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;color:var(--muted)}
+.lang button{padding:4px 8px;border-radius:4px}
+.lang button.active{color:var(--accent);background:var(--bg-panel)}
+
+/* --- Hero: split grid --- */
+.hero{position:relative;min-height:100vh;padding:110px 0 0;display:grid;grid-template-columns:1.1fr .9fr;overflow:hidden}
+.hero-left{padding:60px 6vw 60px 6vw;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.hero-right{position:relative;overflow:hidden;border-left:1px solid var(--line)}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+
+.hero-tag{display:flex;align-items:center;gap:12px;margin-bottom:36px;color:var(--accent)}
+.hero-tag .pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px rgba(125,211,252,.15);animation:pulse2 2s ease-in-out infinite}
+@keyframes pulse2{0%,100%{box-shadow:0 0 0 6px rgba(125,211,252,.15)}50%{box-shadow:0 0 0 10px rgba(125,211,252,.05)}}
+
+.hero h1{font-family:var(--font-heading);font-weight:300;font-size:clamp(2.6rem,5.4vw,5.2rem);line-height:1.02;letter-spacing:-0.025em;max-width:14ch;margin-bottom:36px;text-wrap:balance}
+.hero h1 em{font-weight:300;background:linear-gradient(120deg,var(--accent),var(--accent-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic}
+.hero-sub{font-size:clamp(16px,1.2vw,18px);line-height:1.55;color:var(--ink-soft);max-width:42ch;margin-bottom:48px}
+
+.hero-ctas{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:56px}
+.btn-primary{display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:#0a0e1f;padding:18px 26px;border-radius:100px;font-weight:600;font-size:15px;transition:all .25s;box-shadow:0 0 0 1px var(--accent), 0 10px 30px -10px var(--accent)}
+.btn-primary:hover{background:var(--ink);transform:translateY(-1px);box-shadow:0 0 0 1px var(--ink), 0 10px 30px -10px var(--ink)}
+.btn-primary svg{transition:transform .25s}
+.btn-primary:hover svg{transform:translate(3px,-3px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;color:var(--ink-soft);font-size:14px;padding:16px 4px;border-bottom:1px solid var(--line);transition:all .2s}
+.btn-ghost:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Hero specs strip */
+.hero-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding-top:32px;border-top:1px solid var(--line);max-width:620px}
+.hero-specs .item b{font-family:var(--font-heading);font-weight:400;font-size:28px;letter-spacing:-0.02em;color:var(--ink);display:block;margin-bottom:4px}
+.hero-specs .item b em{color:var(--accent);font-style:italic}
+.hero-specs .item span{font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);line-height:1.4;display:block}
+
+/* Upload card, floating bottom right */
+.upload-card{position:absolute;right:40px;bottom:40px;z-index:3;background:rgba(10,14,31,.65);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;padding:24px;width:min(340px,80%);box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.upload-card .mono{color:var(--accent);margin-bottom:12px}
+.upload-card h3{font-family:var(--font-heading);font-weight:400;font-size:22px;line-height:1.2;letter-spacing:-0.01em;margin-bottom:10px;color:var(--ink)}
+.upload-card p{font-size:13px;line-height:1.5;color:var(--ink-soft);margin-bottom:16px}
+.drop-zone{border:1.5px dashed var(--line);border-radius:10px;padding:18px 14px;text-align:center;transition:all .25s;cursor:pointer;background:rgba(255,255,255,.02);display:block}
+.drop-zone:hover{border-color:var(--accent);background:rgba(125,211,252,.05)}
+.drop-zone .icon{width:34px;height:34px;margin:0 auto 10px;color:var(--accent)}
+.drop-zone b{display:block;font-family:var(--font-heading);font-size:15px;font-weight:400;margin-bottom:3px;color:var(--ink)}
+.drop-zone small{display:block;font-size:10px;color:var(--muted);font-family:var(--font-mono);letter-spacing:0.08em}
+
+/* Hero layout alt */
+[data-hero="stacked"] .hero{grid-template-columns:1fr;min-height:auto}
+[data-hero="stacked"] .hero-right{display:none}
+[data-hero="stacked"] .hero-left{padding:60px 6vw 40px}
+[data-hero="stacked"] .hero-dna-full{display:block}
+
+[data-hero="fullbleed"] .hero{grid-template-columns:1fr;position:relative}
+[data-hero="fullbleed"] .hero-right{position:absolute;inset:0;border:0;z-index:0}
+[data-hero="fullbleed"] .hero-left{max-width:820px;margin:0 auto;text-align:center;padding:100px 6vw}
+[data-hero="fullbleed"] .hero h1{margin-left:auto;margin-right:auto;max-width:18ch}
+[data-hero="fullbleed"] .hero-sub{margin-left:auto;margin-right:auto}
+[data-hero="fullbleed"] .hero-ctas{justify-content:center}
+[data-hero="fullbleed"] .hero-specs{margin-left:auto;margin-right:auto}
+[data-hero="fullbleed"] .hero-tag{justify-content:center}
+[data-hero="fullbleed"] .upload-card{position:relative;right:auto;bottom:auto;margin:40px auto 0}
+
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{min-height:50vh;border-left:0;border-top:1px solid var(--line)}
+  .upload-card{right:20px;bottom:20px}
+}
+
+/* --- Sections --- */
+section{padding:140px 4vw;position:relative}
+.section-inner{max-width:1280px;margin:0 auto}
+.section-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:80px;align-items:end;padding-bottom:32px;border-bottom:1px solid var(--line)}
+.section-head .eyebrow{margin-bottom:18px;display:inline-flex;align-items:center;gap:10px;color:var(--accent)}
+.section-head .eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+.section-head h2{font-family:var(--font-heading);font-weight:300;font-size:clamp(2rem,3.8vw,3.6rem);line-height:1.08;letter-spacing:-0.02em;text-wrap:balance;color:var(--ink)}
+.section-head h2 em{font-style:italic;font-weight:300;color:var(--accent)}
+.section-head .right{font-size:15px;color:var(--muted);max-width:360px;line-height:1.55;align-self:end;padding-bottom:8px}
+
+@media (max-width:800px){.section-head{grid-template-columns:1fr;gap:24px}}
+
+/* --- Portraits (lab-card style) --- */
+.portraits{background:var(--bg-soft)}
+.portrait-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.portrait{aspect-ratio:3/4;background:var(--bg-panel);border-radius:10px;overflow:hidden;position:relative;border:1px solid var(--line-soft);transition:transform .4s ease}
+.portrait:hover{transform:translateY(-6px)}
+.portrait .ph{position:absolute;inset:0;background:var(--gradient, linear-gradient(160deg,var(--bg-soft),var(--bg-panel)))}
+.portrait .ph::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.7))}
+.portrait .ph::after{content:'[ retrato ]';position:absolute;top:14px;left:14px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.18em;color:rgba(255,255,255,.7);text-transform:uppercase;padding:4px 8px;background:rgba(0,0,0,.4);border-radius:4px;backdrop-filter:blur(4px)}
+.portrait .caption{position:absolute;left:20px;right:20px;bottom:20px;z-index:2}
+.portrait .name{font-family:var(--font-heading);font-size:22px;font-weight:400;letter-spacing:-0.01em;color:#fff;margin-bottom:4px}
+.portrait .meta{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:10px}
+.portrait .exam{display:inline-block;padding:3px 8px;border:1px solid rgba(255,255,255,.3);border-radius:4px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent)}
+
+@media (max-width:900px){.portrait-grid{grid-template-columns:repeat(2,1fr)}}
+
+.portrait-quote{margin-top:72px;padding:56px 64px;background:var(--bg-panel);border-radius:10px;border-left:2px solid var(--accent);max-width:900px}
+.portrait-quote blockquote{font-family:var(--font-heading);font-weight:300;font-size:clamp(22px,2.4vw,34px);line-height:1.22;letter-spacing:-0.01em;color:var(--ink);text-wrap:balance;margin-bottom:28px;font-style:italic}
+.portrait-quote blockquote em{color:var(--accent);font-style:italic}
+.portrait-quote cite{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);font-style:normal;display:block}
+.portrait-quote cite b{color:var(--ink);display:block;font-family:var(--font-heading);font-size:17px;font-weight:400;letter-spacing:-0.01em;text-transform:none;margin-bottom:2px}
+
+/* --- Exams as cards --- */
+.exams{background:var(--bg)}
+.exam-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line)}
+.exam{background:var(--bg);padding:40px 36px 44px;display:flex;flex-direction:column;transition:background .3s;min-height:340px;cursor:pointer;position:relative}
+.exam:hover{background:var(--bg-soft)}
+.exam-num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent);margin-bottom:32px}
+.exam h3{font-family:var(--font-heading);font-weight:300;font-size:28px;line-height:1.1;letter-spacing:-0.015em;margin-bottom:14px;color:var(--ink)}
+.exam h3 em{color:var(--accent);font-style:italic;font-weight:300}
+.exam p{font-size:14.5px;line-height:1.55;color:var(--ink-soft);margin-bottom:20px;flex:1}
+.exam-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.exam-tags span{font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:3px 8px;border:1px solid var(--line);border-radius:100px}
+.exam-footer{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--line-soft)}
+.exam-price{font-family:var(--font-heading);font-size:15px;color:var(--ink-soft)}
+.exam-price b{color:var(--ink);font-weight:400}
+.exam-arrow{color:var(--muted);transition:all .3s}
+.exam:hover .exam-arrow{color:var(--accent);transform:translate(4px,-4px)}
+
+@media (max-width:900px){.exam-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.exam-grid{grid-template-columns:1fr}}
+
+/* --- How it works: horizontal timeline --- */
+.how{background:var(--bg-soft)}
+.how-grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding-top:48px}
+.how-grid::before{content:'';position:absolute;top:76px;left:6%;right:6%;height:1px;background:linear-gradient(90deg,transparent,var(--accent) 10%,var(--accent) 90%,transparent)}
+.step{position:relative;padding:0 24px}
+.step::before{content:'';position:absolute;top:68px;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:var(--bg-soft);border:2px solid var(--accent);box-shadow:0 0 20px var(--accent)}
+.step-num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent);margin-bottom:24px;text-align:center;height:44px}
+.step-body{padding-top:80px}
+.step h3{font-family:var(--font-heading);font-size:24px;font-weight:400;line-height:1.15;letter-spacing:-0.01em;margin-bottom:12px;text-wrap:balance;color:var(--ink)}
+.step p{font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+
+@media (max-width:900px){
+  .how-grid{grid-template-columns:repeat(2,1fr);gap:48px}
+  .how-grid::before{display:none}
+  .step::before{display:none}
+  .step-body{padding-top:0}
+}
+
+/* --- Manifesto band --- */
+.manifesto{background:linear-gradient(160deg,var(--bg-panel) 0%,var(--bg) 100%);padding:140px 4vw;position:relative;overflow:hidden}
+.manifesto::before{content:'';position:absolute;top:-50%;right:-20%;width:80%;height:200%;background:radial-gradient(circle,var(--accent) 0%,transparent 50%);opacity:.08;filter:blur(80px)}
+.manifesto-inner{max-width:1000px;margin:0 auto;position:relative}
+.manifesto h2{font-family:var(--font-heading);font-weight:300;font-size:clamp(2.4rem,4.8vw,4.6rem);line-height:1.05;letter-spacing:-0.02em;text-wrap:balance;color:var(--ink)}
+.manifesto h2 em{color:var(--accent);font-style:italic;font-weight:300}
+.manifesto .author{margin-top:48px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:16px}
+.manifesto .author::before{content:'';width:40px;height:1px;background:var(--accent)}
+
+/* --- Stats --- */
+.stats{background:var(--bg);padding:140px 4vw}
+.stats-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:56px}
+.stat{padding-left:24px;border-left:1px solid var(--line)}
+.stat:first-child{border-left-color:var(--accent)}
+.stat .num{font-family:var(--font-heading);font-weight:300;font-size:clamp(3rem,5.5vw,5.5rem);line-height:1;letter-spacing:-0.03em;margin-bottom:14px;color:var(--ink)}
+.stat .num em{color:var(--accent);font-style:italic}
+.stat .lbl{font-size:14px;line-height:1.5;color:var(--ink-soft)}
+@media (max-width:900px){.stats-inner{grid-template-columns:1fr 1fr;gap:40px}}
+
+/* --- Upload band --- */
+.upload-band{background:var(--bg-soft);padding:140px 4vw;position:relative;overflow:hidden}
+.upload-band-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.upload-band .eyebrow{margin-bottom:20px;color:var(--accent)}
+.upload-band h2{font-family:var(--font-heading);font-weight:300;font-size:clamp(2.4rem,4vw,4rem);line-height:1.05;letter-spacing:-0.02em;margin-bottom:24px;text-wrap:balance;color:var(--ink)}
+.upload-band h2 em{color:var(--accent);font-style:italic;font-weight:300}
+.upload-band p{font-size:17px;line-height:1.6;color:var(--ink-soft);margin-bottom:32px;max-width:48ch}
+.upload-band ul{list-style:none;margin-bottom:36px}
+.upload-band li{padding:16px 0;border-top:1px solid var(--line);font-size:14px;color:var(--ink-soft);display:flex;gap:16px;align-items:baseline}
+.upload-band li::before{content:'→';color:var(--accent);font-family:var(--font-mono)}
+.upload-band li:last-child{border-bottom:1px solid var(--line)}
+
+.upload-visual{position:relative;aspect-ratio:1/1;background:var(--bg-panel);border-radius:12px;padding:40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;border:1px solid var(--line)}
+.upload-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,var(--accent) 0,transparent 50%);opacity:.1}
+.file-preview{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:12px;display:flex;align-items:center;gap:14px;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.file-preview:nth-child(2){animation-delay:.3s;margin-left:40px}
+.file-preview:nth-child(3){animation-delay:.6s;margin-left:20px}
+.file-ico{width:34px;height:34px;border-radius:6px;background:var(--accent);color:var(--bg);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;flex-shrink:0;font-weight:600}
+.file-info b{display:block;font-family:var(--font-heading);font-size:15px;font-weight:400;color:var(--ink);letter-spacing:-0.01em}
+.file-info small{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+
+@media (max-width:900px){.upload-band-inner{grid-template-columns:1fr;gap:48px}}
+
+/* --- FAQ --- */
+.faq{background:var(--bg);padding:140px 4vw}
+.faq-inner{max-width:900px;margin:0 auto}
+.faq h2{font-family:var(--font-heading);font-size:clamp(2rem,3.5vw,3.2rem);margin-bottom:56px;max-width:20ch;line-height:1.08;font-weight:300;letter-spacing:-0.02em;text-wrap:balance}
+.faq h2 em{color:var(--accent);font-style:italic;font-weight:300}
+.faq-item{border-bottom:1px solid var(--line);padding:28px 0;cursor:pointer}
+.faq-item summary{list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:24px;font-family:var(--font-heading);font-size:clamp(19px,1.8vw,24px);font-weight:400;letter-spacing:-0.01em;line-height:1.25;color:var(--ink);text-wrap:balance}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-family:var(--font-mono);color:var(--accent);font-size:20px;transition:transform .2s}
+.faq-item[open] summary::after{content:'–'}
+.faq-item p{margin-top:16px;color:var(--ink-soft);font-size:15px;line-height:1.6;max-width:65ch}
+
+/* --- Footer --- */
+footer{background:var(--bg-soft);color:var(--ink);padding:80px 4vw 32px;border-top:1px solid var(--line)}
+.foot-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px;border-bottom:1px solid var(--line)}
+.foot-brand .logo{margin-bottom:16px;display:block}
+.foot-brand .logo img{height:42px;width:auto;display:block}
+.foot-brand p{color:var(--muted);font-size:14px;line-height:1.55;max-width:38ch}
+.foot-col h4{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;font-weight:500}
+.foot-col a{display:block;color:var(--ink-soft);font-size:14.5px;padding:6px 0;transition:color .2s}
+.foot-col a:hover{color:var(--accent)}
+.foot-legal{max-width:1280px;margin:32px auto 0;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+
+@media (max-width:800px){.foot-inner{grid-template-columns:1fr 1fr}}
+
+/* --- Tweaks panel --- */
+.tweaks{position:fixed;bottom:20px;right:20px;z-index:100;background:var(--bg-panel);border:1px solid var(--line);border-radius:12px;padding:20px;width:280px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);font-family:var(--font-body);font-size:13px;display:none;color:var(--ink)}
+.tweaks.visible{display:block}
+.tweaks h4{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:500}
+.tweak-group{margin-bottom:18px}
+.tweak-group label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.tweak-group .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
+.tweak-group .opts button{padding:8px 6px;border:1px solid var(--line);border-radius:6px;font-size:11px;color:var(--ink-soft);background:transparent;transition:all .15s}
+.tweak-group .opts button:hover{border-color:var(--accent)}
+.tweak-group .opts button.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+</style>
+</head>
+<body data-palette="noite" data-heading="fraunces" data-hero="split">
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo" aria-label="Exon Genomics">
+    <img src="assets/exon-wordmark.svg" alt="Exon Genomics">
+  </a>
+  <div class="nav-links">
+    <a href="#exams" data-i18n-pt="Exames" data-i18n-en="Tests">Exames</a>
+    <a href="equipe.html" data-i18n-pt="Equipe" data-i18n-en="Team">Equipe</a>
+    <a href="upload.html" data-i18n-pt="Reanalisar arquivo" data-i18n-en="Reanalyze file">Reanalisar arquivo</a>
+    <a href="#how" data-i18n-pt="Como funciona" data-i18n-en="How it works">Como funciona</a>
+    <a href="#faq">FAQ</a>
+    <div class="lang">
+      <button data-lang-btn="pt">PT</button>
+      <button data-lang-btn="en">EN</button>
+    </div>
+    <a href="upload.html" class="nav-cta" data-i18n-pt="Começar →" data-i18n-en="Start →">Começar →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">
+      <span class="pulse"></span>
+      <span class="mono" style="color:inherit" data-i18n-pt="O primeiro exame genético feito para o paciente" data-i18n-en="The first genetic test built for the patient">O primeiro exame genético feito para o paciente</span>
+    </div>
+    <h1 data-i18n-pt="Conheça o <em>código</em> que torna você, você." data-i18n-en="Meet the <em>code</em> that makes you, you.">
+      Conheça o <em>código</em> que torna você, você.
+    </h1>
+    <p class="hero-sub" data-i18n-pt="3 bilhões de letras. Uma conversa com um geneticista. Relatórios que você realmente entende. Comece por um arquivo que você já tem — ou do zero, com saliva e 15 minutos." data-i18n-en="3 billion letters. A conversation with a geneticist. Reports you actually understand. Start with a file you already have — or from scratch, with saliva and 15 minutes.">
+      3 bilhões de letras. Uma conversa com um geneticista. Relatórios que você realmente entende. Comece por um arquivo que você já tem — ou do zero, com saliva e 15 minutos.
+    </p>
+    <div class="hero-ctas">
+      <a href="upload.html" class="btn-primary">
+        <span data-i18n-pt="Reanalisar meu arquivo" data-i18n-en="Reanalyze my file">Reanalisar meu arquivo</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="#exams" class="btn-ghost" data-i18n-pt="Ver exames Exon ↓" data-i18n-en="Browse Exon tests ↓">Ver exames Exon ↓</a>
+    </div>
+    <div class="hero-specs">
+      <div class="item">
+        <b><em>3</em>Bi</b>
+        <span data-i18n-pt="letras sequenciadas" data-i18n-en="letters sequenced">letras sequenciadas</span>
+      </div>
+      <div class="item">
+        <b><em>+40</em>mil</b>
+        <span data-i18n-pt="pacientes Exon" data-i18n-en="Exon patients">pacientes Exon</span>
+      </div>
+      <div class="item">
+        <b><em>24</em>h</b>
+        <span data-i18n-pt="para reanalisar" data-i18n-en="to reanalyze">para reanalisar</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <canvas class="hero-canvas" id="dna-canvas"></canvas>
+    <div class="upload-card" id="upload">
+      <div class="mono" data-i18n-pt="Atalho · Upload" data-i18n-en="Shortcut · Upload">Atalho · Upload</div>
+      <h3 data-i18n-pt="Fez Genera, 23andMe, MyHeritage?" data-i18n-en="Did Genera, 23andMe, MyHeritage?">Fez Genera, 23andMe, MyHeritage?</h3>
+      <p data-i18n-pt="Reanalise seu arquivo com o motor Exon. Em 24h, muito mais do que os laboratórios originais te entregaram." data-i18n-en="Reanalyze your file with the Exon engine. In 24h, much more than the original labs delivered.">Reanalise seu arquivo com o motor Exon. Em 24h, muito mais do que os laboratórios originais te entregaram.</p>
+      <a class="drop-zone" href="upload.html">
+        <svg class="icon" viewBox="0 0 40 40" fill="none"><path d="M20 27V13M20 13L14 19M20 13L26 19M8 27v3a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <b data-i18n-pt=".txt · .vcf · .zip" data-i18n-en=".txt · .vcf · .zip">.txt · .vcf · .zip</b>
+        <small data-i18n-pt="arraste ou clique · 100% seguro" data-i18n-en="drop or click · 100% private">arraste ou clique · 100% seguro</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PORTRAITS -->
+<section class="portraits">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="left">
+        <div class="mono eyebrow" data-i18n-pt="01 · Pessoas reais" data-i18n-en="01 · Real people">01 · Pessoas reais</div>
+        <h2 data-i18n-pt="Quatro pessoas que <em>descobriram algo</em> sobre si." data-i18n-en="Four people who <em>discovered something</em> about themselves.">Quatro pessoas que <em>descobriram algo</em> sobre si.</h2>
+      </div>
+      <div class="right" data-i18n-pt="Nenhuma tinha feito exame genético antes. Todas tomaram alguma decisão — médica ou íntima — a partir do que aprenderam." data-i18n-en="None had done genetic testing before. All made some decision — medical or intimate — from what they learned.">
+        Nenhuma tinha feito exame genético antes. Todas tomaram alguma decisão — médica ou íntima — a partir do que aprenderam.
+      </div>
+    </div>
+
+    <div class="portrait-grid">
+      <div class="portrait">
+        <div class="ph" style="--gradient:linear-gradient(160deg,#2c3e70,#0a0e1f)"></div>
+        <div class="caption">
+          <div class="name">Camila, 34</div>
+          <div class="meta" data-i18n-pt="Prevenção de câncer" data-i18n-en="Cancer prevention">Prevenção de câncer</div>
+          <span class="exam">BRCA1 · RM anual</span>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="ph" style="--gradient:linear-gradient(160deg,#704020,#0a0e1f)"></div>
+        <div class="caption">
+          <div class="name">Rafael, 41</div>
+          <div class="meta" data-i18n-pt="Cardiologia preventiva" data-i18n-en="Preventive cardiology">Cardiologia preventiva</div>
+          <span class="exam">LDLR · estatina</span>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="ph" style="--gradient:linear-gradient(160deg,#204830,#0a0e1f)"></div>
+        <div class="caption">
+          <div class="name">Beatriz, 52</div>
+          <div class="meta" data-i18n-pt="Reanalisou Genera" data-i18n-en="Reanalyzed Genera">Reanalisou Genera</div>
+          <span class="exam">+28 achados</span>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="ph" style="--gradient:linear-gradient(160deg,#4a2070,#0a0e1f)"></div>
+        <div class="caption">
+          <div class="name">André, 28</div>
+          <div class="meta" data-i18n-pt="Planejamento familiar" data-i18n-en="Family planning">Planejamento familiar</div>
+          <span class="exam">MECP2 · casal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portrait-quote">
+      <blockquote data-i18n-pt="“Eu estava há três anos tentando descobrir por que meu LDL não baixava. Descobri que tinho hipercolesterolemia familiar. Em <em>seis semanas</em>, estava com tratamento certo.”" data-i18n-en="&ldquo;I'd spent three years trying to figure out why my LDL wouldn't drop. Turns out I have familial hypercholesterolemia. In <em>six weeks</em>, I was on the right treatment.&rdquo;">
+        “Eu estava há três anos tentando descobrir por que meu LDL não baixava. Descobri que tinho hipercolesterolemia familiar. Em <em>seis semanas</em>, estava com tratamento certo.”
+      </blockquote>
+      <cite><b>Rafael Moura, 41</b><span data-i18n-pt="Exon · Cardiologia · Curitiba" data-i18n-en="Exon · Cardiology · Curitiba">Exon · Cardiologia · Curitiba</span></cite>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMS -->
+<section class="exams" id="exams">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="left">
+        <div class="mono eyebrow" data-i18n-pt="02 · Os exames" data-i18n-en="02 · The tests">02 · Os exames</div>
+        <h2 data-i18n-pt="Seis caminhos para <em>uma pergunta</em>." data-i18n-en="Six paths for <em>one question</em>.">Seis caminhos para <em>uma pergunta</em>.</h2>
+      </div>
+      <div class="right" data-i18n-pt="Cada pessoa chega com uma inquietação diferente. Você vai entender em qual painel ela cabe — e receber um plano, não um arquivo bruto." data-i18n-en="Each person arrives with a different concern. You'll understand which panel fits it — and get a plan, not a raw file.">
+        Cada pessoa chega com uma inquietação diferente. Você vai entender em qual painel ela cabe — e receber um plano, não um arquivo bruto.
+      </div>
+    </div>
+
+    <div class="exam-grid">
+      <a class="exam" href="exame-genoma.html">
+        <div class="exam-num">01 · Carro-chefe</div>
+        <h3 data-i18n-pt="Genoma <em>Completo</em>" data-i18n-en="<em>Whole</em> Genome">Genoma <em>Completo</em></h3>
+        <p data-i18n-pt="3 bilhões de letras. Uma leitura para a vida inteira. Seu painel atualiza sozinho conforme a ciência avança." data-i18n-en="3 billion letters. One reading for your entire life. Your dashboard updates as science advances.">3 bilhões de letras. Uma leitura para a vida inteira. Seu painel atualiza sozinho conforme a ciência avança.</p>
+        <div class="exam-tags"><span>WGS</span><span data-i18n-pt="uma vez na vida" data-i18n-en="once in a lifetime">uma vez na vida</span></div>
+        <div class="exam-footer">
+          <div class="exam-price"><span data-i18n-pt="a partir de" data-i18n-en="from">a partir de</span> <b>R$ 2.990</b></div>
+          <svg class="exam-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </a>
+
+      <a class="exam" href="#">
+        <div class="exam-num">02 · Cardiologia</div>
+        <h3 data-i18n-pt="Coração <em>em mapa</em>" data-i18n-en="Heart <em>mapped</em>">Coração <em>em mapa</em></h3>
+        <p data-i18n-pt="Infarto precoce, arritmia, colesterol familiar. Os genes que explicam antes do sintoma aparecer." data-i18n-en="Early heart attack, arrhythmia, familial cholesterol. The genes that explain before symptoms appear.">Infarto precoce, arritmia, colesterol familiar. Os genes que explicam antes do sintoma aparecer.</p>
+        <div class="exam-tags"><span data-i18n-pt="cardio" data-i18n-en="cardio">cardio</span><span data-i18n-pt="histórico familiar" data-i18n-en="family history">histórico familiar</span></div>
+        <div class="exam-footer">
+          <div class="exam-price"><span data-i18n-pt="a partir de" data-i18n-en="from">a partir de</span> <b>R$ 890</b></div>
+          <svg class="exam-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </a>
+
+      <a class="exam" href="#">
+        <div class="exam-num">03 · Oncogenética</div>
+        <h3 data-i18n-pt="Prevenção <em>de câncer</em>" data-i18n-en="Cancer <em>prevention</em>">Prevenção <em>de câncer</em></h3>
+        <p data-i18n-pt="80+ genes de câncer hereditário: BRCA1/2, Lynch, Li-Fraumeni. Com aconselhamento genético incluso." data-i18n-en="80+ hereditary cancer genes: BRCA1/2, Lynch, Li-Fraumeni. With genetic counseling included.">80+ genes de câncer hereditário: BRCA1/2, Lynch, Li-Fraumeni. Com aconselhamento genético incluso.</p>
+        <div class="exam-tags"><span data-i18n-pt="oncogenética" data-i18n-en="oncogenetics">oncogenética</span><span data-i18n-pt="com psicólogo" data-i18n-en="with psychologist">com psicólogo</span></div>
+        <div class="exam-footer">
+          <div class="exam-price"><span data-i18n-pt="a partir de" data-i18n-en="from">a partir de</span> <b>R$ 1.490</b></div>
+          <svg class="exam-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </a>
+
+      <a class="exam" href="#">
+        <div class="exam-num">04 · Casais</div>
+        <h3 data-i18n-pt="Planejamento <em>familiar</em>" data-i18n-en="Family <em>planning</em>">Planejamento <em>familiar</em></h3>
+        <p data-i18n-pt="300+ doenças recessivas. Para casais descobrirem, antes da gestação, o risco de passá-las adiante." data-i18n-en="300+ recessive diseases. For couples to discover, before pregnancy, the risk of passing them on.">300+ doenças recessivas. Para casais descobrirem, antes da gestação, o risco de passá-las adiante.</p>
+        <div class="exam-tags"><span data-i18n-pt="pré-concepção" data-i18n-en="pre-conception">pré-concepção</span><span data-i18n-pt="casais" data-i18n-en="couples">casais</span></div>
+        <div class="exam-footer">
+          <div class="exam-price"><span data-i18n-pt="casal a partir de" data-i18n-en="couple from">casal a partir de</span> <b>R$ 1.790</b></div>
+          <svg class="exam-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </a>
+
+      <a class="exam" href="#">
+        <div class="exam-num">05 · Metabólico</div>
+        <h3 data-i18n-pt="Peso & <em>hormônios</em>" data-i18n-en="Weight & <em>hormones</em>">Peso & <em>hormônios</em></h3>
+        <p data-i18n-pt="Qual dieta funciona para o seu corpo? Como você responde a estímulos hormonais? Ciência, não achismo." data-i18n-en="Which diet works for your body? How do you respond to hormonal stimuli? Science, not guesswork.">Qual dieta funciona para o seu corpo? Como você responde a estímulos hormonais? Ciência, não achismo.</p>
+        <div class="exam-tags"><span data-i18n-pt="nutrigenética" data-i18n-en="nutrigenetics">nutrigenética</span><span data-i18n-pt="endócrino" data-i18n-en="endocrine">endócrino</span></div>
+        <div class="exam-footer">
+          <div class="exam-price"><span data-i18n-pt="a partir de" data-i18n-en="from">a partir de</span> <b>R$ 690</b></div>
+          <svg class="exam-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </a>
+
+      <a class="exam" href="#">
+        <div class="exam-num">06 · Neuro</div>
+        <h3 data-i18n-pt="Neuro & <em>autismo</em>" data-i18n-en="Neuro & <em>autism</em>">Neuro & <em>autismo</em></h3>
+        <p data-i18n-pt="Famílias com filhos autistas, ou pais investigando antes de ter o próximo. Abordagem profunda e respeitosa." data-i18n-en="Families with autistic children, or parents investigating before the next. Deep, respectful approach.">Famílias com filhos autistas, ou pais investigando antes de ter o próximo. Abordagem profunda e respeitosa.</p>
+        <div class="exam-tags"><span data-i18n-pt="neurodesenvolvimento" data-i18n-en="neurodevelopment">neurodesenvolvimento</span><span data-i18n-pt="famílias" data-i18n-en="families">famílias</span></div>
+        <div class="exam-footer">
+          <div class="exam-price"><span data-i18n-pt="a partir de" data-i18n-en="from">a partir de</span> <b>R$ 1.290</b></div>
+          <svg class="exam-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <h2 data-i18n-pt="Saber sobre si mesmo não deveria ser um <em>privilégio</em>. Por isso colocamos o genoma — inteiro, interpretado, pronto pra uso — no <em>bolso</em> de quem precisa." data-i18n-en="Knowing yourself shouldn't be a <em>privilege</em>. That's why we put the genome — whole, interpreted, ready to use — in the <em>pocket</em> of whoever needs it.">
+      Saber sobre si mesmo não deveria ser um <em>privilégio</em>. Por isso colocamos o genoma — inteiro, interpretado, pronto pra uso — no <em>bolso</em> de quem precisa.
+    </h2>
+    <div class="author" data-i18n-pt="Manifesto Exon · 2026" data-i18n-en="Exon manifesto · 2026">Manifesto Exon · 2026</div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="left">
+        <div class="mono eyebrow" data-i18n-pt="03 · Como funciona" data-i18n-en="03 · How it works">03 · Como funciona</div>
+        <h2 data-i18n-pt="Quatro passos. <em>Zero jargão</em>." data-i18n-en="Four steps. <em>Zero jargon</em>.">Quatro passos. <em>Zero jargão</em>.</h2>
+      </div>
+      <div class="right" data-i18n-pt="Do pedido ao painel — uma experiência desenhada por pacientes, validada por geneticistas." data-i18n-en="From order to dashboard — an experience designed by patients, validated by geneticists.">
+        Do pedido ao painel — uma experiência desenhada por pacientes, validada por geneticistas.
+      </div>
+    </div>
+
+    <div class="how-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3 data-i18n-pt="Escolha online" data-i18n-en="Choose online">Escolha online</h3>
+          <p data-i18n-pt="4 perguntas rápidas e a gente indica o exame certo. Ou peça direto o genoma completo." data-i18n-en="4 quick questions and we suggest the right test. Or order the whole genome directly.">4 perguntas rápidas e a gente indica o exame certo. Ou peça direto o genoma completo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3 data-i18n-pt="Coleta em casa" data-i18n-en="Collect at home">Coleta em casa</h3>
+          <p data-i18n-pt="Kit de saliva direto na sua casa. Você cospe, sela, devolve. Sem agulha, sem clínica." data-i18n-en="Saliva kit delivered to your door. Spit, seal, send back. No needle, no clinic.">Kit de saliva direto na sua casa. Você cospe, sela, devolve. Sem agulha, sem clínica.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3 data-i18n-pt="Análise Exon" data-i18n-en="Exon analysis">Análise Exon</h3>
+          <p data-i18n-pt="Motor de análise contra as bases clínicas mais atuais do mundo. Revisão humana por geneticistas sempre." data-i18n-en="Analysis engine against the world's most current clinical databases. Always reviewed by human geneticists.">Motor de análise contra as bases clínicas mais atuais do mundo. Revisão humana por geneticistas sempre.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <h3 data-i18n-pt="Portal para a vida" data-i18n-en="A portal for life">Portal para a vida</h3>
+          <p data-i18n-pt="Resultados gráficos, atualizados sempre que a ciência descobrir algo novo sobre você. Nunca expira." data-i18n-en="Charted results, updated whenever science discovers something new about you. Never expires.">Resultados gráficos, atualizados sempre que a ciência descobrir algo novo sobre você. Nunca expira.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="num"><em>3</em>Bi</div>
+      <div class="lbl" data-i18n-pt="letras de DNA lidas no genoma completo" data-i18n-en="DNA letters read in the whole genome">letras de DNA lidas no genoma completo</div>
+    </div>
+    <div class="stat">
+      <div class="num">92<em>%</em></div>
+      <div class="lbl" data-i18n-pt="dos pacientes mudam uma decisão de saúde após o exame" data-i18n-en="of patients change a health decision after testing">dos pacientes mudam uma decisão de saúde após o exame</div>
+    </div>
+    <div class="stat">
+      <div class="num"><em>24</em>h</div>
+      <div class="lbl" data-i18n-pt="para reanalisar um arquivo de outro laboratório" data-i18n-en="to reanalyze a file from another lab">para reanalisar um arquivo de outro laboratório</div>
+    </div>
+    <div class="stat">
+      <div class="num"><em>0</em></div>
+      <div class="lbl" data-i18n-pt="dados vendidos para farmacêuticas ou seguradoras" data-i18n-en="data sold to pharma or insurers">dados vendidos para farmacêuticas ou seguradoras</div>
+    </div>
+  </div>
+</section>
+
+<!-- UPLOAD BAND -->
+<section class="upload-band">
+  <div class="upload-band-inner">
+    <div>
+      <div class="mono eyebrow" data-i18n-pt="04 · Já tem arquivo?" data-i18n-en="04 · Already have a file?">04 · Já tem arquivo?</div>
+      <h2 data-i18n-pt="Você fez <em>Genera</em>. E ficou com vontade de saber mais." data-i18n-en="You did <em>Genera</em>. And wanted more.">
+        Você fez <em>Genera</em>. E ficou com vontade de saber mais.
+      </h2>
+      <p data-i18n-pt="Aquele arquivo .txt que você baixou e não sabia o que fazer? Envia pra gente. Em 24h, um portal novo, com relatórios clínicos que os outros laboratórios não entregam." data-i18n-en="That .txt file you downloaded and didn't know what to do with? Send it to us. In 24h, a new portal, with clinical reports other labs don't deliver.">
+        Aquele arquivo .txt que você baixou e não sabia o que fazer? Envia pra gente. Em 24h, um portal novo, com relatórios clínicos que os outros laboratórios não entregam.
+      </p>
+      <ul>
+        <li data-i18n-pt="Relatório farmacogenômico (como você responde a remédios)" data-i18n-en="Pharmacogenomic report (how you respond to medications)">Relatório farmacogenômico (como você responde a remédios)</li>
+        <li data-i18n-pt="Risco poligênico para 18 doenças crônicas" data-i18n-en="Polygenic risk for 18 chronic diseases">Risco poligênico para 18 doenças crônicas</li>
+        <li data-i18n-pt="Variantes clinicamente relevantes reclassificadas" data-i18n-en="Clinically relevant variants reclassified">Variantes clinicamente relevantes reclassificadas</li>
+        <li data-i18n-pt="Painel de traços e sensibilidades (lactose, cafeína, álcool...)" data-i18n-en="Traits and sensitivities panel (lactose, caffeine, alcohol...)">Painel de traços e sensibilidades (lactose, cafeína, álcool...)</li>
+      </ul>
+      <a href="upload.html" class="btn-primary">
+        <span data-i18n-pt="Fazer upload agora" data-i18n-en="Upload now">Fazer upload agora</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+    <div class="upload-visual">
+      <div class="file-preview">
+        <div class="file-ico">TXT</div>
+        <div class="file-info">
+          <b>genera-dna-raw.txt</b>
+          <small>600.218 variantes</small>
+        </div>
+      </div>
+      <div class="file-preview">
+        <div class="file-ico">VCF</div>
+        <div class="file-info">
+          <b>23andme-raw.vcf</b>
+          <small>1,2M variantes</small>
+        </div>
+      </div>
+      <div class="file-preview">
+        <div class="file-ico">ZIP</div>
+        <div class="file-info">
+          <b>myheritage-data.zip</b>
+          <small data-i18n-pt="processando…" data-i18n-en="processing…">processando…</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="mono eyebrow" style="margin-bottom:18px" data-i18n-pt="05 · Perguntas de verdade" data-i18n-en="05 · Real questions">05 · Perguntas de verdade</div>
+    <h2 data-i18n-pt="A gente escutou. E <em>respondeu</em> sem rodeio." data-i18n-en="We listened. And <em>answered</em> without spin.">A gente escutou. E <em>respondeu</em> sem rodeio.</h2>
+
+    <details class="faq-item" open>
+      <summary data-i18n-pt="Fazer um exame genético pode me assustar?" data-i18n-en="Can a genetic test scare me?">Fazer um exame genético pode me assustar?</summary>
+      <p data-i18n-pt="Pode. Por isso todos os nossos exames incluem uma sessão gratuita de aconselhamento genético com um profissional humano antes de você ver o resultado. Você decide o quanto quer saber, e em que ritmo." data-i18n-en="It can. That's why every Exon test includes a free genetic counseling session with a human professional before you see the result.">Pode. Por isso todos os nossos exames incluem uma sessão gratuita de aconselhamento genético com um profissional humano antes de você ver o resultado. Você decide o quanto quer saber, e em que ritmo.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-i18n-pt="Meus dados ficam seguros?" data-i18n-en="Is my data safe?">Meus dados ficam seguros?</summary>
+      <p data-i18n-pt="Sim. Dados criptografados, armazenados em servidores brasileiros, sob LGPD. Você pode baixar, exportar ou apagar a qualquer momento. Nunca vendemos dados." data-i18n-en="Yes. Encrypted, stored on Brazilian servers, under LGPD. You can download, export or delete any time. We never sell data.">Sim. Dados criptografados, armazenados em servidores brasileiros, sob LGPD. Você pode baixar, exportar ou apagar a qualquer momento. Nunca vendemos dados.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-i18n-pt="Já fiz no Genera. Por que reanalisar?" data-i18n-en="I already did Genera. Why reanalyze?">Já fiz no Genera. Por que reanalisar?</summary>
+      <p data-i18n-pt="Porque o Genera mostra só uma fração do que está no seu arquivo. Nosso motor interpreta variantes clinicamente relevantes que esses serviços não reportam, atualiza os achados à medida que a ciência avança, e integra com um médico quando você quer." data-i18n-en="Because Genera only shows a fraction of what's in your file. Our engine interprets clinically relevant variants those services don't report.">Porque o Genera mostra só uma fração do que está no seu arquivo. Nosso motor interpreta variantes clinicamente relevantes que esses serviços não reportam, atualiza os achados à medida que a ciência avança, e integra com um médico quando você quer.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-i18n-pt="Plano de saúde cobre?" data-i18n-en="Is it covered by health insurance?">Plano de saúde cobre?</summary>
+      <p data-i18n-pt="Alguns. Temos convênios com as principais operadoras. Se não cobrir, oferecemos 12x sem juros." data-i18n-en="Some. We work with major carriers. If not covered, 12 interest-free installments.">Alguns. Temos convênios com as principais operadoras. Se não cobrir, oferecemos 12x sem juros.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-i18n-pt="Vou receber coisa que não pedi para saber?" data-i18n-en="Will I get findings I didn't ask for?">Vou receber coisa que não pedi para saber?</summary>
+      <p data-i18n-pt="Nunca. Você escolhe o que quer ver antes de qualquer relatório. Achados de alto impacto só aparecem com autorização sua, depois de uma conversa com nosso geneticista." data-i18n-en="Never. You choose what you want to see before any report. High-impact findings only appear with your authorization.">Nunca. Você escolhe o que quer ver antes de qualquer relatório. Achados de alto impacto só aparecem com autorização sua, depois de uma conversa com nosso geneticista.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="logo"><img src="assets/exon-wordmark-blue.svg" alt="Exon Genomics"></div>
+      <p data-i18n-pt="Democratizando o acesso ao genoma humano no Brasil. Para que saber de si mesmo deixe de ser privilégio." data-i18n-en="Democratizing access to the human genome in Brazil.">Democratizando o acesso ao genoma humano no Brasil. Para que saber de si mesmo deixe de ser privilégio.</p>
+    </div>
+    <div class="foot-col">
+      <h4 data-i18n-pt="Exames" data-i18n-en="Tests">Exames</h4>
+      <a href="exame-genoma.html" data-i18n-pt="Genoma Completo" data-i18n-en="Whole Genome">Genoma Completo</a>
+      <a href="#" data-i18n-pt="Cardiologia" data-i18n-en="Cardiology">Cardiologia</a>
+      <a href="#" data-i18n-pt="Câncer" data-i18n-en="Cancer">Câncer</a>
+      <a href="#" data-i18n-pt="Planejamento Familiar" data-i18n-en="Family Planning">Planejamento Familiar</a>
+      <a href="#" data-i18n-pt="Peso & Hormônios" data-i18n-en="Weight & Hormones">Peso & Hormônios</a>
+    </div>
+    <div class="foot-col">
+      <h4 data-i18n-pt="Plataforma" data-i18n-en="Platform">Plataforma</h4>
+      <a href="upload.html" data-i18n-pt="Reanalisar arquivo" data-i18n-en="Reanalyze file">Reanalisar arquivo</a>
+      <a href="#" data-i18n-pt="Para médicos" data-i18n-en="For doctors">Para médicos</a>
+      <a href="#" data-i18n-pt="Entrar" data-i18n-en="Sign in">Entrar</a>
+    </div>
+    <div class="foot-col">
+      <h4 data-i18n-pt="A empresa" data-i18n-en="Company">A empresa</h4>
+      <a href="#" data-i18n-pt="Nossa ciência" data-i18n-en="Our science">Nossa ciência</a>
+      <a href="#" data-i18n-pt="Privacidade" data-i18n-en="Privacy">Privacidade</a>
+      <a href="#" data-i18n-pt="Carreiras" data-i18n-en="Careers">Carreiras</a>
+    </div>
+  </div>
+  <div class="foot-legal">
+    <span>© 2026 Exon Genomics</span>
+    <span>Brasil · LGPD · ISO 27001</span>
+  </div>
+</footer>
+
+<!-- TWEAKS PANEL -->
+<div class="tweaks" id="tweaks">
+  <h4>Tweaks</h4>
+  <div class="tweak-group">
+    <label>Paleta</label>
+    <div class="opts" data-tweak="palette">
+      <button data-value="noite">Noite</button>
+      <button data-value="aurora">Aurora</button>
+      <button data-value="mintnight">Menta</button>
+      <button data-value="plasma">Plasma</button>
+    </div>
+  </div>
+  <div class="tweak-group">
+    <label>Tipografia</label>
+    <div class="opts" data-tweak="heading_font">
+      <button data-value="fraunces">Fraunces</button>
+      <button data-value="instrument">Instrument</button>
+      <button data-value="sans">Sans</button>
+    </div>
+  </div>
+  <div class="tweak-group">
+    <label>Hero</label>
+    <div class="opts" data-tweak="hero_layout">
+      <button data-value="split">Split</button>
+      <button data-value="stacked">Empilhado</button>
+      <button data-value="fullbleed">Fullbleed</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/dna-canvas.js"></script>
+<script src="assets/i18n.js"></script>
+<script>
+var dnaPalettes = {
+  noite:     [0x7dd3fc, 0xa78bfa, 0xfbbf24],
+  aurora:    [0xc084fc, 0x7dd3fc, 0xf0abfc],
+  mintnight: [0x6ee7b7, 0x34d399, 0xfde68a],
+  plasma:    [0xf0abfc, 0xfb7185, 0xfbbf24]
+};
+var dnaBg = {
+  noite: 0x0a0e1f,
+  aurora: 0x0c0b1e,
+  mintnight: 0x041815,
+  plasma: 0x120518
+};
+
+var dnaController = initDNA({
+  canvas: document.getElementById('dna-canvas'),
+  colors: dnaPalettes.noite,
+  bg: dnaBg.noite,
+  alpha: 0.95
+});
+
+ExonI18n.init('pt');
+
+var TWEAKS_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette": "noite",
+  "heading_font": "fraunces",
+  "hero_layout": "split"
+}/*EDITMODE-END*/;
+
+var tweaks = Object.assign({}, TWEAKS_DEFAULTS);
+
+function applyTweaks() {
+  document.body.setAttribute('data-palette', tweaks.palette);
+  document.body.setAttribute('data-heading', tweaks.heading_font);
+  document.body.setAttribute('data-hero', tweaks.hero_layout);
+  if (dnaController) {
+    dnaController.setColors.apply(dnaController, dnaPalettes[tweaks.palette]);
+    dnaController.setBg(dnaBg[tweaks.palette]);
+  }
+  document.querySelectorAll('.tweaks .opts').forEach(function(grp) {
+    var key = grp.getAttribute('data-tweak');
+    grp.querySelectorAll('button').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-value') === tweaks[key]);
+    });
+  });
+}
+applyTweaks();
+
+document.querySelectorAll('.tweaks .opts button').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var key = btn.parentElement.getAttribute('data-tweak');
+    tweaks[key] = btn.getAttribute('data-value');
+    applyTweaks();
+    try {
+      window.parent.postMessage({type: '__edit_mode_set_keys', edits: tweaks}, '*');
+    } catch(e) {}
+  });
+});
+
+window.addEventListener('message', function(e) {
+  if (!e.data) return;
+  if (e.data.type === '__activate_edit_mode') document.getElementById('tweaks').classList.add('visible');
+  else if (e.data.type === '__deactivate_edit_mode') document.getElementById('tweaks').classList.remove('visible');
+});
+try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e) {}
+</script>
+</body>
+</html>

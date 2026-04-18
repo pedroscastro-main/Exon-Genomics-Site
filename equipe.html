@@ -1,0 +1,454 @@
+<!DOCTYPE html><html lang="pt" data-lang="pt"><head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipe — Exon Genomics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f2ec;--bg-panel:#fff;--bg-warm:#ebe4d4;--bg-dark:#1a2340;
+  --ink:#1a2340;--ink-soft:#3a4560;--muted:#6b7a95;
+  --accent:#c64c2e;--accent-deep:#8a2f1a;--accent-soft:#f5b68f;
+  --blue:#1565c0;--blue-deep:#0a3d7a;
+  --line:rgba(26,35,64,.12);--line-soft:rgba(26,35,64,.06);
+  --font-heading:'Fraunces',Georgia,serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-size:16px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+em{font-style:italic;color:var(--accent)}
+.mono{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted)}
+
+/* Nav — same vocabulary as home-editorial */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:16px 2.5vw;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:nowrap;background:rgba(245,242,236,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.nav-logo{flex-shrink:0}
+.nav-logo img{height:50px;width:auto;display:block}
+.nav-cluster{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;min-width:0}
+.nav-menu{display:flex;gap:8px;flex-wrap:nowrap}
+.nav-pill{font-size:13px;white-space:nowrap;padding:9px 16px;border-radius:100px;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.5);color:var(--ink-soft);transition:all .2s;box-shadow:0 4px 14px -6px rgba(10,61,122,.12)}
+.nav-pill:hover{background:rgba(255,255,255,.95);color:var(--blue-deep);transform:translateY(-1px)}
+.nav-pill.active{background:#fff;color:var(--blue-deep)}
+@media(max-width:1000px){.nav-menu{display:none}}
+.nav-langs{display:flex;gap:2px;padding:3px;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.5);border-radius:100px;box-shadow:0 4px 14px -6px rgba(10,61,122,.12);flex-shrink:0}
+.nav-langs button{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;padding:7px 11px;border-radius:100px;transition:all .2s;white-space:nowrap}
+.nav-langs button:hover{color:var(--blue-deep)}
+.nav-langs button.active{background:var(--blue-deep);color:#fff;box-shadow:0 2px 6px rgba(10,61,122,.25)}
+.nav-cta{padding:10px 18px;border-radius:100px;background:var(--blue-deep);color:#fff;font-size:13px;font-weight:500;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.nav-cta:hover{background:var(--ink);transform:translateY(-1px)}
+
+/* Shared */
+.btn-primary{display:inline-flex;align-items:center;gap:12px;background:var(--blue-deep);color:#fff;padding:16px 26px;border-radius:100px;font-weight:600;font-size:14.5px;transition:all .25s}
+.btn-primary:hover{background:var(--ink);transform:translateY(-1px);box-shadow:0 18px 40px -15px rgba(10,61,122,.45)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;color:var(--ink);font-size:14px;padding:16px 4px;border-bottom:1px solid var(--line)}
+.btn-ghost:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Hero — editorial, two columns */
+.t-hero{padding:160px 4vw 100px;background:linear-gradient(180deg,#eaf1fa 0%,#f0f5fb 60%,var(--bg) 100%);border-bottom:1px solid var(--line)}
+.t-hero-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:80px;align-items:end}
+@media(max-width:960px){.t-hero-inner{grid-template-columns:1fr;gap:40px;align-items:start}}
+.t-hero .mono{margin-bottom:24px;display:flex;align-items:center;gap:12px;color:var(--blue-deep)}
+.t-hero .mono::before{content:'';width:30px;height:1px;background:var(--blue-deep)}
+.t-hero h1{font-family:var(--font-heading);font-weight:400;font-size:clamp(2.8rem,6vw,6rem);line-height:.98;letter-spacing:-0.028em;text-wrap:balance;max-width:16ch}
+.t-hero h1 em{font-style:italic;color:var(--blue-deep)}
+.t-hero .side{padding-bottom:6px}
+.t-hero .side p{font-size:17px;line-height:1.55;color:var(--ink-soft);max-width:44ch;margin-bottom:22px}
+.t-hero .side .meta{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;padding-top:22px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.t-hero .side .meta b{display:block;font-family:var(--font-heading);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);margin-bottom:4px;text-transform:none;line-height:1}
+.t-hero .side .meta b em{color:var(--blue-deep);font-style:italic}
+
+/* Founder — big feature */
+.founder{padding:120px 4vw;background:var(--bg-panel)}
+.founder-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(320px,480px) 1fr;gap:72px;align-items:start}
+@media(max-width:960px){.founder-inner{grid-template-columns:1fr;gap:40px}}
+
+.founder-card{position:sticky;top:110px}
+.founder-photo{position:relative;aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:linear-gradient(160deg,#0a3d7a,#1a2340)}
+.founder-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.02)}
+.founder-photo::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,12,24,.6) 0%,rgba(6,12,24,.15) 45%,transparent 70%);z-index:1}
+.founder-photo .foot{position:absolute;left:22px;right:22px;bottom:22px;color:#fff;z-index:2}
+.founder-photo .foot b{display:block;font-family:var(--font-heading);font-weight:400;font-size:30px;letter-spacing:-0.02em;line-height:1;margin-bottom:8px}
+.founder-photo .foot span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,.85);line-height:1.5;display:block}
+.founder-meta{margin-top:22px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;display:grid;gap:10px}
+.founder-meta .row{display:flex;justify-content:space-between;gap:18px;padding:10px 0;border-bottom:1px solid var(--line-soft)}
+.founder-meta .row:last-child{border-bottom:0}
+.founder-meta .row b{color:var(--ink);font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:-0.01em;text-transform:none}
+.founder-links{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.founder-links a{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;color:var(--blue-deep);text-transform:uppercase;padding:8px 14px;border:1px solid rgba(10,61,122,.25);border-radius:100px;transition:all .2s}
+.founder-links a:hover{background:var(--blue-deep);color:#fff}
+
+.founder-body{padding-top:6px}
+.founder-body .num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.founder-body .num::before{content:'';width:20px;height:1px;background:var(--accent)}
+.founder-body h2{font-family:var(--font-heading);font-weight:400;font-size:clamp(1.9rem,3.6vw,3.2rem);line-height:1.04;letter-spacing:-0.022em;margin-bottom:26px;max-width:24ch;text-wrap:balance}
+.founder-body h2 em{font-style:italic;color:var(--blue-deep)}
+
+.founder-body .pull{font-family:var(--font-heading);font-weight:400;font-style:italic;font-size:clamp(20px,2vw,28px);line-height:1.32;letter-spacing:-0.012em;color:var(--ink);padding:32px 0 32px 28px;border-left:3px solid var(--accent);margin:28px 0;text-wrap:pretty;max-width:38ch}
+.founder-body p{font-size:15.5px;color:var(--ink-soft);line-height:1.68;margin-bottom:18px;max-width:60ch;text-wrap:pretty}
+.founder-body p b{color:var(--ink);font-weight:600}
+.founder-body p em{color:var(--blue-deep);font-style:italic}
+
+.founder-tags{margin-top:40px;padding-top:28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px}
+.founder-tags span{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;color:var(--blue-deep);text-transform:uppercase;padding:7px 14px;background:rgba(21,101,192,.08);border-radius:100px}
+
+/* Credenciais timeline */
+.cred{padding:120px 4vw;background:var(--bg)}
+.cred-inner{max-width:1320px;margin:0 auto}
+.cred .head{max-width:56ch;margin-bottom:56px}
+.cred .head .num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.cred .head .num::before{content:'';width:20px;height:1px;background:var(--accent)}
+.cred .head h2{font-family:var(--font-heading);font-weight:400;font-size:clamp(2rem,4vw,3.6rem);line-height:1.04;letter-spacing:-0.022em;text-wrap:balance}
+.cred .head h2 em{font-style:italic;color:var(--accent)}
+
+.cred-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+@media(max-width:900px){.cred-grid{grid-template-columns:1fr}}
+.cred-card{background:var(--bg-panel);padding:40px 36px;display:flex;flex-direction:column;gap:18px;min-height:260px;transition:background .2s}
+.cred-card:hover{background:#fff}
+.cred-card .year{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase}
+.cred-card h3{font-family:var(--font-heading);font-size:clamp(22px,2vw,28px);font-weight:400;line-height:1.1;letter-spacing:-0.018em;color:var(--ink);text-wrap:balance}
+.cred-card p{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-top:auto}
+.cred-card .inst{margin-top:auto;padding-top:16px;border-top:1px solid var(--line-soft);font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase}
+
+/* Filosofia — quote band */
+.philo{padding:140px 4vw;background:var(--bg-dark);color:#e9efff;position:relative;overflow:hidden}
+.philo::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 30%,rgba(21,101,192,.35) 0,transparent 55%);opacity:.6;filter:blur(80px)}
+.philo-inner{max-width:1100px;margin:0 auto;position:relative}
+.philo .num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent-soft);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.philo .num::before{content:'';width:20px;height:1px;background:var(--accent-soft)}
+.philo blockquote{font-family:var(--font-heading);font-weight:400;font-size:clamp(1.8rem,3.4vw,3.2rem);line-height:1.12;letter-spacing:-0.022em;color:#f5f2ec;max-width:26ch;text-wrap:balance;margin-bottom:36px}
+.philo blockquote em{font-style:italic;color:#7fb2ff}
+.philo cite{font-style:normal;font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,.7);text-transform:uppercase;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);display:block;max-width:32ch}
+.philo cite b{display:block;font-family:var(--font-heading);font-size:16px;font-weight:500;letter-spacing:-0.005em;color:#fff;margin-bottom:4px;text-transform:none}
+
+/* Pilares de trabalho */
+.pillars{padding:120px 4vw;background:var(--bg-warm)}
+.pillars-inner{max-width:1320px;margin:0 auto}
+.pillars .head{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:end;margin-bottom:56px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+@media(max-width:780px){.pillars .head{grid-template-columns:1fr;gap:20px}}
+.pillars .head .num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase}
+.pillars .head h2{font-family:var(--font-heading);font-weight:400;font-size:clamp(2rem,3.6vw,3.4rem);line-height:1.04;letter-spacing:-0.022em;max-width:24ch;text-wrap:balance}
+.pillars .head h2 em{font-style:italic;color:var(--accent)}
+.pillars .head .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;text-align:right;line-height:1.7}
+@media(max-width:780px){.pillars .head .tag{text-align:left}}
+
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+@media(max-width:960px){.pillars-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.pillars-grid{grid-template-columns:1fr}}
+.pillar{background:var(--bg-panel);border-radius:4px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;min-height:260px}
+.pillar .num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase}
+.pillar h4{font-family:var(--font-heading);font-size:24px;font-weight:400;line-height:1.12;letter-spacing:-0.018em;color:var(--ink);text-wrap:balance}
+.pillar p{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-top:auto}
+
+/* Clínicas associadas */
+.clinics{padding:120px 4vw;background:var(--bg)}
+.clinics-inner{max-width:1320px;margin:0 auto}
+.clinics .head{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:end;margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+@media(max-width:780px){.clinics .head{grid-template-columns:1fr;gap:20px}}
+.clinics .head .num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;white-space:nowrap}
+.clinics .head h2{font-family:var(--font-heading);font-weight:400;font-size:clamp(1.8rem,3.2vw,3rem);line-height:1.04;letter-spacing:-0.022em;max-width:28ch;text-wrap:balance}
+.clinics .head h2 em{font-style:italic;color:var(--accent)}
+
+.clinics-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+@media(max-width:780px){.clinics-grid{grid-template-columns:1fr}}
+.clinic{background:var(--bg-panel);padding:40px 40px;display:flex;flex-direction:column;gap:16px;transition:background .2s}
+.clinic:hover{background:#fff}
+.clinic .tag{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase}
+.clinic h3{font-family:var(--font-heading);font-size:clamp(24px,2.2vw,32px);font-weight:400;line-height:1.08;letter-spacing:-0.02em;color:var(--ink);text-wrap:balance}
+.clinic h3 em{font-style:italic;color:var(--blue-deep)}
+.clinic p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;max-width:52ch}
+.clinic .info{margin-top:auto;padding-top:18px;border-top:1px solid var(--line-soft);display:grid;grid-template-columns:1fr 1fr;gap:16px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase}
+.clinic .info b{display:block;font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:-0.01em;color:var(--ink);text-transform:none;margin-bottom:4px;line-height:1.3}
+
+/* Final CTA */
+.final{padding:140px 4vw;background:var(--bg-dark);color:var(--bg);position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,var(--accent) 0,transparent 55%);opacity:.16;filter:blur(60px)}
+.final-inner{max-width:1100px;margin:0 auto;text-align:center;position:relative}
+.final h2{font-family:var(--font-heading);font-size:clamp(2.4rem,5vw,4.8rem);line-height:1;font-weight:400;letter-spacing:-0.025em;margin-bottom:24px;text-wrap:balance}
+.final h2 em{color:var(--accent);font-style:italic}
+.final .lede{font-size:17px;color:rgba(255,255,255,.78);max-width:54ch;margin:0 auto 40px;line-height:1.55}
+.final .ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.final .btn-secondary{display:inline-flex;align-items:center;gap:10px;color:#fff;padding:18px 28px;border-radius:100px;font-size:15px;border:1px solid rgba(255,255,255,.25);transition:all .2s}
+.final .btn-secondary:hover{background:rgba(255,255,255,.08);border-color:#fff}
+.final .btn-primary{background:var(--accent)}
+.final .btn-primary:hover{background:var(--accent-deep);box-shadow:0 18px 40px -15px rgba(198,76,46,.5)}
+
+/* Footer (compact) */
+footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.08)}
+.foot-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:48px}
+@media(max-width:780px){.foot-inner{grid-template-columns:1fr 1fr;gap:32px}}
+.foot-col h5{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--accent-soft);text-transform:uppercase;margin-bottom:18px}
+.foot-col ul{list-style:none}
+.foot-col li{padding:6px 0;font-size:13.5px}
+.foot-col li a{color:rgba(255,255,255,.6);transition:color .2s}
+.foot-col li a:hover{color:#fff}
+.foot-brand p{font-size:13.5px;line-height:1.55;margin-top:18px;max-width:32ch}
+.foot-brand img{height:32px;filter:brightness(0) invert(1);opacity:.9}
+.foot-bottom{max-width:1320px;margin:48px auto 0;padding-top:28px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.18em;color:rgba(255,255,255,.4);text-transform:uppercase;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1284.0" data-gr-ext-installed="" data-cc-id="cc-1" style="cursor: crosshair;" data-new-gr-c-s-loaded="14.1284.0">
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo" aria-label="Exon Genomics">
+    <img src="assets/exon-wordmark-blue.svg" alt="Exon Genomics">
+  </a>
+  <div class="nav-cluster">
+    <div class="nav-menu">
+      <a href="home-editorial.html" class="nav-pill">Home</a>
+      <a href="home-editorial.html#exams" class="nav-pill">Nossos Exames</a>
+      <a href="equipe.html" class="nav-pill active">Equipe</a>
+      <a href="home-editorial.html#faq" class="nav-pill">FAQ</a>
+    </div>
+    <div class="nav-langs" role="group" aria-label="Idioma">
+      <button type="button" data-lang="pt" class="active">PT</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+    </div>
+    <a href="home-editorial.html#exams" class="nav-cta">Começar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="t-hero">
+  <div class="t-hero-inner">
+    <div>
+      <div class="mono">00 · Quem lê o seu genoma</div>
+      <h1>A <em>medicina</em> acontece entre pessoas. Mesmo a genômica.</h1>
+    </div>
+    <div class="side">
+      <p>Por trás de cada laudo da Exon existe um médico geneticista lendo seus dados com nome, sobrenome e CRM. A gente acredita que a genômica só serve pra alguma coisa quando chega num consultório — não num PDF.</p>
+      <div class="meta">
+        <div><b><em>1</em> fundador</b>Geneticista responsável</div>
+        <div><b><em>12</em> anos</b>de prática clínica</div>
+        <div><b><em>+2.000</em></b>Pacientes atendidos</div>
+        <div><b>USP · UNICAMP · FGV</b>Formação</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder">
+  <div class="founder-inner">
+    <aside class="founder-card">
+      <div class="founder-photo">
+        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=1100&amp;q=80&amp;auto=format&amp;fit=crop" alt="Dr. Pedro Castro">
+        <div class="foot">
+          <b>Dr. Pedro H. S. Castro</b>
+          <span>CRM · Médico Geneticista<br>Fundador &amp; Analista Responsável</span>
+        </div>
+      </div>
+      <div class="founder-meta">
+        <div class="row"><span>Graduação</span><b>Unicamp · Medicina</b></div>
+        <div class="row"><span>Genética Médica</span><b>FMUSP</b></div>
+        <div class="row"><span>MBA</span><b>EAESP-FGV</b></div>
+        <div class="row"><span data-cc-id="cc-10" style=""><br></span><b data-cc-id="cc-11" style=""><br></b></div>
+        <div class="row" data-cc-id="cc-7"><span data-cc-id="cc-9" style=""><br></span><b data-cc-id="cc-8" style=""><br></b></div>
+      </div>
+      <div class="founder-links">
+        <a href="https://www.drpedrocastro.com" target="_blank" rel="noopener">drpedrocastro.com ↗</a>
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </aside>
+
+    <div class="founder-body">
+      <div class="num">01 · Fundador</div>
+      <h2>Dr. Pedro Castro <em>lê</em> cada exame que sai daqui.</h2>
+
+      <p>Pedro é <b>médico geneticista</b> formado pela Unicamp, com especialização em Genética Médica pela <b>FMUSP</b> (Faculdade de Medicina da USP) e MBA pela EAESP-FGV. Há mais de 12 anos atende pacientes em genética médica — com foco em <em>autismo, câncer familial e doenças do desenvolvimento</em>.</p>
+
+      <p>Antes da Exon, trabalhou na indústria farmacêutica e em laboratórios de análise molecular. Mantém sua clínica própria, a <b>PHS Genética</b> no Jardins, em São Paulo, e é co-fundador da <b>GeneID</b>, rede de clínicas multidisciplinares especializadas em autismo e doenças raras. Na Exon, é o <em>analista responsável</em> por todos os exames genéticos.</p>
+
+      <blockquote class="pull">“Em mais de doze anos vi muita coisa. Mas o que mais me incomoda é paciente voltando pra casa com um laudo de trinta páginas e nenhuma conversa.”</blockquote>
+
+      <p>Essa é a tese da Exon: <b>genômica sem consultório é dado</b>, não é medicina. O modelo é o mesmo da clínica do Pedro — cada laudo vem com uma conversa de ~50 minutos, em vídeo, com um médico geneticista. E os achados importantes chegam no celular do paciente <em>para a vida toda</em>, com reanálise gratuita conforme a ciência avança.</p>
+
+      <p>O Pedro também responde por todas as assinaturas clínicas da Exon junto ao <b>CRM-SP</b>. Todos os laudos saem com o nome dele — não com o carimbo de "laboratório X".</p>
+
+      <div class="founder-tags">
+        <span>Autismo &amp; TEA</span>
+        <span>Câncer familial</span>
+        <span>Doenças raras</span>
+        <span>Baixa estatura</span>
+        <span>Atraso de desenvolvimento</span>
+        <span>Aconselhamento oncogenético</span>
+        <span>Planejamento familiar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENCIAIS TIMELINE -->
+<section class="cred" data-cc-id="cc-4">
+  <div class="cred-inner">
+    <div class="head">
+      <div class="num">02 · Formação</div>
+      <h2>Três universidades, doze anos de prática, um <em>fio condutor</em>: medicina traduzida.</h2>
+    </div>
+
+    <div class="cred-grid">
+      <div class="cred-card">
+        <span class="year" data-cc-id="cc-2" style="">2009 — 2014</span>
+        <h3>Medicina</h3>
+        <p>Graduação em Medicina pela Universidade Estadual de Campinas — uma das escolas públicas mais rigorosas do Brasil em formação clínica.</p>
+        <div class="inst">Unicamp · Campinas SP</div>
+      </div>
+      <div class="cred-card">
+        <span class="year" data-cc-id="cc-3" style="">2015 — 2018</span>
+        <h3>Genética Médica</h3>
+        <p>Especialização em Genética Médica na Faculdade de Medicina da USP. Formação clínica em autismo, câncer familial, doenças raras e do desenvolvimento.</p>
+        <div class="inst">FMUSP · São Paulo SP</div>
+      </div>
+      <div class="cred-card">
+        <span class="year">2019 — 2021</span>
+        <h3>MBA · Gestão</h3>
+        <p>Especialização em Administração de Empresas pela Escola de Administração de Empresas de São Paulo — a base do modelo operacional da Exon e da PHS.</p>
+        <div class="inst">EAESP-FGV · São Paulo SP</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILOSOFIA / QUOTE -->
+<section class="philo">
+  <div class="philo-inner">
+    <div class="num">03 · Filosofia clínica</div>
+    <blockquote>“Só o melhor conhecimento <em>científico</em> aliado à sensibilidade e à humanidade entrega o melhor tratamento.”</blockquote>
+    <cite>
+      <b>Dr. Pedro H. S. Castro</b>
+      Fundador &amp; Médico responsável · Exon Genomics
+    </cite>
+  </div>
+</section>
+
+<!-- PILARES -->
+<section class="pillars">
+  <div class="pillars-inner">
+    <div class="head">
+      <div class="num">04 · Método</div>
+      <h2>Como o Pedro <em>lê</em> um exame.</h2>
+      <div class="tag">Cada laudo passa<br>pelos quatro pilares</div>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="num">01</div>
+        <h4>Anamnese completa</h4>
+        <p>Nenhum exame genético começa pelo DNA. Começa pela história do paciente, pela árvore genealógica, e pelos exames anteriores que ele já fez.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">02</div>
+        <h4>Análise com IA</h4>
+        <p>Ferramentas de inteligência artificial pareiam imagens e achados do paciente com um banco de milhares de síndromes — auxiliando o diagnóstico.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">03</div>
+        <h4>Leitura humana</h4>
+        <p>O laudo nunca sai direto do software. O Pedro revisa, contextualiza cada variante e decide o que é clinicamente relevante para aquele paciente.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">04</div>
+        <h4>Conversa com a família</h4>
+        <p>Cada resultado chega em consulta de ~50 min, em vídeo. A família entende o laudo em português. E o painel atualiza sozinho conforme a ciência avança.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLÍNICAS ASSOCIADAS -->
+<section class="clinics" data-cc-id="cc-6">
+  <div class="clinics-inner">
+    <div class="head">
+      <div class="num">05 · Onde o trabalho acontece</div>
+      <h2>A Exon <em>não</em> nasceu no vácuo — nasceu em cima de duas clínicas que já funcionam.</h2>
+    </div>
+    <div class="clinics-grid">
+      <div class="clinic">
+        <span class="tag">Clínica privada do fundador</span>
+        <h3>PHS <em>Genética</em></h3>
+        <p>Consultório próprio do Dr. Pedro, nos Jardins, em São Paulo. Estrutura dedicada a avaliação genética completa, com sala de coleta para exames. Atendimento em metodologia autoral, com duração de até 2 horas por consulta.</p>
+        <div class="info">
+          <div spellcheck="false" data-cc-id="cc-5" style=""><b>Jardins · SP</b>Av. REBOUÇAS, 353 · 9º andar</div>
+          <div><b>Particular + convênio</b>Presencial &amp; telemedicina</div>
+        </div>
+      </div>
+      <div class="clinic">
+        <span class="tag">Rede multidisciplinar</span>
+        <h3>GeneID</h3>
+        <p>Rede de clínicas de atendimento especializado co-fundada pelo Dr. Pedro, com supervisão clínica dele. Atendimento em Genética Médica, Pediatria, Ginecologia, Neurologia, Endocrinologia — e terapias ABA com foco em autismo (Fono, Psicologia e TO).</p>
+        <div class="info">
+          <div><b>Multidisciplinar</b>5 especialidades + terapias</div>
+          <div><b>Co-fundador</b>Supervisão clínica</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="final-inner">
+    <h2>Fala com o <em>médico</em>, não com o PDF.</h2>
+    <p class="lede">Todo exame da Exon vem com conversa de ~50 minutos, em vídeo, com um geneticista. Inclusive com o Pedro, quando o caso exige.</p>
+    <div class="ctas">
+      <a href="home-editorial.html#exams" class="btn-primary">
+        Ver os seis exames
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+      </a>
+      <a href="upload.html" class="btn-secondary">
+        Já tenho arquivo · reanalisar
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-col foot-brand">
+      <img src="assets/exon-wordmark-blue.svg" alt="Exon Genomics" style="filter:brightness(0) invert(1);opacity:.9">
+      <p>Medicina genômica brasileira, feita para o paciente. São Paulo, desde 2022.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Navegação</h5>
+      <ul>
+        <li><a href="home-editorial.html">Home</a></li>
+        <li><a href="home-editorial.html#exams">Nossos exames</a></li>
+        <li><a href="equipe.html">Equipe</a></li>
+        <li><a href="home-editorial.html#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Entradas</h5>
+      <ul>
+        <li><a href="upload.html">Reanalisar arquivo</a></li>
+        <li><a href="home-editorial.html#people">Depoimentos</a></li>
+        <li><a href="home-editorial.html#faq">Dúvidas</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Exon</h5>
+      <ul>
+        <li><a href="equipe.html">Sobre nós</a></li>
+        <li><a href="#">Ciência &amp; Publicações</a></li>
+        <li><a href="#">Política de Privacidade</a></li>
+        <li><a href="#">LGPD · Dados genéticos</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Exon Genomics · CNPJ 14.xxx.xxx/0001-xx</span>
+    <span>Anvisa · CRM-SP responsável · LGPD</span>
+  </div>
+</footer>
+
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
