@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Exon Genomics — o seu genoma, traduzido.</title>
-<link rel="icon" type="image/svg+xml" href="assets/exon-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -66,6 +65,73 @@ em{font-style:italic;color:var(--accent)}
 .hero-microtrust .mt b{font-family:var(--font-heading);font-size:22px;font-weight:400;letter-spacing:-0.02em;line-height:1;margin-bottom:6px}
 .hero-microtrust .mt b em{color:var(--blue-deep);font-style:italic}
 .hero-microtrust .mt span{font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase}
+
+/* Lead modal */
+.lead-modal{position:fixed;inset:0;z-index:200;background:rgba(10,15,30,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px;animation:lmFade .25s ease}
+.lead-modal.open{display:flex}
+@keyframes lmFade{from{opacity:0}to{opacity:1}}
+.lead-card{position:relative;background:#fff;border-radius:18px;padding:36px 36px 30px;max-width:520px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 30px 80px rgba(10,15,30,.4);animation:lmRise .35s cubic-bezier(.22,.8,.36,1)}
+@keyframes lmRise{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.lead-card .lm-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border:none;background:rgba(10,15,30,.05);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);transition:background .15s}
+.lead-card .lm-close:hover{background:rgba(10,15,30,.1)}
+.lead-card .lm-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--blue-deep);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.lead-card .lm-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(21,101,192,.18)}
+.lead-card h3{font-family:var(--font-heading);font-size:clamp(22px,2.4vw,28px);font-weight:400;line-height:1.15;letter-spacing:-0.015em;margin-bottom:10px;text-wrap:balance;color:var(--ink)}
+.lead-card h3 em{font-style:italic;color:var(--blue-deep)}
+.lead-card .lm-sub{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:24px}
+.lm-form{display:flex;flex-direction:column;gap:14px}
+.lm-field{display:flex;flex-direction:column;gap:6px}
+.lm-field label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:var(--ink-soft);text-transform:uppercase}
+.lm-field input{font-family:var(--font-body);font-size:14.5px;color:var(--ink);background:#f7f5f1;border:1px solid rgba(10,61,122,.12);border-radius:10px;padding:12px 14px;transition:all .15s;outline:none}
+.lm-field input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(21,101,192,.12)}
+.lm-field input.error{border-color:#c64c2e;background:#fef5f1}
+.lm-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.lm-row{grid-template-columns:1fr}}
+.lm-consent{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;background:#f7f5f1;border-radius:10px;font-size:12.5px;color:var(--ink-soft);line-height:1.5;cursor:pointer}
+.lm-consent input{margin-top:2px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:var(--blue-deep)}
+.lm-consent a{color:var(--blue-deep);text-decoration:underline;text-underline-offset:2px}
+.lm-actions{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.lm-actions .btn-primary{width:100%;justify-content:center}
+.lm-success{display:none;text-align:center;padding:30px 10px}
+.lm-success.show{display:block}
+.lm-success svg{margin:0 auto 18px;color:var(--blue-deep)}
+.lm-success h4{font-family:var(--font-heading);font-size:24px;font-weight:400;margin-bottom:10px;color:var(--ink)}
+.lm-success p{font-size:14px;color:var(--ink-soft);line-height:1.55;max-width:340px;margin:0 auto}
+
+/* Processing modal */
+.proc-card{position:relative;background:#fff;border-radius:18px;padding:40px 40px 34px;max-width:560px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 30px 80px rgba(10,15,30,.4);animation:lmRise .35s cubic-bezier(.22,.8,.36,1)}
+.proc-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--blue-deep);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.proc-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(21,101,192,.18);animation:procPulse 1.4s ease-in-out infinite}
+.proc-tag.done::before{animation:none;background:#2f8a4f;box-shadow:0 0 0 3px rgba(47,138,79,.18)}
+@keyframes procPulse{0%,100%{box-shadow:0 0 0 3px rgba(21,101,192,.18)}50%{box-shadow:0 0 0 6px rgba(21,101,192,.05)}}
+.proc-card h3{font-family:var(--font-heading);font-size:clamp(22px,2.4vw,28px);font-weight:400;line-height:1.15;letter-spacing:-0.015em;margin-bottom:8px;text-wrap:balance;color:var(--ink)}
+.proc-card h3 em{font-style:italic;color:var(--blue-deep)}
+.proc-sub{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:24px}
+.proc-meter{position:relative;height:6px;background:#eef0f4;border-radius:100px;overflow:hidden;margin-bottom:24px}
+.proc-meter-fill{position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--blue),var(--blue-deep));border-radius:100px;transition:width .8s cubic-bezier(.5,0,.2,1)}
+.proc-meter-pct{position:absolute;top:-22px;right:0;font-family:var(--font-mono);font-size:11px;color:var(--blue-deep);letter-spacing:0.05em;font-variant-numeric:tabular-nums}
+.proc-steps{display:flex;flex-direction:column;gap:2px;margin-bottom:8px}
+.proc-step{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);transition:all .3s}
+.proc-step:last-child{border-bottom:none}
+.proc-step .ps-icon{width:26px;height:26px;border-radius:50%;background:#eef0f4;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#9aa1ad;transition:all .35s}
+.proc-step .ps-icon svg{width:13px;height:13px}
+.proc-step .ps-label{font-family:var(--font-body);font-size:14px;color:var(--ink-soft);flex:1;line-height:1.3;transition:color .3s}
+.proc-step .ps-meta{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;flex-shrink:0}
+.proc-step.active .ps-icon{background:rgba(21,101,192,.12);color:var(--blue-deep)}
+.proc-step.active .ps-icon svg{animation:procSpin 1.1s linear infinite}
+.proc-step.active .ps-label{color:var(--ink);font-weight:500}
+.proc-step.active .ps-meta{color:var(--blue-deep)}
+.proc-step.done .ps-icon{background:#2f8a4f;color:#fff}
+.proc-step.done .ps-icon svg{animation:none}
+.proc-step.done .ps-label{color:var(--ink)}
+.proc-step.done .ps-meta{color:#2f8a4f}
+@keyframes procSpin{to{transform:rotate(360deg)}}
+.proc-cta-wrap{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transform:translateY(8px);transition:all .5s cubic-bezier(.22,.8,.36,1);pointer-events:none}
+.proc-cta-wrap.show{opacity:1;transform:none;pointer-events:auto}
+.proc-cta-wrap .proc-done-msg{font-family:var(--font-heading);font-size:18px;font-weight:400;color:var(--ink);text-align:center;letter-spacing:-0.01em}
+.proc-cta-wrap .proc-done-msg em{font-style:italic;color:var(--blue-deep)}
+.proc-cta{display:inline-flex;align-items:center;gap:10px;background:var(--blue-deep);color:#fff;padding:14px 26px;border-radius:100px;font-weight:600;font-size:14.5px;text-decoration:none;transition:all .25s;border:none;cursor:pointer}
+.proc-cta:hover{background:#0a3d7a;transform:translateY(-1px);box-shadow:0 18px 40px -15px rgba(10,61,122,.5)}
 
 /* Upload card inside hero */
 .upload-card{background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:22px 22px 20px;box-shadow:0 30px 80px -30px rgba(10,61,122,.35)}
@@ -198,7 +264,7 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
 .foot-bottom{max-width:1320px;margin:48px auto 0;padding-top:28px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.18em;color:rgba(255,255,255,.4);text-transform:uppercase;flex-wrap:wrap;gap:12px}
 </style>
 </head>
-<body>
+<body style="font-size: 1px">
 
 <nav class="nav" id="nav">
   <a href="index.html" class="nav-logo" aria-label="Exon Genomics">
@@ -210,13 +276,14 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       <a href="#exams" class="nav-pill" data-i18n="nav.exams">Nossos Exames</a>
       <a href="equipe.html" class="nav-pill" data-i18n="nav.team">Equipe</a>
       <a href="#faq" class="nav-pill" data-i18n="nav.faq">FAQ</a>
+      <a href="upload.html" class="nav-pill" data-i18n="nav.reanalysis">Reanálises</a>
     </div>
     <div class="nav-langs" role="group" aria-label="Idioma">
       <button type="button" data-lang="pt" class="active">PT</button>
       <button type="button" data-lang="en">EN</button>
       <button type="button" data-lang="es">ES</button>
     </div>
-    <a href="https://app.exongenomics.com" class="nav-cta" data-i18n="nav.cta" target="_blank" rel="noopener">Acessar Plataforma</a>
+    <a href="https://app.exongenomics.com" target="_blank" rel="noopener" class="nav-cta" data-i18n="nav.cta">Acessar Plataforma</a>
   </div>
 </nav>
 
@@ -244,20 +311,20 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
     <div class="upload-card">
       <div class="tag" data-i18n="up.tag">JÁ TEM UM EXAME FEITO? CONHEÇA A EXON</div>
       <h3 data-i18n-html="up.h3">Reanalisamos seu arquivo <em>sem custo</em></h3>
-      <p data-i18n="up.p">Reanálise gratuita do seu arquivo da Genera, Sommos, 23andMe, MyHeritage, Dasa ou qualquer laboratório. A gente lê de novo com o que a ciência aprendeu desde então. Conheça a plataforma Exon</p>
-      <label class="upload-dropzone" for="hero-file" id="hero-drop">
+      <p data-i18n="up.p">Reanálisis gratuito* de tu archivo de Genera, Sommos, 23andMe, MyHeritage, Dasa o cualquier otro laboratorio. Lo leemos otra vez con todo lo que la ciencia ha aprendido desde entonces. Conoce la plataforma Exon.</p>
+      <button type="button" class="upload-dropzone" id="hero-drop" data-lead-trigger style="cursor:pointer;width:100%;font:inherit;color:inherit;text-align:center">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0l-4 4m4-4l4 4"/><path d="M3 15v3a2 2 0 002 2h14a2 2 0 002-2v-3"/></svg>
         <b id="hero-drop-label" data-i18n="up.drop.label">Arraste seu arquivo ou clique para enviar</b>
         <span id="hero-drop-hint" data-i18n="up.drop.hint">.vcf · .bam · .fastq · raw data · .zip</span>
-        <input id="hero-file" type="file" accept=".vcf,.bam,.fastq,.txt,.csv,.zip,.tsv,.gz" hidden>
-      </label>
+      </button>
       <div class="labs-strip">
         <span>Genera</span><span>Sommos</span><span>23andMe</span><span>MyHeritage</span><span>Dasa</span><span>+ demais</span>
       </div>
-      <a href="upload.html" class="btn-primary" style="background-color: rgb(26, 35, 64)">
-        <span data-i18n="up.cta">Continuar no upload</span>
+      <div class="upload-note" data-i18n-html="up.note" style="font-size: 10px; color: var(--ink-soft); line-height: 1.5; background: #f7f5f1; border: 1px solid rgba(10,61,122,.12); border-radius: 10px; padding: 12px 14px; margin-bottom: 14px;">*Somente para testes de ancestralidade, ou direto ao consumidor. Para reanálise de Genoma e Exoma de categoria clínica, <a href="upload.html" style="color:var(--blue-deep);text-decoration:underline;text-underline-offset:2px">acesse aqui</a>.</div>
+      <button type="button" class="btn-primary" data-lead-trigger style="background-color: rgb(26, 35, 64);border:none;cursor:pointer;font:inherit">
+        <span data-i18n="up.cta" style="font-size: 16px">Fazer Upload</span>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </a>
+      </button>
     </div>
   </div>
 </section>
@@ -652,6 +719,7 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
     tRY = 1.36 + -0.001 * sy;
   });
   var mTx=0, mTy=0, mCx=0, mCy=0;
+  var autoT = 0;
   window.addEventListener('mousemove', function(e) {
     mTx = (e.clientX / W - 0.5) * 2;
     mTy = (e.clientY / H - 0.5) * 2;
@@ -670,8 +738,12 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
   function L(a,b,t){ return a + (b-a)*t; }
   function tick() {
     requestAnimationFrame(tick);
-    cCY = L(cCY, tCY, 0.5); cRY = L(cRY, tRY, 0.5);
-    mCx = L(mCx, mTx, 0.05); mCy = L(mCy, mTy, 0.05);
+    autoT += 0.006;
+    // autonomous drift: gentle sinusoidal sway so helix breathes without mouse
+    var aTx = Math.sin(autoT) * 0.55;
+    var aTy = Math.cos(autoT * 0.7) * 0.35;
+    cCY = L(cCY, tCY, 0.5); cRY = L(cRY, tRY + autoT * 0.05, 0.06);
+    mCx = L(mCx, mTx + aTx, 0.05); mCy = L(mCy, mTy + aTy, 0.05);
     container.position.y = cCY;
     pMesh.rotation.y = cRY;
     camera.position.x = L(-0.2, 0.2, (mCx + 1) / 2);
@@ -686,6 +758,119 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
   window.addEventListener('scroll', function(){
     if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
   });
+
+  // Lead-capture modal — defer until DOM is fully parsed (modal markup is below this script)
+  function initLeadModal(){
+    var modal = document.getElementById('lead-modal');
+    if(!modal) return;
+    var form = modal.querySelector('.lm-form');
+    var success = modal.querySelector('.lm-success');
+    var closeBtn = modal.querySelector('.lm-close');
+    var consent = modal.querySelector('#lm-consent');
+    var nameI = modal.querySelector('#lm-name');
+    var phoneI = modal.querySelector('#lm-phone');
+    var emailI = modal.querySelector('#lm-email');
+    var cpfI = modal.querySelector('#lm-cpf');
+    var passI = modal.querySelector('#lm-pass');
+    var pass2I = modal.querySelector('#lm-pass2');
+    function open(){ modal.classList.add('open'); document.body.style.overflow='hidden'; setTimeout(function(){ nameI && nameI.focus(); },80); }
+    function close(){ modal.classList.remove('open'); document.body.style.overflow=''; form.style.display=''; success.classList.remove('show'); form.reset && form.reset(); }
+    document.querySelectorAll('[data-lead-trigger]').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); open(); }); });
+    closeBtn && closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if(e.target===modal) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) close(); });
+    // input masks
+    phoneI && phoneI.addEventListener('input', function(e){
+      var v = e.target.value.replace(/\D/g,'').slice(0,11);
+      if(v.length>10) v = v.replace(/(\d{2})(\d{5})(\d{0,4}).*/,'($1) $2-$3');
+      else if(v.length>6) v = v.replace(/(\d{2})(\d{4})(\d{0,4}).*/,'($1) $2-$3');
+      else if(v.length>2) v = v.replace(/(\d{2})(\d{0,5}).*/,'($1) $2');
+      else if(v.length>0) v = v.replace(/(\d{0,2}).*/,'($1');
+      e.target.value = v;
+    });
+    cpfI && cpfI.addEventListener('input', function(e){
+      var v = e.target.value.replace(/\D/g,'').slice(0,11);
+      v = v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+      e.target.value = v;
+    });
+    form && form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var ok = true;
+      [nameI, phoneI, emailI, cpfI, passI, pass2I].forEach(function(i){ if(i && !i.value.trim()){ i.classList.add('error'); ok=false; } else if(i) i.classList.remove('error'); });
+      if(passI && passI.value.length < 8){ passI.classList.add('error'); ok=false; }
+      if(passI && pass2I && passI.value !== pass2I.value){ pass2I.classList.add('error'); ok=false; }
+      if(consent && !consent.checked){ ok=false; consent.parentElement.style.borderColor='#c64c2e'; }
+      if(!ok) return;
+      // Close lead modal and open processing modal
+      close();
+      if(typeof startProcessing === 'function') startProcessing();
+    });
+    [nameI, phoneI, emailI, cpfI, passI, pass2I].forEach(function(i){ i && i.addEventListener('input', function(){ i.classList.remove('error'); }); });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLeadModal);
+  else initLeadModal();
+
+  // Processing modal — simulates pipeline progress, then reveals CTA
+  var startProcessing;
+  function initProcModal(){
+    var modal = document.getElementById('proc-modal');
+    if(!modal) return;
+    var fill = modal.querySelector('#proc-fill');
+    var pct  = modal.querySelector('#proc-pct');
+    var tag  = modal.querySelector('#proc-tag');
+    var ctaWrap = modal.querySelector('#proc-cta-wrap');
+    var steps = modal.querySelectorAll('.proc-step');
+    var timers = [];
+    function reset(){
+      timers.forEach(clearTimeout); timers = [];
+      fill.style.width = '0%'; pct.textContent = '0%';
+      tag.classList.remove('done');
+      ctaWrap.classList.remove('show');
+      steps.forEach(function(s){ s.classList.remove('active','done'); });
+    }
+    function open(){
+      reset();
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // Step timeline (ms): each step takes ~2s, total ~8s
+      var schedule = [
+        {at: 100,  step: 0, pct: 8,  action: 'active'},
+        {at: 1900, step: 0, pct: 25, action: 'done'},
+        {at: 1950, step: 1, pct: 28, action: 'active'},
+        {at: 3700, step: 1, pct: 50, action: 'done'},
+        {at: 3750, step: 2, pct: 53, action: 'active'},
+        {at: 5800, step: 2, pct: 78, action: 'done'},
+        {at: 5850, step: 3, pct: 82, action: 'active'},
+        {at: 7800, step: 3, pct: 100, action: 'done'},
+        {at: 7900, finish: true}
+      ];
+      schedule.forEach(function(ev){
+        timers.push(setTimeout(function(){
+          if(ev.finish){
+            tag.classList.add('done');
+            tag.querySelector('span').setAttribute('data-i18n','proc.tag.done');
+            // re-apply i18n if present
+            if(window.applyI18n) window.applyI18n();
+            else tag.querySelector('span').textContent = (window.__i18nLang === 'en' ? 'ANALYSIS COMPLETE' : window.__i18nLang === 'es' ? 'ANÁLISIS COMPLETO' : 'ANÁLISE CONCLUÍDA');
+            ctaWrap.classList.add('show');
+            return;
+          }
+          fill.style.width = ev.pct + '%';
+          pct.textContent = ev.pct + '%';
+          var s = steps[ev.step];
+          if(!s) return;
+          if(ev.action === 'active'){ s.classList.add('active'); s.classList.remove('done'); }
+          else if(ev.action === 'done'){ s.classList.remove('active'); s.classList.add('done'); }
+        }, ev.at));
+      });
+    }
+    function close(){ modal.classList.remove('open'); document.body.style.overflow=''; reset(); }
+    modal.addEventListener('click', function(e){ if(e.target===modal) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) close(); });
+    startProcessing = open;
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initProcModal);
+  else initProcModal();
 
   // drag/drop + nome do arquivo no dropzone
   (function(){
@@ -704,7 +889,7 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
   // i18n — PT / EN / ES
   var I18N = {
     pt: {
-      "nav.home":"Home","nav.exams":"Nossos Exames","nav.team":"Equipe","nav.faq":"FAQ","nav.cta":"Acessar Plataforma",
+      "nav.home":"Home","nav.exams":"Nossos Exames","nav.team":"Equipe","nav.faq":"FAQ","nav.reanalysis":"Reanálises","nav.cta":"Acessar Plataforma",
       "hero.eyebrow":"",
       "hero.h1":"O seu genoma de uma maneira que você entende",
       "hero.lede":"A gente sequencia, traduz e senta com você. A plataforma mais moderna do Brasil, focada 100% no paciente",
@@ -716,7 +901,37 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       "up.p":"Reanálise gratuita do seu arquivo da Genera, Sommos, 23andMe, MyHeritage, Dasa ou qualquer laboratório. A gente lê de novo com o que a ciência aprendeu desde então. Conheça a plataforma Exon",
       "up.drop.label":"Arraste seu arquivo ou clique para enviar",
       "up.drop.hint":".vcf · .bam · .fastq · raw data · .zip",
-      "up.cta":"Continuar no upload",
+      "up.cta":"Fazer upload",
+      "up.note":"*Somente para testes de ancestralidade, ou direto ao consumidor. Para reanálise de Genoma e Exoma de categoria clínica, <a href=\"upload.html\" style=\"color:var(--blue-deep);text-decoration:underline;text-underline-offset:2px\">acesse aqui</a>.",
+      "lm.tag":"REANÁLISE GRATUITA · CADASTRO",
+      "lm.h3":"Antes de enviar seu arquivo, <em>conte um pouco sobre você</em>",
+      "lm.sub":"Nossa equipe entra em contato em até 48h com instruções para o envio seguro do seu arquivo.",
+      "lm.name":"Nome completo",
+      "lm.phone":"Telefone",
+      "lm.cpf":"CPF",
+      "lm.email":"E-mail",
+      "lm.pass":"Crie uma senha",
+      "lm.pass2":"Confirme a senha",
+      "lm.pass.hint":"Você usará esses dados para acessar sua conta em <b>app.exongenomics.com</b>.",
+      "lm.consent":"Li e concordo com a <a href=\"#\" target=\"_blank\">Política de Privacidade</a> e com o tratamento dos meus dados conforme a LGPD para fins de contato e análise do meu arquivo genético.",
+      "lm.submit":"Criar conta e continuar",
+      "lm.ok.h":"Conta criada",
+      "lm.ok.p":"Sua conta na plataforma Exon foi criada. Acesse com seu e-mail e senha para enviar seu arquivo e acompanhar a análise.",
+      "lm.ok.cta":"Acessar a plataforma",
+      "proc.tag":"PROCESSANDO SEU ARQUIVO",
+      "proc.tag.done":"ANÁLISE CONCLUÍDA",
+      "proc.h3":"Sua análise está <em>em andamento</em>",
+      "proc.sub":"Estamos preparando sua conta e processando seu arquivo genético. Em poucos segundos você terá acesso à plataforma.",
+      "proc.s1":"Recebendo arquivo e validando integridade",
+      "proc.s1.m":"SHA-256",
+      "proc.s2":"Criando sua conta na plataforma Exon",
+      "proc.s2.m":"PROVISIONANDO",
+      "proc.s3":"Variant calling e anotação (ClinVar, gnomAD)",
+      "proc.s3.m":"PIPELINE",
+      "proc.s4":"Gerando seu painel personalizado",
+      "proc.s4.m":"RELATÓRIO",
+      "proc.done":"Tudo pronto. <em>Sua plataforma está liberada.</em>",
+      "proc.cta":"Acessar a plataforma",
       "people.num":"01 · Pessoas reais",
       "people.h2":"Não são amostras em tubos.<br>São <em>vidas</em> em movimento.",
       "people.tag":"Quatro pessoas, quatro motivos diferentes<br>para conhecer o próprio genoma. Nenhuma<br>tinha feito antes.<br><span style='opacity:.6'>Casos reais (imagens e nomes modificados)</span>",
@@ -779,7 +994,7 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       "foot.legal1":"© 2026 Exon Genomics Medical Ltda · CNPJ 52.431.908/0001-00","foot.legal2":"CRM-SP responsável Dr. Pedro H S Castro 169778 · LGPD"
     },
     en: {
-      "nav.home":"Home","nav.exams":"Our Tests","nav.team":"Team","nav.faq":"FAQ","nav.cta":"Access Platform",
+      "nav.home":"Home","nav.exams":"Our Tests","nav.team":"Team","nav.faq":"FAQ","nav.reanalysis":"Reanalyses","nav.cta":"Access Platform",
       "hero.eyebrow":"",
       "hero.h1":"Your genome, in a way you actually understand",
       "hero.lede":"We sequence, translate, and sit down with you. Brazil's most modern platform — 100% focused on the patient.",
@@ -791,7 +1006,37 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       "up.p":"Free reanalysis of your Genera, Sommos, 23andMe, MyHeritage, Dasa, or any other lab file. We read it again with everything science has learned since. Meet the Exon platform.",
       "up.drop.label":"Drag your file or click to upload",
       "up.drop.hint":".vcf · .bam · .fastq · raw data · .zip",
-      "up.cta":"Continue to upload",
+      "up.cta":"Upload file",
+      "up.note":"*For ancestry or direct-to-consumer tests only. For clinical-grade Genome and Exome reanalysis, <a href=\"upload.html\" style=\"color:var(--blue-deep);text-decoration:underline;text-underline-offset:2px\">access here</a>.",
+      "lm.tag":"FREE REANALYSIS · SIGN-UP",
+      "lm.h3":"Before sending your file, <em>tell us a bit about you</em>",
+      "lm.sub":"Our team will reach out within 48h with instructions to send your file securely.",
+      "lm.name":"Full name",
+      "lm.phone":"Phone",
+      "lm.cpf":"Tax ID (CPF)",
+      "lm.email":"E-mail",
+      "lm.pass":"Create a password",
+      "lm.pass2":"Confirm password",
+      "lm.pass.hint":"You will use these credentials to access your account at <b>app.exongenomics.com</b>.",
+      "lm.consent":"I have read and agree to the <a href=\"#\" target=\"_blank\">Privacy Policy</a> and to the processing of my data under LGPD for contact and genetic file analysis purposes.",
+      "lm.submit":"Create account and continue",
+      "lm.ok.h":"Account created",
+      "lm.ok.p":"Your Exon platform account is ready. Sign in with your e-mail and password to upload your file and follow the analysis.",
+      "lm.ok.cta":"Go to the platform",
+      "proc.tag":"PROCESSING YOUR FILE",
+      "proc.tag.done":"ANALYSIS COMPLETE",
+      "proc.h3":"Your analysis is <em>in progress</em>",
+      "proc.sub":"We are setting up your account and processing your genetic file. In a few seconds your platform access will be ready.",
+      "proc.s1":"Receiving file and validating integrity",
+      "proc.s1.m":"SHA-256",
+      "proc.s2":"Creating your Exon platform account",
+      "proc.s2.m":"PROVISIONING",
+      "proc.s3":"Variant calling and annotation (ClinVar, gnomAD)",
+      "proc.s3.m":"PIPELINE",
+      "proc.s4":"Building your personalized dashboard",
+      "proc.s4.m":"REPORT",
+      "proc.done":"All set. <em>Your platform is ready.</em>",
+      "proc.cta":"Go to the platform",
       "people.num":"01 · Real people",
       "people.h2":"Not samples in tubes.<br>They are <em>lives</em> in motion.",
       "people.tag":"Four people, four different reasons<br>to get to know their own genome. None<br>had done it before.<br><span style='opacity:.6'>Real cases (images and names modified)</span>",
@@ -854,7 +1099,7 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       "foot.legal1":"© 2026 Exon Genomics Medical Ltda · CNPJ 52.431.908/0001-00","foot.legal2":"Responsible CRM-SP Dr. Pedro H S Castro 169778 · LGPD"
     },
     es: {
-      "nav.home":"Inicio","nav.exams":"Nuestros Exámenes","nav.team":"Equipo","nav.faq":"FAQ","nav.cta":"Acceder a la Plataforma",
+      "nav.home":"Inicio","nav.exams":"Nuestros Exámenes","nav.team":"Equipo","nav.faq":"FAQ","nav.reanalysis":"Reanálisis","nav.cta":"Acceder a la Plataforma",
       "hero.eyebrow":"",
       "hero.h1":"Tu genoma de una manera que tú entiendes",
       "hero.lede":"Secuenciamos, traducimos y nos sentamos contigo. La plataforma más moderna de Brasil, 100% enfocada en el paciente.",
@@ -866,7 +1111,37 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       "up.p":"Reanálisis gratuito de tu archivo de Genera, Sommos, 23andMe, MyHeritage, Dasa o cualquier otro laboratorio. Lo leemos otra vez con todo lo que la ciencia ha aprendido desde entonces. Conoce la plataforma Exon.",
       "up.drop.label":"Arrastra tu archivo o haz clic para subir",
       "up.drop.hint":".vcf · .bam · .fastq · raw data · .zip",
-      "up.cta":"Continuar a la carga",
+      "up.cta":"Subir archivo",
+      "up.note":"*Solo para pruebas de ascendencia o directas al consumidor. Para reanálisis de Genoma y Exoma de categoría clínica, <a href=\"upload.html\" style=\"color:var(--blue-deep);text-decoration:underline;text-underline-offset:2px\">accede aquí</a>.",
+      "lm.tag":"REANÁLISIS GRATUITO · REGISTRO",
+      "lm.h3":"Antes de enviar tu archivo, <em>cuéntanos un poco sobre ti</em>",
+      "lm.sub":"Nuestro equipo te contactará en hasta 48h con instrucciones para enviar tu archivo de forma segura.",
+      "lm.name":"Nombre completo",
+      "lm.phone":"Teléfono",
+      "lm.cpf":"CPF / Identificación",
+      "lm.email":"Correo electrónico",
+      "lm.pass":"Crea una contraseña",
+      "lm.pass2":"Confirma la contraseña",
+      "lm.pass.hint":"Usarás estos datos para acceder a tu cuenta en <b>app.exongenomics.com</b>.",
+      "lm.consent":"He leído y acepto la <a href=\"#\" target=\"_blank\">Política de Privacidad</a> y el tratamiento de mis datos conforme a la LGPD para fines de contacto y análisis de mi archivo genético.",
+      "lm.submit":"Crear cuenta y continuar",
+      "lm.ok.h":"Cuenta creada",
+      "lm.ok.p":"Tu cuenta en la plataforma Exon ha sido creada. Inicia sesión con tu correo y contraseña para subir tu archivo y seguir el análisis.",
+      "lm.ok.cta":"Ir a la plataforma",
+      "proc.tag":"PROCESANDO TU ARCHIVO",
+      "proc.tag.done":"ANÁLISIS COMPLETO",
+      "proc.h3":"Tu análisis está <em>en curso</em>",
+      "proc.sub":"Estamos preparando tu cuenta y procesando tu archivo genético. En pocos segundos tendrás acceso a la plataforma.",
+      "proc.s1":"Recibiendo archivo y validando integridad",
+      "proc.s1.m":"SHA-256",
+      "proc.s2":"Creando tu cuenta en la plataforma Exon",
+      "proc.s2.m":"APROVISIONANDO",
+      "proc.s3":"Variant calling y anotación (ClinVar, gnomAD)",
+      "proc.s3.m":"PIPELINE",
+      "proc.s4":"Generando tu panel personalizado",
+      "proc.s4.m":"INFORME",
+      "proc.done":"Todo listo. <em>Tu plataforma está disponible.</em>",
+      "proc.cta":"Ir a la plataforma",
       "people.num":"01 · Personas reales",
       "people.h2":"No son muestras en tubos.<br>Son <em>vidas</em> en movimiento.",
       "people.tag":"Cuatro personas, cuatro motivos distintos<br>para conocer su propio genoma. Ninguna<br>lo había hecho antes.<br><span style='opacity:.6'>Casos reales (imágenes y nombres modificados)</span>",
@@ -931,6 +1206,7 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
   };
   function applyLang(lang){
     var dict = I18N[lang] || I18N.pt;
+    window.__i18nLang = lang;
     document.documentElement.setAttribute('lang', lang);
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k = el.getAttribute('data-i18n'); if(dict[k] != null) el.textContent = dict[k];
@@ -940,6 +1216,7 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
     });
     try{ localStorage.setItem('exon-lang', lang); }catch(_){}
   }
+  window.applyI18n = function(){ applyLang(window.__i18nLang || 'pt'); };
   document.querySelectorAll('.nav-langs button').forEach(function(b){
     b.addEventListener('click', function(){
       document.querySelectorAll('.nav-langs button').forEach(function(x){x.classList.remove('active')});
@@ -954,5 +1231,112 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
   }
 })();
 </script>
+
+<!-- Lead capture modal -->
+<div class="lead-modal" id="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lm-title">
+  <div class="lead-card">
+    <button type="button" class="lm-close" aria-label="Fechar">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
+    </button>
+    <div class="lm-tag" data-i18n="lm.tag">REANÁLISE GRATUITA · CADASTRO</div>
+    <h3 id="lm-title" data-i18n-html="lm.h3">Antes de enviar seu arquivo, <em>conte um pouco sobre você</em></h3>
+    <p class="lm-sub" data-i18n="lm.sub">Seu arquivo será processado e em alguns minutos seu acesso estará liberado</p>
+    <form class="lm-form" novalidate>
+      <div class="lm-field">
+        <label for="lm-name" data-i18n="lm.name">Nome completo</label>
+        <input type="text" id="lm-name" name="name" autocomplete="name" required>
+      </div>
+      <div class="lm-row">
+        <div class="lm-field">
+          <label for="lm-phone" data-i18n="lm.phone">Telefone</label>
+          <input type="tel" id="lm-phone" name="phone" autocomplete="tel" placeholder="(11) 99999-9999" required>
+        </div>
+        <div class="lm-field">
+          <label for="lm-cpf" data-i18n="lm.cpf">CPF</label>
+          <input type="text" id="lm-cpf" name="cpf" placeholder="000.000.000-00" inputmode="numeric" required>
+        </div>
+      </div>
+      <div class="lm-field">
+        <label for="lm-email" data-i18n="lm.email">E-mail</label>
+        <input type="email" id="lm-email" name="email" autocomplete="email" required>
+      </div>
+      <div class="lm-row">
+        <div class="lm-field">
+          <label for="lm-pass" data-i18n="lm.pass">Crie uma senha</label>
+          <input type="password" id="lm-pass" name="password" autocomplete="new-password" minlength="8" required>
+        </div>
+        <div class="lm-field">
+          <label for="lm-pass2" data-i18n="lm.pass2">Confirme a senha</label>
+          <input type="password" id="lm-pass2" name="password_confirm" autocomplete="new-password" minlength="8" required>
+        </div>
+      </div>
+      <p class="lm-pass-hint" style="font-size:12px;color:#5a6275;margin:-4px 0 8px;line-height:1.5" data-i18n-html="lm.pass.hint">Você usará esses dados para acessar sua conta em <b>app.exongenomics.com</b>.</p>
+      <label class="lm-consent">
+        <input type="checkbox" id="lm-consent" required>
+        <span data-i18n-html="lm.consent">Li e concordo com a <a href="#" target="_blank">Política de Privacidade</a> e com o tratamento dos meus dados conforme a LGPD para fins de contato e análise do meu arquivo genético.</span>
+      </label>
+      <div class="lm-actions">
+        <button type="submit" class="btn-primary" style="background-color: rgb(26, 35, 64);border:none;cursor:pointer">
+          <span data-i18n="lm.submit">Enviar e continuar</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </form>
+    <div class="lm-success">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l3 3 5-6"/></svg>
+      <h4 data-i18n="lm.ok.h">Conta criada</h4>
+      <p data-i18n="lm.ok.p">Sua conta na plataforma Exon foi criada. Acesse com seu e-mail e senha para enviar seu arquivo e acompanhar a análise.</p>
+      <div style="margin-top:18px;display:flex;justify-content:center">
+        <a href="https://app.exongenomics.com" target="_blank" rel="noopener" class="btn-primary" style="background-color:rgb(26,35,64);color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;font-weight:600;font-size:14px">
+          <span data-i18n="lm.ok.cta">Acessar a plataforma</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Processing modal (post-signup) -->
+<div class="lead-modal" id="proc-modal" role="dialog" aria-modal="true" aria-labelledby="proc-title">
+  <div class="proc-card">
+    <div class="proc-tag" id="proc-tag"><span data-i18n="proc.tag">PROCESSANDO SEU ARQUIVO</span></div>
+    <h3 id="proc-title" data-i18n-html="proc.h3">Sua análise está <em>em andamento</em></h3>
+    <p class="proc-sub" data-i18n="proc.sub">Estamos preparando sua conta e processando seu arquivo genético. Em poucos segundos você terá acesso à plataforma.</p>
+    <div class="proc-meter">
+      <div class="proc-meter-pct" id="proc-pct">0%</div>
+      <div class="proc-meter-fill" id="proc-fill"></div>
+    </div>
+    <div class="proc-steps" id="proc-steps">
+      <div class="proc-step" data-step="0">
+        <span class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.2-8.55"/></svg></span>
+        <span class="ps-label" data-i18n="proc.s1">Recebendo arquivo e validando integridade</span>
+        <span class="ps-meta" data-i18n="proc.s1.m">SHA-256</span>
+      </div>
+      <div class="proc-step" data-step="1">
+        <span class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.2-8.55"/></svg></span>
+        <span class="ps-label" data-i18n="proc.s2">Criando sua conta na plataforma Exon</span>
+        <span class="ps-meta" data-i18n="proc.s2.m">PROVISIONANDO</span>
+      </div>
+      <div class="proc-step" data-step="2">
+        <span class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.2-8.55"/></svg></span>
+        <span class="ps-label" data-i18n="proc.s3">Variant calling e anotação (ClinVar, gnomAD)</span>
+        <span class="ps-meta" data-i18n="proc.s3.m">PIPELINE</span>
+      </div>
+      <div class="proc-step" data-step="3">
+        <span class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.2-8.55"/></svg></span>
+        <span class="ps-label" data-i18n="proc.s4">Gerando seu painel personalizado</span>
+        <span class="ps-meta" data-i18n="proc.s4.m">RELATÓRIO</span>
+      </div>
+    </div>
+    <div class="proc-cta-wrap" id="proc-cta-wrap">
+      <div class="proc-done-msg" data-i18n-html="proc.done">Tudo pronto. <em>Sua plataforma está liberada.</em></div>
+      <a href="https://app.exongenomics.com" target="_blank" rel="noopener" class="proc-cta">
+        <span data-i18n="proc.cta">Acessar a plataforma</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
