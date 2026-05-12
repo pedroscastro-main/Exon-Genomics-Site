@@ -806,6 +806,23 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       if(typeof startProcessing === 'function') startProcessing();
     });
     [nameI, phoneI, emailI, cpfI, passI, pass2I].forEach(function(i){ i && i.addEventListener('input', function(){ i.classList.remove('error'); }); });
+    // Password requirements — real-time feedback
+    var rLen  = document.getElementById('lm-r-len');
+    var rUp   = document.getElementById('lm-r-up');
+    var rNum  = document.getElementById('lm-r-num');
+    var rSpec = document.getElementById('lm-r-spec');
+    function setRule(el, ok) {
+      if (!el) return;
+      el.firstChild.textContent = ok ? '✅' : '⬜';
+      el.style.color = ok ? '#2a7a4b' : '#9aa0ad';
+    }
+    passI && passI.addEventListener('input', function() {
+      var v = passI.value;
+      setRule(rLen,  v.length >= 8);
+      setRule(rUp,   /[A-Z]/.test(v));
+      setRule(rNum,  /[0-9]/.test(v));
+      setRule(rSpec, /[^A-Za-z0-9]/.test(v));
+    });
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLeadModal);
   else initLeadModal();
@@ -913,6 +930,10 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       "lm.pass":"Crie uma senha",
       "lm.pass2":"Confirme a senha",
       "lm.pass.hint":"Você usará esses dados para acessar sua conta em <b>app.exongenomics.com</b>.",
+      "lm.pwd.r.len":"8 caracteres",
+      "lm.pwd.r.up":"Letra maiúscula",
+      "lm.pwd.r.num":"Número",
+      "lm.pwd.r.spec":"Caractere especial (!@#$…)",
       "lm.consent":"Li e concordo com a <a href=\"#\" target=\"_blank\">Política de Privacidade</a> e com o tratamento dos meus dados conforme a LGPD para fins de contato e análise do meu arquivo genético.",
       "lm.submit":"Criar conta e continuar",
       "lm.ok.h":"Conta criada",
@@ -1018,6 +1039,10 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
       "lm.pass":"Create a password",
       "lm.pass2":"Confirm password",
       "lm.pass.hint":"You will use these credentials to access your account at <b>app.exongenomics.com</b>.",
+      "lm.pwd.r.len":"8 characters",
+      "lm.pwd.r.up":"Uppercase letter",
+      "lm.pwd.r.num":"Number",
+      "lm.pwd.r.spec":"Special character (!@#$…)",
       "lm.consent":"I have read and agree to the <a href=\"#\" target=\"_blank\">Privacy Policy</a> and to the processing of my data under LGPD for contact and genetic file analysis purposes.",
       "lm.submit":"Create account and continue",
       "lm.ok.h":"Account created",
@@ -1270,7 +1295,12 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
           <input type="password" id="lm-pass2" name="password_confirm" autocomplete="new-password" minlength="8" required>
         </div>
       </div>
-      <p class="lm-pass-hint" style="font-size:12px;color:#5a6275;margin:-4px 0 8px;line-height:1.5" data-i18n-html="lm.pass.hint">Você usará esses dados para acessar sua conta em <b>app.exongenomics.com</b>.</p>
+      <div id="lm-pwd-rules" style="display:flex;flex-wrap:wrap;gap:4px 10px;margin:-2px 0 10px;font-size:11px;line-height:1.4">
+        <span id="lm-r-len"  style="display:flex;align-items:center;gap:3px;color:#9aa0ad">⬜ <span data-i18n="lm.pwd.r.len">8 caracteres</span></span>
+        <span id="lm-r-up"   style="display:flex;align-items:center;gap:3px;color:#9aa0ad">⬜ <span data-i18n="lm.pwd.r.up">Letra maiúscula</span></span>
+        <span id="lm-r-num"  style="display:flex;align-items:center;gap:3px;color:#9aa0ad">⬜ <span data-i18n="lm.pwd.r.num">Número</span></span>
+        <span id="lm-r-spec" style="display:flex;align-items:center;gap:3px;color:#9aa0ad">⬜ <span data-i18n="lm.pwd.r.spec">Caractere especial (!@#$…)</span></span>
+      </div>
       <label class="lm-consent">
         <input type="checkbox" id="lm-consent" required>
         <span data-i18n-html="lm.consent">Li e concordo com a <a href="#" target="_blank">Política de Privacidade</a> e com o tratamento dos meus dados conforme a LGPD para fins de contato e análise do meu arquivo genético.</span>

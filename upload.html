@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reanalisar meu arquivo — Exon Genomics</title>
+<title data-i18n="meta.title">Reanalisar meu arquivo — Exon Genomics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -30,7 +30,11 @@ em{font-style:italic;color:var(--accent)}
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 4vw;display:flex;justify-content:space-between;align-items:center;background:rgba(245,242,236,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
 .nav-logo{display:flex;align-items:center;gap:10px}
 .nav-logo img{height:44px;width:auto;display:block}
-.nav-right{display:flex;align-items:center;gap:24px;font-size:13.5px}
+.nav-right{display:flex;align-items:center;gap:14px;font-size:13.5px}
+.nav-langs{display:flex;gap:2px;padding:3px;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:100px;flex-shrink:0}
+.nav-langs button{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;padding:7px 11px;border-radius:100px;transition:all .2s;white-space:nowrap}
+.nav-langs button:hover{color:var(--blue-deep)}
+.nav-langs button.active{background:var(--blue-deep);color:#fff;box-shadow:0 2px 6px rgba(10,61,122,.25)}
 .nav-right a:hover{color:var(--accent)}
 .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase}
 .back:hover{color:var(--ink)}
@@ -201,9 +205,14 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
   <div class="nav-right">
     <a class="back" href="home-editorial.html">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2L3.5 6L7.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Voltar para home
+      <span data-i18n="nav.back">Voltar para home</span>
     </a>
-    <a href="equipe.html" style="color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Equipe</a>
+    <a href="equipe.html" style="color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'" data-i18n="nav.team">Equipe</a>
+    <div class="nav-langs" role="group" aria-label="Idioma">
+      <button type="button" data-lang="pt" class="active">PT</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+    </div>
   </div>
 </nav>
 
@@ -211,21 +220,21 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
   <div class="wrap">
     <div class="page-head">
       <div>
-        <div class="mono">Reanalisar · Raw data</div>
-        <h1>Do arquivo ao painel, em <em>24 horas</em>.</h1>
+        <div class="mono" data-i18n="head.mono">Reanalisar · Raw data</div>
+        <h1 data-i18n-html="head.h1">Do arquivo ao painel, em <em>24 horas</em>.</h1>
       </div>
       <div class="meta-right">
-        <b>Grátis</b>
-        Para arquivos Genera · via app
+        <b data-i18n="head.free">Grátis</b>
+        <span data-i18n="head.freeSub">Para arquivos Genera/similares</span>
       </div>
     </div>
 
     <!-- Stepper -->
     <div class="stepper">
-      <div class="st active"><span class="n">1</span> Upload</div>
-      <div class="st"><span class="n">2</span> Laboratório de origem</div>
-      <div class="st"><span class="n">3</span> O que você quer saber</div>
-      <div class="st"><span class="n">4</span> Confirmação</div>
+      <div class="st active"><span class="n">1</span> <span data-i18n="step.1">Upload</span></div>
+      <div class="st"><span class="n">2</span> <span data-i18n="step.2">Laboratório de origem</span></div>
+      <div class="st"><span class="n">3</span> <span data-i18n="step.3">O que você quer saber</span></div>
+      <div class="st"><span class="n">4</span> <span data-i18n="step.4">Confirmação</span></div>
     </div>
 
     <div class="layout">
@@ -233,23 +242,23 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
 
         <!-- Step 1: Upload -->
         <div class="card">
-          <h2>1 · Envie seu <em>arquivo</em></h2>
-          <p class="lede">Aceitamos o arquivo bruto de SNP (Genera, 23andMe, MyHeritage, AncestryDNA) e também arquivos de <b>exoma</b> e <b>genoma completo</b> (.vcf, .fastq, .bam). Até 200MB pelo navegador — acima disso, usamos link de upload dedicado.</p>
+          <h2 data-i18n-html="s1.h2">1 · Envie seu <em>arquivo</em></h2>
+          <p class="lede" data-i18n-html="s1.lede">Aceitamos o arquivo bruto de SNP (Genera, 23andMe, MyHeritage, AncestryDNA) e também arquivos de <b>exoma</b> e <b>genoma completo</b> (.vcf, .fastq, .bam). Até 200MB pelo navegador — acima disso, usamos link de upload dedicado.</p>
 
           <label class="dropzone" id="dz">
             <input type="file" accept=".txt,.vcf,.zip,.csv,.fastq,.bam,.fq,.gz" id="file" style="display:none">
             <div class="icon-wrap">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 19V9M14 9L9 14M14 9L19 14M5 19v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <h3>Arraste o arquivo do seu exame</h3>
-            <p>SNP · Exoma · Genoma — escolha do seu computador</p>
+            <h3 data-i18n="dz.h3">Arraste o arquivo do seu exame</h3>
+            <p data-i18n="dz.p">SNP · Exoma · Genoma — escolha do seu computador</p>
             <span class="browse">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              Escolher arquivo
+              <span data-i18n="dz.browse">Escolher arquivo</span>
             </span>
             <div class="formats">
               <span>.txt</span><span>.vcf</span><span>.fastq</span><span>.bam</span><span>.zip</span>
-              <span>até 200MB</span>
+              <span data-i18n="dz.size">até 200MB</span>
             </div>
           </label>
 
@@ -258,7 +267,7 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
             <div class="ficon">TXT</div>
             <div class="finfo">
               <b>genera-dna-raw-beatriz.txt</b>
-              <small>13.2 MB · 602.318 variantes · enviando…</small>
+              <small data-i18n="file.uploading">13.2 MB · 602.318 variantes · enviando…</small>
               <div class="bar"><div></div></div>
             </div>
             <button class="remove" type="button" onclick="removeFile()" aria-label="remover">
@@ -269,42 +278,42 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
           <!-- Pricing by file type -->
           <div class="pricing">
             <div class="tier free">
-              <span class="tag">Arquivos Genera</span>
-              <h4>Reanálise completa</h4>
-              <div class="price"><em>Grátis</em></div>
-              <p>Envie o .txt do Genera e receba o painel Exon sem custo. É necessário baixar o app para abrir o portal do paciente.</p>
-              <span class="note">Requer app Exon</span>
+              <span class="tag" data-i18n="t1.tag">Arquivo Genera/similar</span>
+              <h4 data-i18n="t1.h">Reanálise completa</h4>
+              <div class="price"><em data-i18n="t1.price">Grátis</em></div>
+              <p data-i18n="t1.p">Envie o .txt do Genera ou similares e receba o painel Exon sem custo. É necessário baixar o app para abrir o portal do paciente.</p>
+              <span class="note" data-i18n="t1.note">Requer app Exon</span>
+            </div>
+            <div class="tier" style="font-size:12.5px">
+              <span class="tag" style="font-size:9px" data-i18n="t2.tag">Exoma completo</span>
+              <h4 style="font-size:20px" data-i18n="t2.h">Reanálise clínica</h4>
+              <div class="price" style="font-size:1px">R$ 690<small data-i18n="price.installments">à vista · 12x sem juros</small></div>
+              <p data-i18n-html="t2.p">Reprocessamento ACMG, farmacogenômica e painéis clínicos a partir do .vcf / .bam do seu exoma.<div style=\"font-size:10px\">*Farmacogenômica somente se o Exoma permitir</div></p>
+              <span class="note" data-i18n="t2.note">Qualquer laboratório</span>
             </div>
             <div class="tier">
-              <span class="tag">Exoma completo</span>
-              <h4>Reanálise clínica</h4>
-              <div class="price">R$ 690<small>à vista · 12x sem juros</small></div>
-              <p>Reprocessamento ACMG, farmacogenômica e painéis clínicos a partir do .vcf / .bam do seu exoma.</p>
-              <span class="note">Qualquer laboratório</span>
-            </div>
-            <div class="tier">
-              <span class="tag">Genoma completo</span>
-              <h4>Reanálise full WGS</h4>
-              <div class="price">R$ 990<small>à vista · 12x sem juros</small></div>
-              <p>Inclui risco poligênico, farmacogenômica profunda e reinterpretação de variantes raras do seu genoma.</p>
-              <span class="note">WGS 30x+</span>
+              <span class="tag" data-i18n="t3.tag">Genoma completo</span>
+              <h4 data-i18n="t3.h">Reanálise full WGS</h4>
+              <div class="price" style="font-size:14px">R$ 990<small style="font-size:1px" data-i18n="price.installments">à vista · 12x sem juros</small></div>
+              <p data-i18n="t3.p">Inclui risco poligênico, farmacogenômica profunda e reinterpretação de variantes raras do seu genoma.</p>
+              <span class="note" data-i18n="t3.note">WGS 30x+</span>
             </div>
           </div>
 
           <!-- App CTA -->
           <div class="app-row">
             <div class="app-copy">
-              <b>Baixe o app Exon para acessar seu painel</b>
-              <span>O resultado da reanálise é entregue dentro do aplicativo — mesmo para a versão gratuita do Genera.</span>
+              <b data-i18n="app.b">Baixe o app Exon para acessar seu painel completo</b>
+              <span data-i18n="app.s">O resultado completo da reanálise é entregue dentro do aplicativo — Acesse a versão compacta em nosso site.</span>
             </div>
             <div class="stores">
               <a class="store" href="#" aria-label="Baixar na App Store">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z\"/></svg>
-                <div><small>Baixar na</small><b>App Store</b></div>
+                <div><small data-i18n="store.apple.s">Baixar na</small><b>App Store</b></div>
               </a>
               <a class="store" href="#" aria-label="Disponível no Google Play">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.7c-.3.3-.5.8-.5 1.5v15.6c0 .7.2 1.2.5 1.5l9-9-9-9.6zM14.5 13.6L17 15l3.2-1.8c.9-.5.9-1.3 0-1.8L17 9.6l-2.5 1.4-1.5 1.3 1.5 1.3zM4.8 22l8.4-8.4-1.5-1.6-8.5 8.4c.3.3.8.4 1.6-.4zm0-20l8.4 8.4-1.5 1.6-8.5-8.4c.3-.3.8-.4 1.6.4z\"/></svg>
-                <div><small>Disponível no</small><b>Google Play</b></div>
+                <div><small data-i18n="store.google.s">Disponível no</small><b>Google Play</b></div>
               </a>
             </div>
           </div>
@@ -312,88 +321,104 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
 
         <!-- Step 2: Lab source -->
         <div class="card">
-          <h2>2 · De onde <em>veio</em>?</h2>
-          <p class="lede">Nosso motor de análise trata cada fornecedor de forma específica. Isso aumenta a qualidade dos achados.</p>
+          <h2 data-i18n-html="s2.h2">2 · De onde <em>veio</em>?</h2>
+          <p class="lede" data-i18n="s2.lede">Nosso motor de análise trata cada fornecedor de forma específica. Isso aumenta a qualidade dos achados.</p>
           <div class="labs">
-            <div class="lab active"><b>Genera</b><small>Brasil · SNP</small></div>
-            <div class="lab"><b>23andMe</b><small>USA · SNP</small></div>
-            <div class="lab"><b>MyHeritage</b><small>DNA · SNP</small></div>
-            <div class="lab"><b>Ancestry</b><small>SNP array</small></div>
-            <div class="lab"><b>DNASimples</b><small>Brasil</small></div>
-            <div class="lab"><b>Dante Labs</b><small>WGS / Exome</small></div>
-            <div class="lab"><b>Nebula</b><small>WGS 30x</small></div>
-            <div class="lab"><b>Outro</b><small>nos diga</small></div>
+            <div class="lab active"><b>Genera</b><small data-i18n="lab.genera">Brasil · SNP</small></div>
+            <div class="lab"><b>23andMe</b><small data-i18n="lab.23">USA · SNP</small></div>
+            <div class="lab"><b>MyHeritage</b><small data-i18n="lab.myh">DNA · SNP</small></div>
+            <div class="lab"><b>Ancestry</b><small data-i18n="lab.anc">SNP array</small></div>
+            <div class="lab"><b>DNASimples</b><small data-i18n="lab.dna">Brasil</small></div>
+            <div class="lab"><b>Dante Labs</b><small data-i18n="lab.dante">WGS / Exome</small></div>
+            <div class="lab"><b>Nebula</b><small data-i18n="lab.neb">WGS 30x</small></div>
+            <div class="lab"><b data-i18n="lab.other.b">Outro</b><small data-i18n="lab.other.s">nos diga</small></div>
           </div>
         </div>
 
         <!-- Step 3: Focus -->
         <div class="card">
-          <h2>3 · O que <em>você quer saber</em>?</h2>
-          <p class="lede">Escolha os painéis. <b>O que está disponível depende do tipo de arquivo</b>: farmacogenômica e risco poligênico exigem arquivo de <b>genoma</b>; exomas destravam variantes clínicas e carrier; testes SNP (Genera, 23andMe) cobrem traits, ancestralidade e um subconjunto de achados clínicos.</p>
+          <h2 data-i18n-html="s3.h2">3 · O que <em>você quer saber</em>?</h2>
+          <p class="lede" data-i18n-html="s3.lede">Escolha os painéis. <b>O que está disponível depende do tipo de arquivo</b>: farmacogenômica e risco poligênico exigem arquivo de <b>genoma</b>; exomas destravam variantes clínicas e carrier; testes SNP (Genera, 23andMe) cobrem traits, ancestralidade e um subconjunto de achados clínicos.</p>
           <div class="check-group">
             <label class="check checked"><span class="box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="txt"><b>Farmacogenômica</b><small>Como você responde a 60+ medicamentos · <b style="color:var(--accent)">requer genoma</b></small></span>
+              <span class="txt"><b data-i18n="chk.pgx.b">Farmacogenômica</b><small data-i18n-html="chk.pgx.s">Como você responde a 60+ medicamentos · <b style="color:var(--accent)">requer genoma</b></small></span>
             </label>
             <label class="check checked"><span class="box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="txt"><b>Risco poligênico</b><small>18 doenças crônicas e o seu percentil · <b style="color:var(--accent)">requer genoma</b></small></span>
+              <span class="txt"><b data-i18n="chk.prs.b">Risco poligênico</b><small data-i18n-html="chk.prs.s">18 doenças crônicas e o seu percentil · <b style="color:var(--accent)">requer genoma</b></small></span>
             </label>
             <label class="check checked"><span class="box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="txt"><b>Variantes clínicas</b><small>Achados de significado médico com revisão humana · <b style="color:var(--blue)">exoma ou genoma</b></small></span>
+              <span class="txt"><b data-i18n="chk.cv.b">Variantes clínicas</b><small data-i18n-html="chk.cv.s">Achados de significado médico com revisão humana · <b style="color:var(--blue)">exoma ou genoma</b></small></span>
             </label>
             <label class="check"><span class="box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="txt"><b>Traços & sensibilidades</b><small>Lactose, cafeína, álcool, sono, metabolismo</small></span>
+              <span class="txt"><b data-i18n="chk.tr.b">Traços &amp; sensibilidades</b><small data-i18n="chk.tr.s">Lactose, cafeína, álcool, sono, metabolismo</small></span>
             </label>
             <label class="check"><span class="box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="txt"><b>Ancestralidade avançada</b><small>Composição regional mais granular que o Genera</small></span>
+              <span class="txt"><b data-i18n="chk.an.b">Ancestralidade avançada</b><small data-i18n="chk.an.s">Composição regional mais granular que o Genera</small></span>
             </label>
             <label class="check"><span class="box"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="txt"><b>Carrier para casal</b><small>Se vai ter filho: 300+ doenças recessivas · <b style="color:var(--blue)">exoma ou genoma</b></small></span>
+              <span class="txt"><b data-i18n="chk.ca.b">Carrier para casal</b><small data-i18n-html="chk.ca.s">Se vai ter filho: 300+ doenças recessivas · <b style="color:var(--blue)">exoma ou genoma</b></small></span>
             </label>
           </div>
         </div>
 
         <!-- Step 4: About you -->
         <div class="card">
-          <h2>4 · <em>Quem</em> vai receber?</h2>
-          <p class="lede">Precisamos do básico para montar sua conta. A consulta com o geneticista é opcional e tem cobrança à parte — você escolhe se quer agendar depois de ver o painel.</p>
+          <h2 data-i18n-html="s4.h2">4 · <em>Quem</em> vai receber?</h2>
+          <p class="lede" data-i18n="s4.lede">Precisamos do básico para montar sua conta. A consulta com o geneticista é opcional e tem cobrança à parte — você escolhe se quer agendar depois de ver o painel.</p>
           <div class="form-row">
             <div class="field">
-              <label>Nome completo</label>
+              <label data-i18n="f.name">Nome completo</label>
               <input type="text" value="Beatriz Salles Carvalho" placeholder="Maria Silva">
             </div>
             <div class="field">
-              <label>Data de nascimento</label>
+              <label data-i18n="f.dob">Data de nascimento</label>
               <input type="text" value="14/03/1973" placeholder="DD/MM/AAAA">
             </div>
           </div>
           <div class="form-row">
             <div class="field">
-              <label>E-mail</label>
+              <label data-i18n="f.email">E-mail</label>
               <input type="email" value="beatriz@exemplo.com" placeholder="voce@email.com">
             </div>
             <div class="field">
-              <label>Telefone · WhatsApp</label>
+              <label data-i18n="f.phone">Telefone · WhatsApp</label>
               <input type="tel" value="(11) 98765-4321" placeholder="(11) 99999-9999">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label data-i18n="f.pwd">Crie uma senha</label>
+              <input type="password" id="up-pwd" placeholder="••••••••" minlength="8">
+              <div id="up-pwd-rules" style="display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:7px;font-size:11px;line-height:1.4">
+                <span id="up-r-len"  style="display:flex;align-items:center;gap:3px;color:var(--muted)">⬜ <span data-i18n="f.pwd.r.len">8 caracteres</span></span>
+                <span id="up-r-up"   style="display:flex;align-items:center;gap:3px;color:var(--muted)">⬜ <span data-i18n="f.pwd.r.up">Letra maiúscula</span></span>
+                <span id="up-r-num"  style="display:flex;align-items:center;gap:3px;color:var(--muted)">⬜ <span data-i18n="f.pwd.r.num">Número</span></span>
+                <span id="up-r-spec" style="display:flex;align-items:center;gap:3px;color:var(--muted)">⬜ <span data-i18n="f.pwd.r.spec">Caractere especial (!@#$…)</span></span>
+              </div>
+            </div>
+            <div class="field">
+              <label data-i18n="f.pwd2">Confirme a senha</label>
+              <input type="password" placeholder="••••••••" minlength="8">
             </div>
           </div>
           <div class="form-row single">
             <div class="field">
-              <label>Já teve aconselhamento genético antes?</label>
+              <label data-i18n="f.gc">Já teve aconselhamento genético antes?</label>
               <select>
-                <option>Nunca — prefiro começar com uma conversa</option>
-                <option>Sim, uma vez</option>
-                <option>Sim, várias</option>
-                <option>Prefiro ir direto ao relatório</option>
+                <option data-i18n="f.gc.0">Nunca — prefiro começar com uma conversa</option>
+                <option data-i18n="f.gc.1">Sim, uma vez</option>
+                <option data-i18n="f.gc.2">Sim, várias</option>
+                <option data-i18n="f.gc.3">Prefiro ir direto ao relatório</option>
               </select>
             </div>
           </div>
 
           <div class="submit-bar">
-            <div class="note">
+            <div class="note" data-i18n-html="sub.note">
               Ao prosseguir você concorda com os <a href="#" style="color:var(--ink);border-bottom:1px solid var(--line)">Termos de Uso</a> e a <a href="#" style="color:var(--ink);border-bottom:1px solid var(--line)">Política de Privacidade</a>. Não compartilhamos dados com terceiros.
             </div>
             <button class="btn-submit" type="button" onclick="showDone()">
-              Enviar para análise
+              <span data-i18n="sub.btn">Enviar para análise</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
           </div>
@@ -404,38 +429,42 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
           <div class="ring">
             <svg width="42" height="42" viewBox="0 0 42 42" fill="none"><path d="M12 22L18 28L30 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <h2>Arquivo <em>recebido</em>.</h2>
-          <p>Em até 24h úteis, Beatriz, o seu painel estará pronto no <b>app Exon</b>. Vamos te avisar no WhatsApp e por e-mail. Se quiser conversar com um(a) geneticista sobre os achados, você agenda direto no app — é opcional e tem cobrança à parte.</p>
-          <div class="eta"><span>Resultado estimado</span><b>23 NOV · 14H</b></div>
+          <h2 data-i18n-html="done.h2">Arquivo <em>recebido</em>. Conta <em>criada</em>.</h2>
+          <p data-i18n-html="done.p">Sua conta foi criada com o e-mail e a senha que você cadastrou. Acesse <b><a href="https://app.exongenomics.com" target="_blank" rel="noopener" style="color:var(--ink);border-bottom:1px solid var(--line)">app.exongenomics.com</a></b> para acompanhar seu painel — em até 24h úteis ele estará pronto. Vamos te avisar no WhatsApp e por e-mail.</p>
+          <a href="https://app.exongenomics.com" target="_blank" rel="noopener" class="btn-submit" style="display:inline-flex;margin:18px 0 8px;text-decoration:none">
+            <span data-i18n="done.cta">Acessar a plataforma</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+          <div class="eta"><span data-i18n="done.eta">Resultado estimado</span><b data-i18n="done.etaDate">23 NOV · 14H</b></div>
         </div>
       </div>
 
       <!-- SIDEBAR -->
       <aside class="side">
         <div class="panel">
-          <h3>O que vem no <em>seu painel</em></h3>
+          <h3 data-i18n-html="sb.h3">O que vem no <em>seu painel</em></h3>
           <div class="item">
             <span class="i">01</span>
-            <div><b>Relatório farmacogenômico</b><span>Como seu corpo responde a 60+ medicamentos, incluindo antidepressivos, anticoagulantes e estatinas.</span></div>
+            <div><b data-i18n="sb.i1.b">Relatório farmacogenômico*</b><span data-i18n="sb.i1.s">Como seu corpo responde a 60+ medicamentos, incluindo antidepressivos, anticoagulantes e estatinas.</span></div>
           </div>
           <div class="item">
             <span class="i">02</span>
-            <div><b>Risco poligênico para 18 condições</b><span>Diabetes, Alzheimer, câncer de mama, doença cardíaca — seu percentil versus a população.</span></div>
+            <div><b data-i18n="sb.i2.b">Risco poligênico para 18 condições*</b><span data-i18n="sb.i2.s">Diabetes, Alzheimer, câncer de mama, doença cardíaca — seu percentil versus a população.</span></div>
           </div>
           <div class="item">
             <span class="i">03</span>
-            <div><b>Variantes clínicas reclassificadas</b><span>ACMG-validadas. Revisão humana sempre, com exatamente o nível de detalhe que você autorizar.</span></div>
+            <div><b data-i18n="sb.i3.b">Variantes clínicas reclassificadas</b><span data-i18n="sb.i3.s">ACMG-validadas. Revisão humana sempre, com exatamente o nível de detalhe que você autorizar.</span></div>
           </div>
           <div class="item">
             <span class="i">04</span>
-            <div><b>Consulta com geneticista <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);border-radius:3px;margin-left:6px">Opcional</span></b><span>45min com um(a) geneticista para interpretar achados de alto impacto. Cobrada à parte, você agenda quando quiser.</span></div>
+            <div><b data-i18n-html="sb.i4.b">Consulta com geneticista <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);border-radius:3px;margin-left:6px">Opcional</span></b><span data-i18n="sb.i4.s">45min com um(a) geneticista para interpretar achados de alto impacto. Cobrada à parte, você agenda quando quiser.</span></div>
           </div>
 
           <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--line-soft);display:flex;gap:12px;align-items:flex-start">
             <div style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-heading);font-size:15px;font-weight:400;line-height:1">i</div>
             <div>
-              <b style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:-0.01em;display:block;margin-bottom:3px">A profundidade depende do arquivo</b>
-              <span style="font-size:12.5px;color:var(--ink-soft);line-height:1.55;display:block">A quantidade de informação no relatório varia conforme o arquivo-fonte (SNP array como Genera ou Sommos, exoma ou genoma). <b>Arquivos de SNP array tipicamente carregam bem menos variantes</b> — você ainda recebe achados relevantes, mas farmacogenômica completa, risco poligênico e reinterpretação de variantes raras só são possíveis com exoma ou genoma.</span>
+              <b style="font-family:var(--font-heading);font-size:14px;font-weight:400;letter-spacing:-0.01em;display:block;margin-bottom:3px" data-i18n="sb.depth.b">*A profundidade  da análise depende do arquivo</b>
+              <span style="font-size:12.5px;color:var(--ink-soft);line-height:1.55;display:block" data-i18n-html="sb.depth.s">A quantidade de informação no relatório varia conforme o arquivo-fonte (SNP array como Genera ou Sommos, exoma ou genoma). <b>Arquivos de SNP array tipicamente carregam bem menos variantes</b> — você ainda recebe achados relevantes, mas farmacogenômica completa, risco poligênico e reinterpretação de variantes raras só são possíveis com exoma ou genoma.</span>
             </div>
           </div>
         </div>
@@ -445,34 +474,34 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
             <div class="shield">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L2.5 4.5V9.5C2.5 12.5 5 15 9 16.5C13 15 15.5 12.5 15.5 9.5V4.5L9 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <h4>Seu arquivo, seus dados.</h4>
-            <p>Criptografado ponta a ponta. Servidores brasileiros. LGPD. Você deleta quando quiser.</p>
+            <h4 data-i18n="sec.h4">Seu arquivo, seus dados.</h4>
+            <p data-i18n="sec.p">Criptografado ponta a ponta. Servidores brasileiros. LGPD. Você deleta quando quiser.</p>
             <ul>
-              <li>Nunca vendemos dados</li>
-              <li>Sem compartilhamento com farma ou seguro</li>
-              <li>Exportável em qualquer formato padrão</li>
-              <li>Deletar tudo em 1 clique</li>
+              <li data-i18n="sec.l1">Nunca vendemos dados pessoais</li>
+              <li data-i18n="sec.l2">Sem compartilhamento com farma ou seguro</li>
+              <li data-i18n="sec.l3">Exportável em formato padrão</li>
+              <li data-i18n="sec.l4">Deletar tudo em 2 cliques</li>
             </ul>
           </div>
         </div>
 
         <div class="help">
-          <h4>Dúvidas rápidas</h4>
+          <h4 data-i18n="help.h4">Dúvidas rápidas</h4>
           <details open>
-            <summary>Onde eu baixo meu arquivo do Genera?</summary>
-            <p>No Genera, entre na sua conta → Configurações → Dados Brutos → Solicitar download. Chega um .zip por e-mail em ~48h.</p>
+            <summary data-i18n="help.q1">Onde eu baixo meu arquivo do Genera?</summary>
+            <p data-i18n="help.a1">No Genera, entre na sua conta → Configurações → Dados Brutos → Solicitar download. Chega um .zip por e-mail em ~48h. Outros laboratórios geralmente tem secções similares</p>
           </details>
           <details>
-            <summary>Por que .vcf é melhor que .txt?</summary>
-            <p>.vcf traz contexto de referência que o .txt descarta. Se seu lab oferece as duas opções, envie .vcf.</p>
+            <summary data-i18n="help.q2">Por que .vcf é melhor que .txt?</summary>
+            <p data-i18n="help.a2">.vcf traz contexto de referência que o .txt descarta. Se seu lab oferece as duas opções, envie .vcf.</p>
           </details>
           <details>
-            <summary>Perdi meu arquivo original. E agora?</summary>
-            <p>Peça novamente ao lab. É seu direito — LGPD obriga. Se tiver dificuldade, chama a gente no WhatsApp.</p>
+            <summary data-i18n="help.q3">Perdi meu arquivo original. E agora?</summary>
+            <p data-i18n="help.a3">Peça novamente ao lab. É seu direito — LGPD obriga. Se tiver dificuldade, chama a gente no WhatsApp.</p>
           </details>
           <details>
-            <summary>Vocês fazem exame do zero também?</summary>
-            <p>Fazemos. É mais caro, mais completo — WGS de verdade. <a href="exame-genoma.html" style="color:var(--accent)">Veja o Genoma Completo →</a></p>
+            <summary data-i18n="help.q4">Vocês fazem exame do zero também?</summary>
+            <p data-i18n-html="help.a4">Fazemos. É inclusive bem mais completo — WGS de verdade. <a href="exame-genoma.html" style="color:var(--accent)">Veja o Genoma Completo →</a></p>
           </details>
         </div>
       </aside>
@@ -482,8 +511,8 @@ footer{padding:40px 4vw 32px;border-top:1px solid var(--line);margin-top:60px}
 
 <footer>
   <div class="foot-inner">
-    <span>© 2026 Exon Genomics</span>
-    <span>Brasil · LGPD · ISO 27001</span>
+    <span data-i18n="foot.l">© 2026 Exon Genomics</span>
+    <span data-i18n="foot.r">Brasil · LGPD · ISO 27001</span>
   </div>
 </footer>
 
@@ -508,7 +537,7 @@ function showFile(){
   setTimeout(function(){ fakeFile.querySelector('.bar div').style.width='100%'; },100);
   setTimeout(function(){
     var sm = fakeFile.querySelector('small');
-    if (sm) sm.textContent = '13.2 MB · 602.318 variantes · pronto';
+    if (sm) sm.textContent = (window.I18N && window.I18N[document.documentElement.dataset.lang] && window.I18N[document.documentElement.dataset.lang]['file.ready']) || '13.2 MB · 602.318 variantes · pronto';
     fakeFile.querySelector('.ficon').style.background = 'var(--ink)';
   }, 2200);
   // advance step
@@ -548,6 +577,218 @@ window.showDone = function(){
   document.querySelectorAll('.stepper .st').forEach(function(s){s.classList.remove('active');s.classList.add('done')});
   window.scrollTo({top:0,behavior:'smooth'});
 };
+
+// i18n
+window.I18N = {
+  pt: {
+    "meta.title":"Reanalisar meu arquivo — Exon Genomics",
+    "nav.back":"Voltar para home","nav.team":"Equipe",
+    "head.mono":"Reanalisar · Raw data","head.h1":"Do arquivo ao painel, em <em>24 horas</em>.",
+    "head.free":"Grátis","head.freeSub":"Para arquivos Genera/similares",
+    "step.1":"Upload","step.2":"Laboratório de origem","step.3":"O que você quer saber","step.4":"Confirmação",
+    "s1.h2":"1 · Envie seu <em>arquivo</em>",
+    "s1.lede":"Aceitamos o arquivo bruto de SNP (Genera, 23andMe, MyHeritage, AncestryDNA) e também arquivos de <b>exoma</b> e <b>genoma completo</b> (.vcf, .fastq, .bam). Até 200MB pelo navegador — acima disso, usamos link de upload dedicado.",
+    "dz.h3":"Arraste o arquivo do seu exame","dz.p":"SNP · Exoma · Genoma — escolha do seu computador","dz.browse":"Escolher arquivo","dz.size":"até 200MB",
+    "file.uploading":"13.2 MB · 602.318 variantes · enviando…","file.ready":"13.2 MB · 602.318 variantes · pronto",
+    "t1.tag":"Arquivo Genera/similar","t1.h":"Reanálise completa","t1.price":"Grátis",
+    "t1.p":"Envie o .txt do Genera ou similares e receba o painel Exon sem custo. É necessário baixar o app para abrir o portal do paciente.","t1.note":"Requer app Exon",
+    "t2.tag":"Exoma completo","t2.h":"Reanálise clínica",
+    "t2.p":"Reprocessamento ACMG, farmacogenômica e painéis clínicos a partir do .vcf / .bam do seu exoma.<div style=\"font-size:10px\">*Farmacogenômica somente se o Exoma permitir</div>",
+    "t2.note":"Qualquer laboratório",
+    "t3.tag":"Genoma completo","t3.h":"Reanálise full WGS","t3.p":"Inclui risco poligênico, farmacogenômica profunda e reinterpretação de variantes raras do seu genoma.","t3.note":"WGS 30x+",
+    "price.installments":"à vista · 12x sem juros",
+    "app.b":"Baixe o app Exon para acessar seu painel completo","app.s":"O resultado completo da reanálise é entregue dentro do aplicativo — Acesse a versão compacta em nosso site.",
+    "store.apple.s":"Baixar na","store.google.s":"Disponível no",
+    "s2.h2":"2 · De onde <em>veio</em>?","s2.lede":"Nosso motor de análise trata cada fornecedor de forma específica. Isso aumenta a qualidade dos achados.",
+    "lab.genera":"Brasil · SNP","lab.23":"USA · SNP","lab.myh":"DNA · SNP","lab.anc":"SNP array","lab.dna":"Brasil","lab.dante":"WGS / Exoma","lab.neb":"WGS 30x","lab.other.b":"Outro","lab.other.s":"nos diga",
+    "s3.h2":"3 · O que <em>você quer saber</em>?",
+    "s3.lede":"Escolha os painéis. <b>O que está disponível depende do tipo de arquivo</b>: farmacogenômica e risco poligênico exigem arquivo de <b>genoma</b>; exomas destravam variantes clínicas e carrier; testes SNP (Genera, 23andMe) cobrem traits, ancestralidade e um subconjunto de achados clínicos.",
+    "chk.pgx.b":"Farmacogenômica","chk.pgx.s":"Como você responde a 60+ medicamentos · <b style=\"color:var(--accent)\">requer genoma</b>",
+    "chk.prs.b":"Risco poligênico","chk.prs.s":"18 doenças crônicas e o seu percentil · <b style=\"color:var(--accent)\">requer genoma</b>",
+    "chk.cv.b":"Variantes clínicas","chk.cv.s":"Achados de significado médico com revisão humana · <b style=\"color:var(--blue)\">exoma ou genoma</b>",
+    "chk.tr.b":"Traços & sensibilidades","chk.tr.s":"Lactose, cafeína, álcool, sono, metabolismo",
+    "chk.an.b":"Ancestralidade avançada","chk.an.s":"Composição regional mais granular que o Genera",
+    "chk.ca.b":"Carrier para casal","chk.ca.s":"Se vai ter filho: 300+ doenças recessivas · <b style=\"color:var(--blue)\">exoma ou genoma</b>",
+    "s4.h2":"4 · <em>Quem</em> vai receber?","s4.lede":"Precisamos do básico para montar sua conta. A consulta com o geneticista é opcional e tem cobrança à parte — você escolhe se quer agendar depois de ver o painel.",
+    "f.name":"Nome completo","f.dob":"Data de nascimento","f.email":"E-mail","f.phone":"Telefone · WhatsApp",
+    "f.pwd":"Crie uma senha","f.pwd2":"Confirme a senha","f.pwd.hint":"Mínimo 8 caracteres · será sua senha em <b style=\"color:var(--ink)\">app.exongenomics.com</b>",
+    "f.gc":"Já teve aconselhamento genético antes?","f.gc.0":"Nunca — prefiro começar com uma conversa","f.gc.1":"Sim, uma vez","f.gc.2":"Sim, várias","f.gc.3":"Prefiro ir direto ao relatório",
+    "sub.note":"Ao prosseguir você concorda com os <a href=\"#\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">Termos de Uso</a> e a <a href=\"#\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">Política de Privacidade</a>. Não compartilhamos dados com terceiros.",
+    "sub.btn":"Enviar para análise",
+    "done.h2":"Arquivo <em>recebido</em>. Conta <em>criada</em>.","done.cta":"Acessar a plataforma","done.p":"Sua conta foi criada com o e-mail e a senha que você cadastrou. Acesse <b><a href=\"https://app.exongenomics.com\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">app.exongenomics.com</a></b> para acompanhar seu painel — em até 24h úteis ele estará pronto. Vamos te avisar no WhatsApp e por e-mail. Se quiser conversar com um(a) geneticista sobre os achados, você agenda direto no app — é opcional e tem cobrança à parte.",
+    "done.eta":"Resultado estimado","done.etaDate":"23 NOV · 14H",
+    "sb.h3":"O que vem no <em>seu painel</em>",
+    "sb.i1.b":"Relatório farmacogenômico*","sb.i1.s":"Como seu corpo responde a 60+ medicamentos, incluindo antidepressivos, anticoagulantes e estatinas.",
+    "sb.i2.b":"Risco poligênico para 18 condições*","sb.i2.s":"Diabetes, Alzheimer, câncer de mama, doença cardíaca — seu percentil versus a população.",
+    "sb.i3.b":"Variantes clínicas reclassificadas","sb.i3.s":"ACMG-validadas. Revisão humana sempre, com exatamente o nível de detalhe que você autorizar.",
+    "sb.i4.b":"Consulta com geneticista <span style=\"font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);border-radius:3px;margin-left:6px\">Opcional</span>",
+    "sb.i4.s":"45min com um(a) geneticista para interpretar achados de alto impacto. Cobrada à parte, você agenda quando quiser.",
+    "sb.depth.b":"*A profundidade da análise depende do arquivo",
+    "sb.depth.s":"A quantidade de informação no relatório varia conforme o arquivo-fonte (SNP array como Genera ou Sommos, exoma ou genoma). <b>Arquivos de SNP array tipicamente carregam bem menos variantes</b> — você ainda recebe achados relevantes, mas farmacogenômica completa, risco poligênico e reinterpretação de variantes raras só são possíveis com exoma ou genoma.",
+    "sec.h4":"Seu arquivo, seus dados.","sec.p":"Criptografado ponta a ponta. Servidores brasileiros. LGPD. Você deleta quando quiser.",
+    "sec.l1":"Nunca vendemos dados pessoais","sec.l2":"Sem compartilhamento com farma ou seguro","sec.l3":"Exportável em formato padrão","sec.l4":"Deletar tudo em 2 cliques",
+    "help.h4":"Dúvidas rápidas",
+    "help.q1":"Onde eu baixo meu arquivo do Genera?","help.a1":"No Genera, entre na sua conta → Configurações → Dados Brutos → Solicitar download. Chega um .zip por e-mail em ~48h. Outros laboratórios geralmente tem secções similares.",
+    "help.q2":"Por que .vcf é melhor que .txt?","help.a2":".vcf traz contexto de referência que o .txt descarta. Se seu lab oferece as duas opções, envie .vcf.",
+    "help.q3":"Perdi meu arquivo original. E agora?","help.a3":"Peça novamente ao lab. É seu direito — LGPD obriga. Se tiver dificuldade, chama a gente no WhatsApp.",
+    "help.q4":"Vocês fazem exame do zero também?","help.a4":"Fazemos. É inclusive bem mais completo — WGS de verdade. <a href=\"exame-genoma.html\" style=\"color:var(--accent)\">Veja o Genoma Completo →</a>",
+    "foot.l":"© 2026 Exon Genomics","foot.r":"Brasil · LGPD · ISO 27001"
+  },
+  en: {
+    "meta.title":"Reanalyze my file — Exon Genomics",
+    "nav.back":"Back to home","nav.team":"Team",
+    "head.mono":"Reanalyze · Raw data","head.h1":"From file to dashboard, in <em>24 hours</em>.",
+    "head.free":"Free","head.freeSub":"For Genera/similar files",
+    "step.1":"Upload","step.2":"Source lab","step.3":"What you want to know","step.4":"Confirmation",
+    "s1.h2":"1 · Send your <em>file</em>",
+    "s1.lede":"We accept raw SNP files (Genera, 23andMe, MyHeritage, AncestryDNA) as well as <b>exome</b> and <b>whole genome</b> files (.vcf, .fastq, .bam). Up to 200MB via browser — beyond that, we use a dedicated upload link.",
+    "dz.h3":"Drag your test file here","dz.p":"SNP · Exome · Genome — pick from your computer","dz.browse":"Choose file","dz.size":"up to 200MB",
+    "file.uploading":"13.2 MB · 602,318 variants · uploading…","file.ready":"13.2 MB · 602,318 variants · ready",
+    "t1.tag":"Genera/similar file","t1.h":"Full reanalysis","t1.price":"Free",
+    "t1.p":"Send your Genera (or similar) .txt and receive the Exon dashboard at no cost. The Exon app is required to access the patient portal.","t1.note":"Requires Exon app",
+    "t2.tag":"Whole exome","t2.h":"Clinical reanalysis",
+    "t2.p":"ACMG reprocessing, pharmacogenomics and clinical panels from your exome's .vcf / .bam.<div style=\"font-size:10px\">*Pharmacogenomics only if the exome supports it</div>",
+    "t2.note":"Any lab",
+    "t3.tag":"Whole genome","t3.h":"Full WGS reanalysis","t3.p":"Includes polygenic risk, deep pharmacogenomics and reinterpretation of rare variants from your genome.","t3.note":"WGS 30x+",
+    "price.installments":"upfront · 12x interest-free",
+    "app.b":"Download the Exon app to access your full dashboard","app.s":"The full reanalysis result is delivered inside the app — access the compact version on our site.",
+    "store.apple.s":"Download on the","store.google.s":"Get it on",
+    "s2.h2":"2 · Where did it <em>come from</em>?","s2.lede":"Our analysis engine handles each provider specifically. This raises the quality of findings.",
+    "lab.genera":"Brazil · SNP","lab.23":"USA · SNP","lab.myh":"DNA · SNP","lab.anc":"SNP array","lab.dna":"Brazil","lab.dante":"WGS / Exome","lab.neb":"WGS 30x","lab.other.b":"Other","lab.other.s":"tell us",
+    "s3.h2":"3 · What do <em>you want to know</em>?",
+    "s3.lede":"Pick the panels. <b>Availability depends on file type</b>: pharmacogenomics and polygenic risk require a <b>genome</b>; exomes unlock clinical variants and carrier; SNP tests (Genera, 23andMe) cover traits, ancestry and a subset of clinical findings.",
+    "chk.pgx.b":"Pharmacogenomics","chk.pgx.s":"How you respond to 60+ medications · <b style=\"color:var(--accent)\">requires genome</b>",
+    "chk.prs.b":"Polygenic risk","chk.prs.s":"18 chronic diseases and your percentile · <b style=\"color:var(--accent)\">requires genome</b>",
+    "chk.cv.b":"Clinical variants","chk.cv.s":"Findings of medical significance with human review · <b style=\"color:var(--blue)\">exome or genome</b>",
+    "chk.tr.b":"Traits & sensitivities","chk.tr.s":"Lactose, caffeine, alcohol, sleep, metabolism",
+    "chk.an.b":"Advanced ancestry","chk.an.s":"More granular regional composition than Genera",
+    "chk.ca.b":"Couple carrier","chk.ca.s":"If planning a child: 300+ recessive diseases · <b style=\"color:var(--blue)\">exome or genome</b>",
+    "s4.h2":"4 · <em>Who</em> will receive it?","s4.lede":"We need the basics to set up your account. The geneticist consultation is optional and billed separately — you choose whether to schedule it after seeing your dashboard.",
+    "f.name":"Full name","f.dob":"Date of birth","f.email":"Email","f.phone":"Phone · WhatsApp",
+    "f.pwd":"Create a password","f.pwd2":"Confirm password","f.pwd.hint":"Minimum 8 characters · this will be your password at <b style=\"color:var(--ink)\">app.exongenomics.com</b>",
+    "f.gc":"Have you had genetic counseling before?","f.gc.0":"Never — I'd rather start with a conversation","f.gc.1":"Yes, once","f.gc.2":"Yes, several times","f.gc.3":"I'd rather go straight to the report",
+    "sub.note":"By proceeding you agree to the <a href=\"#\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">Terms of Use</a> and <a href=\"#\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">Privacy Policy</a>. We do not share data with third parties.",
+    "sub.btn":"Submit for analysis",
+    "done.h2":"File <em>received</em>. Account <em>created</em>.","done.cta":"Access the platform","done.p":"Your account was created with the email and password you registered. Visit <b><a href=\"https://app.exongenomics.com\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">app.exongenomics.com</a></b> to track your dashboard — it will be ready within 24 business hours. We'll notify you via WhatsApp and email. If you want to talk to a geneticist about the findings, schedule directly in the app — it's optional and billed separately.",
+    "done.eta":"Estimated result","done.etaDate":"NOV 23 · 2PM",
+    "sb.h3":"What's in <em>your dashboard</em>",
+    "sb.i1.b":"Pharmacogenomic report*","sb.i1.s":"How your body responds to 60+ medications, including antidepressants, anticoagulants and statins.",
+    "sb.i2.b":"Polygenic risk for 18 conditions*","sb.i2.s":"Diabetes, Alzheimer's, breast cancer, heart disease — your percentile versus the population.",
+    "sb.i3.b":"Reclassified clinical variants","sb.i3.s":"ACMG-validated. Always with human review, at exactly the level of detail you authorize.",
+    "sb.i4.b":"Geneticist consultation <span style=\"font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);border-radius:3px;margin-left:6px\">Optional</span>",
+    "sb.i4.s":"45min with a geneticist to interpret high-impact findings. Billed separately, schedule whenever.",
+    "sb.depth.b":"*Analysis depth depends on the file",
+    "sb.depth.s":"Report depth varies with the source file (SNP array like Genera or Sommos, exome or genome). <b>SNP array files typically carry far fewer variants</b> — you still get relevant findings, but full pharmacogenomics, polygenic risk and rare-variant reinterpretation are only possible with exome or genome.",
+    "sec.h4":"Your file, your data.","sec.p":"End-to-end encrypted. Brazilian servers. LGPD. Delete whenever you want.",
+    "sec.l1":"We never sell personal data","sec.l2":"No sharing with pharma or insurers","sec.l3":"Exportable in standard format","sec.l4":"Delete everything in 2 clicks",
+    "help.h4":"Quick questions",
+    "help.q1":"Where do I download my Genera file?","help.a1":"In Genera, log in → Settings → Raw Data → Request download. A .zip arrives by email in ~48h. Other labs usually have similar sections.",
+    "help.q2":"Why is .vcf better than .txt?","help.a2":".vcf carries reference context that .txt drops. If your lab offers both, send .vcf.",
+    "help.q3":"I lost my original file. Now what?","help.a3":"Ask the lab again. It's your right — LGPD requires it. If you have trouble, ping us on WhatsApp.",
+    "help.q4":"Do you also run tests from scratch?","help.a4":"We do. Even more complete — real WGS. <a href=\"exame-genoma.html\" style=\"color:var(--accent)\">See the Whole Genome →</a>",
+    "foot.l":"© 2026 Exon Genomics","foot.r":"Brazil · LGPD · ISO 27001"
+  },
+  es: {
+    "meta.title":"Reanalizar mi archivo — Exon Genomics",
+    "nav.back":"Volver al inicio","nav.team":"Equipo",
+    "head.mono":"Reanalizar · Raw data","head.h1":"Del archivo al panel, en <em>24 horas</em>.",
+    "head.free":"Gratis","head.freeSub":"Para archivos Genera/similares",
+    "step.1":"Subida","step.2":"Laboratorio de origen","step.3":"Qué quieres saber","step.4":"Confirmación",
+    "s1.h2":"1 · Envía tu <em>archivo</em>",
+    "s1.lede":"Aceptamos archivos brutos de SNP (Genera, 23andMe, MyHeritage, AncestryDNA) y también archivos de <b>exoma</b> y <b>genoma completo</b> (.vcf, .fastq, .bam). Hasta 200MB por el navegador — más allá usamos un enlace de subida dedicado.",
+    "dz.h3":"Arrastra el archivo de tu test","dz.p":"SNP · Exoma · Genoma — elige desde tu computadora","dz.browse":"Elegir archivo","dz.size":"hasta 200MB",
+    "file.uploading":"13,2 MB · 602.318 variantes · subiendo…","file.ready":"13,2 MB · 602.318 variantes · listo",
+    "t1.tag":"Archivo Genera/similar","t1.h":"Reanálisis completo","t1.price":"Gratis",
+    "t1.p":"Envía el .txt de Genera o similares y recibe el panel Exon sin costo. Hace falta descargar la app para abrir el portal del paciente.","t1.note":"Requiere app Exon",
+    "t2.tag":"Exoma completo","t2.h":"Reanálisis clínico",
+    "t2.p":"Reprocesamiento ACMG, farmacogenómica y paneles clínicos a partir del .vcf / .bam de tu exoma.<div style=\"font-size:10px\">*Farmacogenómica solo si el exoma lo permite</div>",
+    "t2.note":"Cualquier laboratorio",
+    "t3.tag":"Genoma completo","t3.h":"Reanálisis full WGS","t3.p":"Incluye riesgo poligénico, farmacogenómica profunda y reinterpretación de variantes raras de tu genoma.","t3.note":"WGS 30x+",
+    "price.installments":"al contado · 12 cuotas sin intereses",
+    "app.b":"Descarga la app Exon para acceder a tu panel completo","app.s":"El resultado completo del reanálisis se entrega dentro de la app — accede a la versión compacta en nuestro sitio.",
+    "store.apple.s":"Descargar en","store.google.s":"Disponible en",
+    "s2.h2":"2 · ¿De dónde <em>vino</em>?","s2.lede":"Nuestro motor de análisis trata cada proveedor de forma específica. Eso aumenta la calidad de los hallazgos.",
+    "lab.genera":"Brasil · SNP","lab.23":"USA · SNP","lab.myh":"DNA · SNP","lab.anc":"SNP array","lab.dna":"Brasil","lab.dante":"WGS / Exoma","lab.neb":"WGS 30x","lab.other.b":"Otro","lab.other.s":"dinos cuál",
+    "s3.h2":"3 · ¿Qué <em>quieres saber</em>?",
+    "s3.lede":"Elige los paneles. <b>Lo disponible depende del tipo de archivo</b>: farmacogenómica y riesgo poligénico exigen archivo de <b>genoma</b>; los exomas desbloquean variantes clínicas y carrier; los tests SNP (Genera, 23andMe) cubren rasgos, ancestría y un subconjunto de hallazgos clínicos.",
+    "chk.pgx.b":"Farmacogenómica","chk.pgx.s":"Cómo respondes a 60+ medicamentos · <b style=\"color:var(--accent)\">requiere genoma</b>",
+    "chk.prs.b":"Riesgo poligénico","chk.prs.s":"18 enfermedades crónicas y tu percentil · <b style=\"color:var(--accent)\">requiere genoma</b>",
+    "chk.cv.b":"Variantes clínicas","chk.cv.s":"Hallazgos de relevancia médica con revisión humana · <b style=\"color:var(--blue)\">exoma o genoma</b>",
+    "chk.tr.b":"Rasgos y sensibilidades","chk.tr.s":"Lactosa, cafeína, alcohol, sueño, metabolismo",
+    "chk.an.b":"Ancestría avanzada","chk.an.s":"Composición regional más granular que Genera",
+    "chk.ca.b":"Carrier para pareja","chk.ca.s":"Si planean hijos: 300+ enfermedades recesivas · <b style=\"color:var(--blue)\">exoma o genoma</b>",
+    "s4.h2":"4 · ¿<em>Quién</em> lo recibirá?","s4.lede":"Necesitamos lo básico para crear tu cuenta. La consulta con el genetista es opcional y se cobra aparte — eliges si la agendas después de ver tu panel.",
+    "f.name":"Nombre completo","f.dob":"Fecha de nacimiento","f.email":"Correo","f.phone":"Teléfono · WhatsApp",
+    "f.pwd":"Crea una contraseña","f.pwd2":"Confirma la contraseña","f.pwd.hint":"Mínimo 8 caracteres · será tu contraseña en <b style=\"color:var(--ink)\">app.exongenomics.com</b>",
+    "f.gc":"¿Has tenido asesoría genética antes?","f.gc.0":"Nunca — prefiero empezar con una conversación","f.gc.1":"Sí, una vez","f.gc.2":"Sí, varias","f.gc.3":"Prefiero ir directo al informe",
+    "sub.note":"Al continuar aceptas los <a href=\"#\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">Términos de Uso</a> y la <a href=\"#\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">Política de Privacidad</a>. No compartimos datos con terceros.",
+    "sub.btn":"Enviar para análisis",
+    "done.h2":"Archivo <em>recibido</em>. Cuenta <em>creada</em>.","done.cta":"Acceder a la plataforma","done.p":"Tu cuenta fue creada con el correo y la contraseña que registraste. Accede a <b><a href=\"https://app.exongenomics.com\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--ink);border-bottom:1px solid var(--line)\">app.exongenomics.com</a></b> para seguir tu panel — en hasta 24h hábiles estará listo. Te avisamos por WhatsApp y correo. Si quieres conversar con un(a) genetista sobre los hallazgos, agendas directo en la app — es opcional y se cobra aparte.",
+    "done.eta":"Resultado estimado","done.etaDate":"23 NOV · 14H",
+    "sb.h3":"Qué viene en <em>tu panel</em>",
+    "sb.i1.b":"Informe farmacogenómico*","sb.i1.s":"Cómo tu cuerpo responde a 60+ medicamentos, incluyendo antidepresivos, anticoagulantes y estatinas.",
+    "sb.i2.b":"Riesgo poligénico para 18 condiciones*","sb.i2.s":"Diabetes, Alzheimer, cáncer de mama, enfermedad cardíaca — tu percentil frente a la población.",
+    "sb.i3.b":"Variantes clínicas reclasificadas","sb.i3.s":"Validadas por ACMG. Siempre con revisión humana, con el nivel de detalle que tú autorices.",
+    "sb.i4.b":"Consulta con genetista <span style=\"font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);border-radius:3px;margin-left:6px\">Opcional</span>",
+    "sb.i4.s":"45min con un(a) genetista para interpretar hallazgos de alto impacto. Se cobra aparte, agendas cuando quieras.",
+    "sb.depth.b":"*La profundidad del análisis depende del archivo",
+    "sb.depth.s":"La cantidad de información en el informe varía según el archivo fuente (SNP array como Genera o Sommos, exoma o genoma). <b>Los archivos de SNP array suelen llevar bastante menos variantes</b> — igual recibes hallazgos relevantes, pero farmacogenómica completa, riesgo poligénico y reinterpretación de variantes raras solo son posibles con exoma o genoma.",
+    "sec.h4":"Tu archivo, tus datos.","sec.p":"Cifrado de extremo a extremo. Servidores brasileños. LGPD. Borras cuando quieras.",
+    "sec.l1":"Nunca vendemos datos personales","sec.l2":"Sin compartir con farmacéuticas ni aseguradoras","sec.l3":"Exportable en formato estándar","sec.l4":"Borrar todo en 2 clics",
+    "help.h4":"Dudas rápidas",
+    "help.q1":"¿Dónde descargo mi archivo de Genera?","help.a1":"En Genera, entra a tu cuenta → Configuración → Datos Brutos → Solicitar descarga. Llega un .zip por correo en ~48h. Otros laboratorios suelen tener secciones similares.",
+    "help.q2":"¿Por qué .vcf es mejor que .txt?","help.a2":".vcf trae contexto de referencia que el .txt descarta. Si tu laboratorio ofrece ambos, envía .vcf.",
+    "help.q3":"Perdí mi archivo original. ¿Y ahora?","help.a3":"Pídelo de nuevo al laboratorio. Es tu derecho — LGPD lo exige. Si tienes problemas, escríbenos por WhatsApp.",
+    "help.q4":"¿También hacen el examen desde cero?","help.a4":"Lo hacemos. Es incluso bastante más completo — WGS de verdad. <a href=\"exame-genoma.html\" style=\"color:var(--accent)\">Mira el Genoma Completo →</a>",
+    "foot.l":"© 2026 Exon Genomics","foot.r":"Brasil · LGPD · ISO 27001"
+  }
+};
+
+function applyLang(lang){
+  var dict = window.I18N[lang] || window.I18N.pt;
+  document.documentElement.lang = lang;
+  document.documentElement.dataset.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if (dict[k] != null) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if (dict[k] != null) el.innerHTML = dict[k];
+  });
+  if (dict['meta.title']) document.title = dict['meta.title'];
+  document.querySelectorAll('.nav-langs button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('exon.lang', lang); }catch(e){}
+}
+
+document.querySelectorAll('.nav-langs button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+});
+
+(function(){
+  var saved;
+  try{ saved = localStorage.getItem('exon.lang'); }catch(e){}
+  if (saved && window.I18N[saved]) applyLang(saved);
+})();
+
+(function(){
+  function setRule(el, ok) {
+    if (!el) return;
+    el.firstChild.textContent = ok ? '✅' : '⬜';
+    el.style.color = ok ? '#2a7a4b' : '#9aa0ad';
+  }
+  var pwdI = document.getElementById('up-pwd');
+  if (!pwdI) return;
+  pwdI.addEventListener('input', function() {
+    var v = pwdI.value;
+    setRule(document.getElementById('up-r-len'),  v.length >= 8);
+    setRule(document.getElementById('up-r-up'),   /[A-Z]/.test(v));
+    setRule(document.getElementById('up-r-num'),  /[0-9]/.test(v));
+    setRule(document.getElementById('up-r-spec'), /[^A-Za-z0-9]/.test(v));
+  });
+})();
 </script>
 </body>
 </html>
