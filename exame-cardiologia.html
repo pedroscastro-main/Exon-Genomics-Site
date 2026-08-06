@@ -34,6 +34,10 @@ em{font-style:italic;color:var(--accent)}
 .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase}
 .back:hover{color:var(--ink)}
 .nav-cta{padding:10px 18px;border-radius:100px;background:var(--ink);color:var(--bg);font-size:13px;font-weight:500}
+.nav-langs{display:flex;gap:2px;padding:3px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.06);border-radius:100px}
+.nav-langs button{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;padding:6px 10px;border-radius:100px;border:none;background:transparent;cursor:pointer;transition:all .2s}
+.nav-langs button:hover{color:var(--ink)}
+.nav-langs button.active{background:var(--ink);color:#fff}
 
 /* HERO */
 .hero{padding:128px 4vw 80px;position:relative;overflow:hidden}
@@ -206,6 +210,11 @@ footer .foot-inner{max-width:1260px;margin:0 auto;display:flex;justify-content:s
     <img src="assets/exon-wordmark-blue.svg" alt="Exon Genomics">
   </a>
   <div class="nav-right">
+    <div class="nav-langs" role="group" aria-label="Idioma">
+      <button type="button" data-lang="pt" class="active">PT</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+    </div>
     <a class="back" href="home-editorial.html">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2L3.5 6L7.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Todos os exames
@@ -523,10 +532,10 @@ footer .foot-inner{max-width:1260px;margin:0 auto;display:flex;justify-content:s
           <small>pagamento único</small>
         </div>
         <div class="installment">ou <b>12x de R$ 416</b> sem juros no cartão</div>
-        <a href="#" class="btn-primary">
+        <button onclick="openCheckout('cardiologia')" class="btn-primary">
           Começar agora
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
+        </button>
         <div class="fine">Reembolso integral se a coleta falhar · sem taxa por atualização futura · sem mensalidade</div>
       </div>
       <div class="price-right">
@@ -579,10 +588,10 @@ footer .foot-inner{max-width:1260px;margin:0 auto;display:flex;justify-content:s
     <h2>Chegue <em>antes</em> do coração falhar.</h2>
     <p>Se você já fez exame genético em outro lab, a reanálise cardio custa menos. Se quer painel direcionado com plano clínico, o cardiogenética vai fundo.</p>
     <div class="ctas">
-      <a href="#price" class="btn-primary">
+      <button onclick="openCheckout('cardiologia')" class="btn-primary">
         Painel Cardiológico — R$ 4.990
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </a>
+      </button>
       <a href="upload.html" class="btn-secondary">
         Reanalisar arquivo — grátis (Genera)
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -599,5 +608,9 @@ footer .foot-inner{max-width:1260px;margin:0 auto;display:flex;justify-content:s
 </footer>
 
 
+
+<script src="assets/exam-dict.js"></script>
+<script src="assets/exam-i18n.js"></script>
+<script src="assets/checkout.js"></script>
 </body>
 </html>

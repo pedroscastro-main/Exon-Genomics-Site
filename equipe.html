@@ -3,7 +3,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Equipe — Exon Genomics</title>
+<title data-i18n="meta.title">Equipe — Exon Genomics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -70,7 +70,7 @@ em{font-style:italic;color:var(--accent)}
 
 .founder-card{position:sticky;top:110px}
 .founder-photo{position:relative;aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:linear-gradient(160deg,#0a3d7a,#1a2340)}
-.founder-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.02)}
+.founder-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block;filter:grayscale(.08) contrast(1.02)}
 .founder-photo::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,12,24,.6) 0%,rgba(6,12,24,.15) 45%,transparent 70%);z-index:1}
 .founder-photo .foot{position:absolute;left:22px;right:22px;bottom:22px;color:#fff;z-index:2}
 .founder-photo .foot b{display:block;font-family:var(--font-heading);font-weight:400;font-size:30px;letter-spacing:-0.02em;line-height:1;margin-bottom:8px}
@@ -200,17 +200,17 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
   </a>
   <div class="nav-cluster">
     <div class="nav-menu">
-      <a href="home-editorial.html" class="nav-pill">Home</a>
-      <a href="home-editorial.html#exams" class="nav-pill">Nossos Exames</a>
-      <a href="equipe.html" class="nav-pill active">Equipe</a>
-      <a href="home-editorial.html#faq" class="nav-pill">FAQ</a>
+      <a href="home-editorial.html" class="nav-pill" data-i18n="nav.home">Home</a>
+      <a href="home-editorial.html#exams" class="nav-pill" data-i18n="nav.exams">Nossos Exames</a>
+      <a href="equipe.html" class="nav-pill active" data-i18n="nav.team">Equipe</a>
+      <a href="home-editorial.html#faq" class="nav-pill" data-i18n="nav.faq">FAQ</a>
     </div>
     <div class="nav-langs" role="group" aria-label="Idioma">
       <button type="button" data-lang="pt" class="active">PT</button>
       <button type="button" data-lang="en">EN</button>
       <button type="button" data-lang="es">ES</button>
     </div>
-    <a href="home-editorial.html#exams" class="nav-cta">Começar</a>
+    <a href="home-editorial.html#exams" class="nav-cta" data-i18n="nav.cta">Começar</a>
   </div>
 </nav>
 
@@ -218,16 +218,16 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
 <section class="t-hero">
   <div class="t-hero-inner">
     <div>
-      <div class="mono">00 · Quem lê o seu genoma</div>
-      <h1>A <em>medicina</em> acontece entre pessoas. Mesmo a genômica.</h1>
+      <div class="mono" data-i18n="hero.eyebrow">00 · Quem lê o seu genoma</div>
+      <h1 data-i18n-html="hero.h1">A <em>medicina</em> acontece entre pessoas. Mesmo a genômica.</h1>
     </div>
     <div class="side">
-      <p>Por trás de cada laudo da Exon existe um médico geneticista lendo seus dados com nome, sobrenome e CRM. A gente acredita que a genômica só serve pra alguma coisa quando chega num consultório — não num PDF.</p>
+      <p data-i18n="hero.p">Por trás de cada laudo da Exon existe um médico geneticista lendo seus dados com nome, sobrenome e CRM. A gente acredita que a genômica só serve pra alguma coisa quando chega num consultório — não num PDF.</p>
       <div class="meta">
-        <div><b><em>1</em> fundador</b>Geneticista responsável</div>
-        <div><b><em>12</em> anos</b>de prática clínica</div>
-        <div><b><em>+2.000</em></b>Pacientes atendidos</div>
-        <div><b>USP · UNICAMP · FGV</b>Formação</div>
+        <div><b data-i18n-html="hero.m1.b"><em>1</em> fundador</b><span data-i18n="hero.m1.s">Geneticista responsável</span></div>
+        <div><b data-i18n-html="hero.m2.b"><em>12</em> anos</b><span data-i18n="hero.m2.s">de prática clínica</span></div>
+        <div><b data-i18n-html="hero.m3.b"><em>+2.000</em></b><span data-i18n="hero.m3.s">Pacientes atendidos</span></div>
+        <div><b data-i18n="hero.m4.b">USP · UNICAMP · FGV</b><span data-i18n="hero.m4.s">Formação</span></div>
       </div>
     </div>
   </div>
@@ -238,16 +238,16 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
   <div class="founder-inner">
     <aside class="founder-card">
       <div class="founder-photo">
-        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=1100&amp;q=80&amp;auto=format&amp;fit=crop" alt="Dr. Pedro Castro">
+        <img src="assets/dr-pedro-castro.jpg" alt="Dr. Pedro Castro">
         <div class="foot">
           <b>Dr. Pedro H. S. Castro</b>
-          <span>CRM · Médico Geneticista<br>Fundador &amp; Analista Responsável</span>
+          <span data-i18n-html="founder.role">CRM · Médico Geneticista<br>Fundador &amp; Analista Responsável</span>
         </div>
       </div>
       <div class="founder-meta">
-        <div class="row"><span>Graduação</span><b>Unicamp · Medicina</b></div>
-        <div class="row"><span>Genética Médica</span><b>FMUSP</b></div>
-        <div class="row"><span>MBA</span><b>EAESP-FGV</b></div>
+        <div class="row"><span data-i18n="founder.row1.k">Graduação</span><b data-i18n="founder.row1.v">Unicamp · Medicina</b></div>
+        <div class="row"><span data-i18n="founder.row2.k">Genética Médica</span><b data-i18n="founder.row2.v">FMUSP</b></div>
+        <div class="row"><span data-i18n="founder.row3.k">MBA</span><b data-i18n="founder.row3.v">EAESP-FGV</b></div>
         <div class="row"><span data-cc-id="cc-10" style=""><br></span><b data-cc-id="cc-11" style=""><br></b></div>
         <div class="row" data-cc-id="cc-7"><span data-cc-id="cc-9" style=""><br></span><b data-cc-id="cc-8" style=""><br></b></div>
       </div>
@@ -258,27 +258,27 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
     </aside>
 
     <div class="founder-body">
-      <div class="num">01 · Fundador</div>
-      <h2>Dr. Pedro Castro <em>lê</em> cada exame que sai daqui.</h2>
+      <div class="num" data-i18n="founder.num">01 · Fundador</div>
+      <h2 data-i18n-html="founder.h2">Dr. Pedro Castro <em>lê</em> cada exame que sai daqui.</h2>
 
-      <p>Pedro é <b>médico geneticista</b> formado pela Unicamp, com especialização em Genética Médica pela <b>FMUSP</b> (Faculdade de Medicina da USP) e MBA pela EAESP-FGV. Há mais de 12 anos atende pacientes em genética médica — com foco em <em>autismo, câncer familial e doenças do desenvolvimento</em>.</p>
+      <p data-i18n-html="founder.p1">Pedro é <b>médico geneticista</b> formado pela Unicamp, com especialização em Genética Médica pela <b>FMUSP</b> (Faculdade de Medicina da USP) e MBA pela EAESP-FGV. Há mais de 12 anos atende pacientes em genética médica — com foco em <em>autismo, câncer familial e doenças do desenvolvimento</em>.</p>
 
-      <p>Antes da Exon, trabalhou na indústria farmacêutica e em laboratórios de análise molecular. Mantém sua clínica própria, a <b>PHS Genética</b> no Jardins, em São Paulo, e é co-fundador da <b>GeneID</b>, rede de clínicas multidisciplinares especializadas em autismo e doenças raras. Na Exon, é o <em>analista responsável</em> por todos os exames genéticos.</p>
+      <p data-i18n-html="founder.p2">Antes da Exon, trabalhou na indústria farmacêutica e em laboratórios de análise molecular. Mantém sua clínica própria, a <b>PHS Genética</b> no Jardins, em São Paulo, e é co-fundador da <b>GeneID</b>, rede de clínicas multidisciplinares especializadas em autismo e doenças raras. Na Exon, é o <em>analista responsável</em> por todos os exames genéticos.</p>
 
-      <blockquote class="pull">“Em mais de doze anos vi muita coisa. Mas o que mais me incomoda é paciente voltando pra casa com um laudo de trinta páginas e nenhuma conversa.”</blockquote>
+      <blockquote class="pull" data-i18n="founder.pull">“Em mais de doze anos vi muita coisa. Mas o que mais me incomoda é paciente voltando pra casa com um laudo de trinta páginas e nenhuma conversa.”</blockquote>
 
-      <p>Essa é a tese da Exon: <b>genômica sem consultório é dado</b>, não é medicina. O modelo é o mesmo da clínica do Pedro — cada laudo vem com uma conversa de ~50 minutos, em vídeo, com um médico geneticista. E os achados importantes chegam no celular do paciente <em>para a vida toda</em>, com reanálise gratuita conforme a ciência avança.</p>
+      <p data-i18n-html="founder.p3">Essa é a tese da Exon: <b>genômica sem consultório é dado</b>, não é medicina. O modelo é o mesmo da clínica do Pedro — cada laudo vem com uma conversa de ~50 minutos, em vídeo, com um médico geneticista. E os achados importantes chegam no celular do paciente <em>para a vida toda</em>, com reanálise gratuita conforme a ciência avança.</p>
 
-      <p>O Pedro também responde por todas as assinaturas clínicas da Exon junto ao <b>CRM-SP</b>. Todos os laudos saem com o nome dele — não com o carimbo de "laboratório X".</p>
+      <p data-i18n-html="founder.p4">O Pedro também responde por todas as assinaturas clínicas da Exon junto ao <b>CRM-SP</b>. Todos os laudos saem com o nome dele — não com o carimbo de "laboratório X".</p>
 
       <div class="founder-tags">
-        <span>Autismo &amp; TEA</span>
-        <span>Câncer familial</span>
-        <span>Doenças raras</span>
-        <span>Baixa estatura</span>
-        <span>Atraso de desenvolvimento</span>
-        <span>Aconselhamento oncogenético</span>
-        <span>Planejamento familiar</span>
+        <span data-i18n="tag.autism">Autismo &amp; TEA</span>
+        <span data-i18n="tag.cancer">Câncer familial</span>
+        <span data-i18n="tag.rare">Doenças raras</span>
+        <span data-i18n="tag.short">Baixa estatura</span>
+        <span data-i18n="tag.devel">Atraso de desenvolvimento</span>
+        <span data-i18n="tag.onco">Aconselhamento oncogenético</span>
+        <span data-i18n="tag.family">Planejamento familiar</span>
       </div>
     </div>
   </div>
@@ -288,27 +288,27 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
 <section class="cred" data-cc-id="cc-4">
   <div class="cred-inner">
     <div class="head">
-      <div class="num">02 · Formação</div>
-      <h2>Três universidades, doze anos de prática, um <em>fio condutor</em>: medicina traduzida.</h2>
+      <div class="num" data-i18n="cred.num">02 · Formação</div>
+      <h2 data-i18n-html="cred.h2">Três universidades, doze anos de prática, um <em>fio condutor</em>: medicina traduzida.</h2>
     </div>
 
     <div class="cred-grid">
       <div class="cred-card">
         <span class="year" data-cc-id="cc-2" style="">2009 — 2014</span>
-        <h3>Medicina</h3>
-        <p>Graduação em Medicina pela Universidade Estadual de Campinas — uma das escolas públicas mais rigorosas do Brasil em formação clínica.</p>
+        <h3 data-i18n="cred.c1.h">Medicina</h3>
+        <p data-i18n="cred.c1.p">Graduação em Medicina pela Universidade Estadual de Campinas — uma das escolas públicas mais rigorosas do Brasil em formação clínica.</p>
         <div class="inst">Unicamp · Campinas SP</div>
       </div>
       <div class="cred-card">
         <span class="year" data-cc-id="cc-3" style="">2015 — 2018</span>
-        <h3>Genética Médica</h3>
-        <p>Especialização em Genética Médica na Faculdade de Medicina da USP. Formação clínica em autismo, câncer familial, doenças raras e do desenvolvimento.</p>
+        <h3 data-i18n="cred.c2.h">Genética Médica</h3>
+        <p data-i18n="cred.c2.p">Especialização em Genética Médica na Faculdade de Medicina da USP. Formação clínica em autismo, câncer familial, doenças raras e do desenvolvimento.</p>
         <div class="inst">FMUSP · São Paulo SP</div>
       </div>
       <div class="cred-card">
         <span class="year">2019 — 2021</span>
-        <h3>MBA · Gestão</h3>
-        <p>Especialização em Administração de Empresas pela Escola de Administração de Empresas de São Paulo — a base do modelo operacional da Exon e da PHS.</p>
+        <h3 data-i18n="cred.c3.h">MBA · Gestão</h3>
+        <p data-i18n="cred.c3.p">Especialização em Administração de Empresas pela Escola de Administração de Empresas de São Paulo — a base do modelo operacional da Exon e da PHS.</p>
         <div class="inst">EAESP-FGV · São Paulo SP</div>
       </div>
     </div>
@@ -318,11 +318,11 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
 <!-- FILOSOFIA / QUOTE -->
 <section class="philo">
   <div class="philo-inner">
-    <div class="num">03 · Filosofia clínica</div>
-    <blockquote>“Só o melhor conhecimento <em>científico</em> aliado à sensibilidade e à humanidade entrega o melhor tratamento.”</blockquote>
+    <div class="num" data-i18n="philo.num">03 · Filosofia clínica</div>
+    <blockquote data-i18n-html="philo.q">“Só o melhor conhecimento <em>científico</em> aliado à sensibilidade e à humanidade entrega o melhor tratamento.”</blockquote>
     <cite>
       <b>Dr. Pedro H. S. Castro</b>
-      Fundador &amp; Médico responsável · Exon Genomics
+      <span data-i18n="philo.cite">Fundador &amp; Médico responsável · Exon Genomics</span>
     </cite>
   </div>
 </section>
@@ -331,30 +331,30 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
 <section class="pillars">
   <div class="pillars-inner">
     <div class="head">
-      <div class="num">04 · Método</div>
-      <h2>Como o Pedro <em>lê</em> um exame.</h2>
-      <div class="tag">Cada laudo passa<br>pelos quatro pilares</div>
+      <div class="num" data-i18n="pil.num">04 · Método</div>
+      <h2 data-i18n-html="pil.h2">Como o Pedro <em>lê</em> um exame.</h2>
+      <div class="tag" data-i18n-html="pil.tag">Cada laudo passa<br>pelos quatro pilares</div>
     </div>
     <div class="pillars-grid">
       <div class="pillar">
         <div class="num">01</div>
-        <h4>Anamnese completa</h4>
-        <p>Nenhum exame genético começa pelo DNA. Começa pela história do paciente, pela árvore genealógica, e pelos exames anteriores que ele já fez.</p>
+        <h4 data-i18n="pil.p1.h">Anamnese completa</h4>
+        <p data-i18n="pil.p1.p">Nenhum exame genético começa pelo DNA. Começa pela história do paciente, pela árvore genealógica, e pelos exames anteriores que ele já fez.</p>
       </div>
       <div class="pillar">
         <div class="num">02</div>
-        <h4>Análise com IA</h4>
-        <p>Ferramentas de inteligência artificial pareiam imagens e achados do paciente com um banco de milhares de síndromes — auxiliando o diagnóstico.</p>
+        <h4 data-i18n="pil.p2.h">Análise com IA</h4>
+        <p data-i18n="pil.p2.p">Ferramentas de inteligência artificial pareiam imagens e achados do paciente com um banco de milhares de síndromes — auxiliando o diagnóstico.</p>
       </div>
       <div class="pillar">
         <div class="num">03</div>
-        <h4>Leitura humana</h4>
-        <p>O laudo nunca sai direto do software. O Pedro revisa, contextualiza cada variante e decide o que é clinicamente relevante para aquele paciente.</p>
+        <h4 data-i18n="pil.p3.h">Leitura humana</h4>
+        <p data-i18n="pil.p3.p">O laudo nunca sai direto do software. O Pedro revisa, contextualiza cada variante e decide o que é clinicamente relevante para aquele paciente.</p>
       </div>
       <div class="pillar">
         <div class="num">04</div>
-        <h4>Conversa com a família</h4>
-        <p>Cada resultado chega em consulta de ~50 min, em vídeo. A família entende o laudo em português. E o painel atualiza sozinho conforme a ciência avança.</p>
+        <h4 data-i18n="pil.p4.h">Conversa com a família</h4>
+        <p data-i18n="pil.p4.p">Cada resultado chega em consulta de ~50 min, em vídeo. A família entende o laudo em português. E o painel atualiza sozinho conforme a ciência avança.</p>
       </div>
     </div>
   </div>
@@ -364,26 +364,26 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
 <section class="clinics" data-cc-id="cc-6">
   <div class="clinics-inner">
     <div class="head">
-      <div class="num">05 · Onde o trabalho acontece</div>
-      <h2>A Exon <em>não</em> nasceu no vácuo — nasceu em cima de duas clínicas que já funcionam.</h2>
+      <div class="num" data-i18n="cli.num">05 · Onde o trabalho acontece</div>
+      <h2 data-i18n-html="cli.h2">A Exon <em>não</em> nasceu no vácuo — nasceu em cima de duas clínicas que já funcionam.</h2>
     </div>
     <div class="clinics-grid">
       <div class="clinic">
-        <span class="tag">Clínica privada do fundador</span>
-        <h3>PHS <em>Genética</em></h3>
-        <p>Consultório próprio do Dr. Pedro, nos Jardins, em São Paulo. Estrutura dedicada a avaliação genética completa, com sala de coleta para exames. Atendimento em metodologia autoral, com duração de até 2 horas por consulta.</p>
+        <span class="tag" data-i18n="cli.c1.tag">Clínica privada do fundador</span>
+        <h3 data-i18n-html="cli.c1.h">PHS <em>Genética</em></h3>
+        <p data-i18n="cli.c1.p">Consultório próprio do Dr. Pedro, nos Jardins, em São Paulo. Estrutura dedicada a avaliação genética completa, com sala de coleta para exames. Atendimento em metodologia autoral, com duração de até 2 horas por consulta.</p>
         <div class="info">
-          <div spellcheck="false" data-cc-id="cc-5" style=""><b>Jardins · SP</b>Av. REBOUÇAS, 353 · 9º andar</div>
-          <div><b>Particular + convênio</b>Presencial &amp; telemedicina</div>
+          <div spellcheck="false" data-cc-id="cc-5" style=""><b data-i18n="cli.c1.b1">Jardins · SP</b><span data-i18n="cli.c1.s1">Av. REBOUÇAS, 353 · 9º andar</span></div>
+          <div><b data-i18n="cli.c1.b2">Particular + convênio</b><span data-i18n="cli.c1.s2">Presencial &amp; telemedicina</span></div>
         </div>
       </div>
       <div class="clinic">
-        <span class="tag">Rede multidisciplinar</span>
+        <span class="tag" data-i18n="cli.c2.tag">Rede multidisciplinar</span>
         <h3>GeneID</h3>
-        <p>Rede de clínicas de atendimento especializado co-fundada pelo Dr. Pedro, com supervisão clínica dele. Atendimento em Genética Médica, Pediatria, Ginecologia, Neurologia, Endocrinologia — e terapias ABA com foco em autismo (Fono, Psicologia e TO).</p>
+        <p data-i18n="cli.c2.p">Rede de clínicas de atendimento especializado co-fundada pelo Dr. Pedro, com supervisão clínica dele. Atendimento em Genética Médica, Pediatria, Ginecologia, Neurologia, Endocrinologia — e terapias ABA com foco em autismo (Fono, Psicologia e TO).</p>
         <div class="info">
-          <div><b>Multidisciplinar</b>5 especialidades + terapias</div>
-          <div><b>Co-fundador</b>Supervisão clínica</div>
+          <div><b data-i18n="cli.c2.b1">Multidisciplinar</b><span data-i18n="cli.c2.s1">5 especialidades + terapias</span></div>
+          <div><b data-i18n="cli.c2.b2">Co-fundador</b><span data-i18n="cli.c2.s2">Supervisão clínica</span></div>
         </div>
       </div>
     </div>
@@ -393,15 +393,15 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
 <!-- FINAL CTA -->
 <section class="final">
   <div class="final-inner">
-    <h2>Fala com o <em>médico</em>, não com o PDF.</h2>
-    <p class="lede">Todo exame da Exon vem com conversa de ~50 minutos, em vídeo, com um geneticista. Inclusive com o Pedro, quando o caso exige.</p>
+    <h2 data-i18n-html="final.h2">Fala com o <em>médico</em>, não com o PDF.</h2>
+    <p class="lede" data-i18n="final.p">Todo exame da Exon vem com conversa de ~50 minutos, em vídeo, com um geneticista. Inclusive com o Pedro, quando o caso exige.</p>
     <div class="ctas">
       <a href="home-editorial.html#exams" class="btn-primary">
-        Ver os seis exames
+        <span data-i18n="final.cta1">Ver os seis exames</span>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
       </a>
       <a href="upload.html" class="btn-secondary">
-        Já tenho arquivo · reanalisar
+        <span data-i18n="final.cta2">Já tenho arquivo · reanalisar</span>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
       </a>
     </div>
@@ -413,42 +413,233 @@ footer{padding:64px 4vw 40px;background:var(--bg-dark);color:rgba(255,255,255,.6
   <div class="foot-inner">
     <div class="foot-col foot-brand">
       <img src="assets/exon-wordmark-blue.svg" alt="Exon Genomics" style="filter:brightness(0) invert(1);opacity:.9">
-      <p>Medicina genômica brasileira, feita para o paciente. São Paulo, desde 2022.</p>
+      <p data-i18n="foot.brand">Medicina genômica brasileira, feita para o paciente. São Paulo, desde 2022.</p>
     </div>
     <div class="foot-col">
-      <h5>Navegação</h5>
+      <h5 data-i18n="foot.nav">Navegação</h5>
       <ul>
-        <li><a href="home-editorial.html">Home</a></li>
-        <li><a href="home-editorial.html#exams">Nossos exames</a></li>
-        <li><a href="equipe.html">Equipe</a></li>
-        <li><a href="home-editorial.html#faq">FAQ</a></li>
+        <li><a href="home-editorial.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="home-editorial.html#exams" data-i18n="foot.exams">Nossos exames</a></li>
+        <li><a href="equipe.html" data-i18n="nav.team">Equipe</a></li>
+        <li><a href="home-editorial.html#faq" data-i18n="nav.faq">FAQ</a></li>
       </ul>
     </div>
     <div class="foot-col">
-      <h5>Entradas</h5>
+      <h5 data-i18n="foot.entries">Entradas</h5>
       <ul>
-        <li><a href="upload.html">Reanalisar arquivo</a></li>
-        <li><a href="home-editorial.html#people">Depoimentos</a></li>
-        <li><a href="home-editorial.html#faq">Dúvidas</a></li>
+        <li><a href="upload.html" data-i18n="foot.reanalyze">Reanalisar arquivo</a></li>
+        <li><a href="home-editorial.html#people" data-i18n="foot.testim">Depoimentos</a></li>
+        <li><a href="home-editorial.html#faq" data-i18n="foot.help">Dúvidas</a></li>
       </ul>
     </div>
     <div class="foot-col">
-      <h5>Exon</h5>
+      <h5 data-i18n="foot.exon">Exon</h5>
       <ul>
-        <li><a href="equipe.html">Sobre nós</a></li>
-        <li><a href="#">Ciência &amp; Publicações</a></li>
-        <li><a href="#">Política de Privacidade</a></li>
-        <li><a href="#">LGPD · Dados genéticos</a></li>
-        <li><a href="#">Contato</a></li>
+        <li><a href="equipe.html" data-i18n="foot.about">Sobre nós</a></li>
+        <li><a href="#" data-i18n="foot.science">Ciência &amp; Publicações</a></li>
+        <li><a href="#" data-i18n="foot.privacy">Política de Privacidade</a></li>
+        <li><a href="#" data-i18n="foot.lgpd">LGPD · Dados genéticos</a></li>
+        <li><a href="#" data-i18n="foot.contact">Contato</a></li>
       </ul>
     </div>
   </div>
   <div class="foot-bottom">
-    <span>© 2026 Exon Genomics · CNPJ 14.xxx.xxx/0001-xx</span>
-    <span>Anvisa · CRM-SP responsável · LGPD</span>
+    <span data-i18n="foot.copy">© 2026 Exon Genomics · CNPJ 14.xxx.xxx/0001-xx</span>
+    <span data-i18n="foot.legal">Anvisa · CRM-SP responsável · LGPD</span>
   </div>
 </footer>
 
-
+<script>
+window.I18N = {
+  pt: {
+    "meta.title":"Equipe — Exon Genomics",
+    "nav.home":"Home","nav.exams":"Nossos Exames","nav.team":"Equipe","nav.faq":"FAQ","nav.cta":"Começar",
+    "hero.eyebrow":"00 · Quem lê o seu genoma",
+    "hero.h1":"A <em>medicina</em> acontece entre pessoas. Mesmo a genômica.",
+    "hero.p":"Por trás de cada laudo da Exon existe um médico geneticista lendo seus dados com nome, sobrenome e CRM. A gente acredita que a genômica só serve pra alguma coisa quando chega num consultório — não num PDF.",
+    "hero.m1.b":"<em>1</em> fundador","hero.m1.s":"Geneticista responsável",
+    "hero.m2.b":"<em>12</em> anos","hero.m2.s":"de prática clínica",
+    "hero.m3.b":"<em>+2.000</em>","hero.m3.s":"Pacientes atendidos",
+    "hero.m4.b":"USP · UNICAMP · FGV","hero.m4.s":"Formação",
+    "founder.role":"CRM · Médico Geneticista<br>Fundador &amp; Analista Responsável",
+    "founder.row1.k":"Graduação","founder.row1.v":"Unicamp · Medicina",
+    "founder.row2.k":"Genética Médica","founder.row2.v":"FMUSP",
+    "founder.row3.k":"MBA","founder.row3.v":"EAESP-FGV",
+    "founder.num":"01 · Fundador",
+    "founder.h2":"Dr. Pedro Castro <em>lê</em> cada exame que sai daqui.",
+    "founder.p1":"Pedro é <b>médico geneticista</b> formado pela Unicamp, com especialização em Genética Médica pela <b>FMUSP</b> (Faculdade de Medicina da USP) e MBA pela EAESP-FGV. Há mais de 12 anos atende pacientes em genética médica — com foco em <em>autismo, câncer familial e doenças do desenvolvimento</em>.",
+    "founder.p2":"Antes da Exon, trabalhou na indústria farmacêutica e em laboratórios de análise molecular. Mantém sua clínica própria, a <b>PHS Genética</b> no Jardins, em São Paulo, e é co-fundador da <b>GeneID</b>, rede de clínicas multidisciplinares especializadas em autismo e doenças raras. Na Exon, é o <em>analista responsável</em> por todos os exames genéticos.",
+    "founder.pull":"“Em mais de doze anos vi muita coisa. Mas o que mais me incomoda é paciente voltando pra casa com um laudo de trinta páginas e nenhuma conversa.”",
+    "founder.p3":"Essa é a tese da Exon: <b>genômica sem consultório é dado</b>, não é medicina. O modelo é o mesmo da clínica do Pedro — cada laudo vem com uma conversa de ~50 minutos, em vídeo, com um médico geneticista. E os achados importantes chegam no celular do paciente <em>para a vida toda</em>, com reanálise gratuita conforme a ciência avança.",
+    "founder.p4":"O Pedro também responde por todas as assinaturas clínicas da Exon junto ao <b>CRM-SP</b>. Todos os laudos saem com o nome dele — não com o carimbo de \"laboratório X\".",
+    "tag.autism":"Autismo & TEA","tag.cancer":"Câncer familial","tag.rare":"Doenças raras","tag.short":"Baixa estatura","tag.devel":"Atraso de desenvolvimento","tag.onco":"Aconselhamento oncogenético","tag.family":"Planejamento familiar",
+    "cred.num":"02 · Formação",
+    "cred.h2":"Três universidades, doze anos de prática, um <em>fio condutor</em>: medicina traduzida.",
+    "cred.c1.h":"Medicina","cred.c1.p":"Graduação em Medicina pela Universidade Estadual de Campinas — uma das escolas públicas mais rigorosas do Brasil em formação clínica.",
+    "cred.c2.h":"Genética Médica","cred.c2.p":"Especialização em Genética Médica na Faculdade de Medicina da USP. Formação clínica em autismo, câncer familial, doenças raras e do desenvolvimento.",
+    "cred.c3.h":"MBA · Gestão","cred.c3.p":"Especialização em Administração de Empresas pela Escola de Administração de Empresas de São Paulo — a base do modelo operacional da Exon e da PHS.",
+    "philo.num":"03 · Filosofia clínica",
+    "philo.q":"“Só o melhor conhecimento <em>científico</em> aliado à sensibilidade e à humanidade entrega o melhor tratamento.”",
+    "philo.cite":"Fundador & Médico responsável · Exon Genomics",
+    "pil.num":"04 · Método","pil.h2":"Como o Pedro <em>lê</em> um exame.","pil.tag":"Cada laudo passa<br>pelos quatro pilares",
+    "pil.p1.h":"Anamnese completa","pil.p1.p":"Nenhum exame genético começa pelo DNA. Começa pela história do paciente, pela árvore genealógica, e pelos exames anteriores que ele já fez.",
+    "pil.p2.h":"Análise com IA","pil.p2.p":"Ferramentas de inteligência artificial pareiam imagens e achados do paciente com um banco de milhares de síndromes — auxiliando o diagnóstico.",
+    "pil.p3.h":"Leitura humana","pil.p3.p":"O laudo nunca sai direto do software. O Pedro revisa, contextualiza cada variante e decide o que é clinicamente relevante para aquele paciente.",
+    "pil.p4.h":"Conversa com a família","pil.p4.p":"Cada resultado chega em consulta de ~50 min, em vídeo. A família entende o laudo em português. E o painel atualiza sozinho conforme a ciência avança.",
+    "cli.num":"05 · Onde o trabalho acontece",
+    "cli.h2":"A Exon <em>não</em> nasceu no vácuo — nasceu em cima de duas clínicas que já funcionam.",
+    "cli.c1.tag":"Clínica privada do fundador","cli.c1.h":"PHS <em>Genética</em>",
+    "cli.c1.p":"Consultório próprio do Dr. Pedro, nos Jardins, em São Paulo. Estrutura dedicada a avaliação genética completa, com sala de coleta para exames. Atendimento em metodologia autoral, com duração de até 2 horas por consulta.",
+    "cli.c1.b1":"Jardins · SP","cli.c1.s1":"Av. REBOUÇAS, 353 · 9º andar",
+    "cli.c1.b2":"Particular + convênio","cli.c1.s2":"Presencial & telemedicina",
+    "cli.c2.tag":"Rede multidisciplinar",
+    "cli.c2.p":"Rede de clínicas de atendimento especializado co-fundada pelo Dr. Pedro, com supervisão clínica dele. Atendimento em Genética Médica, Pediatria, Ginecologia, Neurologia, Endocrinologia — e terapias ABA com foco em autismo (Fono, Psicologia e TO).",
+    "cli.c2.b1":"Multidisciplinar","cli.c2.s1":"5 especialidades + terapias",
+    "cli.c2.b2":"Co-fundador","cli.c2.s2":"Supervisão clínica",
+    "final.h2":"Fala com o <em>médico</em>, não com o PDF.",
+    "final.p":"Todo exame da Exon vem com conversa de ~50 minutos, em vídeo, com um geneticista. Inclusive com o Pedro, quando o caso exige.",
+    "final.cta1":"Ver os seis exames","final.cta2":"Já tenho arquivo · reanalisar",
+    "foot.brand":"Medicina genômica brasileira, feita para o paciente. São Paulo, desde 2022.",
+    "foot.nav":"Navegação","foot.exams":"Nossos exames",
+    "foot.entries":"Entradas","foot.reanalyze":"Reanalisar arquivo","foot.testim":"Depoimentos","foot.help":"Dúvidas",
+    "foot.exon":"Exon","foot.about":"Sobre nós","foot.science":"Ciência & Publicações","foot.privacy":"Política de Privacidade","foot.lgpd":"LGPD · Dados genéticos","foot.contact":"Contato",
+    "foot.copy":"© 2026 Exon Genomics · CNPJ 14.xxx.xxx/0001-xx","foot.legal":"Anvisa · CRM-SP responsável · LGPD"
+  },
+  en: {
+    "meta.title":"Team — Exon Genomics",
+    "nav.home":"Home","nav.exams":"Our Exams","nav.team":"Team","nav.faq":"FAQ","nav.cta":"Get started",
+    "hero.eyebrow":"00 · Who reads your genome",
+    "hero.h1":"<em>Medicine</em> happens between people. Genomics too.",
+    "hero.p":"Behind every Exon report there is a medical geneticist reading your data with a name, surname and license number. We believe genomics is only useful when it reaches a doctor's office — not a PDF.",
+    "hero.m1.b":"<em>1</em> founder","hero.m1.s":"Responsible geneticist",
+    "hero.m2.b":"<em>12</em> years","hero.m2.s":"of clinical practice",
+    "hero.m3.b":"<em>+2,000</em>","hero.m3.s":"Patients seen",
+    "hero.m4.b":"USP · UNICAMP · FGV","hero.m4.s":"Education",
+    "founder.role":"License · Medical Geneticist<br>Founder &amp; Responsible Analyst",
+    "founder.row1.k":"Medical degree","founder.row1.v":"Unicamp · Medicine",
+    "founder.row2.k":"Medical Genetics","founder.row2.v":"FMUSP",
+    "founder.row3.k":"MBA","founder.row3.v":"EAESP-FGV",
+    "founder.num":"01 · Founder",
+    "founder.h2":"Dr. Pedro Castro <em>reads</em> every exam that leaves here.",
+    "founder.p1":"Pedro is a <b>medical geneticist</b> trained at Unicamp, with a specialization in Medical Genetics from <b>FMUSP</b> (USP School of Medicine) and an MBA from EAESP-FGV. For over 12 years he has been seeing patients in medical genetics — focused on <em>autism, familial cancer and developmental disorders</em>.",
+    "founder.p2":"Before Exon, he worked in the pharmaceutical industry and in molecular analysis labs. He runs his own clinic, <b>PHS Genética</b>, in Jardins, São Paulo, and co-founded <b>GeneID</b>, a network of multidisciplinary clinics specialized in autism and rare diseases. At Exon, he is the <em>responsible analyst</em> for every genetic exam.",
+    "founder.pull":"“In more than twelve years I've seen a lot. But what bothers me most is patients going home with a thirty-page report and zero conversation.”",
+    "founder.p3":"That is Exon's thesis: <b>genomics without a doctor's office is data</b>, not medicine. The model is the same as Pedro's clinic — every report comes with a ~50-minute video conversation with a medical geneticist. And important findings reach the patient's phone <em>for life</em>, with free reanalysis as science advances.",
+    "founder.p4":"Pedro also signs off on every clinical signature at Exon with <b>CRM-SP</b>. All reports go out under his name — not under a \"lab X\" stamp.",
+    "tag.autism":"Autism & ASD","tag.cancer":"Familial cancer","tag.rare":"Rare diseases","tag.short":"Short stature","tag.devel":"Developmental delay","tag.onco":"Oncogenetic counseling","tag.family":"Family planning",
+    "cred.num":"02 · Education",
+    "cred.h2":"Three universities, twelve years of practice, one <em>through-line</em>: translated medicine.",
+    "cred.c1.h":"Medicine","cred.c1.p":"Medical degree at the State University of Campinas — one of Brazil's most rigorous public schools in clinical training.",
+    "cred.c2.h":"Medical Genetics","cred.c2.p":"Specialization in Medical Genetics at the USP School of Medicine. Clinical training in autism, familial cancer, rare and developmental disorders.",
+    "cred.c3.h":"MBA · Management","cred.c3.p":"Specialization in Business Administration at the São Paulo School of Business Administration — the basis for Exon and PHS's operating model.",
+    "philo.num":"03 · Clinical philosophy",
+    "philo.q":"“Only the best <em>scientific</em> knowledge, paired with sensitivity and humanity, delivers the best treatment.”",
+    "philo.cite":"Founder & Responsible Physician · Exon Genomics",
+    "pil.num":"04 · Method","pil.h2":"How Pedro <em>reads</em> an exam.","pil.tag":"Every report passes<br>through the four pillars",
+    "pil.p1.h":"Full anamnesis","pil.p1.p":"No genetic exam starts with DNA. It starts with the patient's story, family tree, and the exams they have already had.",
+    "pil.p2.h":"AI analysis","pil.p2.p":"Artificial intelligence tools match the patient's images and findings against a database of thousands of syndromes — assisting diagnosis.",
+    "pil.p3.h":"Human reading","pil.p3.p":"The report never comes straight from software. Pedro reviews it, contextualizes each variant and decides what is clinically relevant for that patient.",
+    "pil.p4.h":"Conversation with the family","pil.p4.p":"Every result is delivered in a ~50 min video consultation. The family understands the report in plain language. And the dashboard updates itself as science advances.",
+    "cli.num":"05 · Where the work happens",
+    "cli.h2":"Exon was <em>not</em> born in a vacuum — it was born on top of two clinics that already work.",
+    "cli.c1.tag":"Founder's private clinic","cli.c1.h":"PHS <em>Genética</em>",
+    "cli.c1.p":"Dr. Pedro's own practice, in Jardins, São Paulo. Dedicated structure for full genetic evaluation, with a sample collection room. Care in his own methodology, with consultations of up to 2 hours.",
+    "cli.c1.b1":"Jardins · SP","cli.c1.s1":"Av. REBOUÇAS, 353 · 9th floor",
+    "cli.c1.b2":"Private + insurance","cli.c1.s2":"In-person & telemedicine",
+    "cli.c2.tag":"Multidisciplinary network",
+    "cli.c2.p":"Network of specialty clinics co-founded by Dr. Pedro, under his clinical supervision. Care in Medical Genetics, Pediatrics, Gynecology, Neurology, Endocrinology — and ABA therapies focused on autism (Speech, Psychology, OT).",
+    "cli.c2.b1":"Multidisciplinary","cli.c2.s1":"5 specialties + therapies",
+    "cli.c2.b2":"Co-founder","cli.c2.s2":"Clinical supervision",
+    "final.h2":"Talk to the <em>doctor</em>, not the PDF.",
+    "final.p":"Every Exon exam comes with a ~50-minute video conversation with a geneticist. Including with Pedro, when the case calls for it.",
+    "final.cta1":"See the six exams","final.cta2":"I have a file · reanalyze",
+    "foot.brand":"Brazilian genomic medicine, made for the patient. São Paulo, since 2022.",
+    "foot.nav":"Navigation","foot.exams":"Our exams",
+    "foot.entries":"Entry points","foot.reanalyze":"Reanalyze a file","foot.testim":"Stories","foot.help":"FAQ",
+    "foot.exon":"Exon","foot.about":"About us","foot.science":"Science & Publications","foot.privacy":"Privacy Policy","foot.lgpd":"LGPD · Genetic data","foot.contact":"Contact",
+    "foot.copy":"© 2026 Exon Genomics · CNPJ 14.xxx.xxx/0001-xx","foot.legal":"Anvisa · CRM-SP responsible · LGPD"
+  },
+  es: {
+    "meta.title":"Equipo — Exon Genomics",
+    "nav.home":"Home","nav.exams":"Nuestros Exámenes","nav.team":"Equipo","nav.faq":"FAQ","nav.cta":"Empezar",
+    "hero.eyebrow":"00 · Quién lee tu genoma",
+    "hero.h1":"La <em>medicina</em> ocurre entre personas. La genómica también.",
+    "hero.p":"Detrás de cada informe de Exon hay un médico genetista leyendo tus datos con nombre, apellido y matrícula. Creemos que la genómica solo sirve cuando llega a un consultorio — no a un PDF.",
+    "hero.m1.b":"<em>1</em> fundador","hero.m1.s":"Genetista responsable",
+    "hero.m2.b":"<em>12</em> años","hero.m2.s":"de práctica clínica",
+    "hero.m3.b":"<em>+2.000</em>","hero.m3.s":"Pacientes atendidos",
+    "hero.m4.b":"USP · UNICAMP · FGV","hero.m4.s":"Formación",
+    "founder.role":"Matrícula · Médico Genetista<br>Fundador &amp; Analista Responsable",
+    "founder.row1.k":"Carrera de Medicina","founder.row1.v":"Unicamp · Medicina",
+    "founder.row2.k":"Genética Médica","founder.row2.v":"FMUSP",
+    "founder.row3.k":"MBA","founder.row3.v":"EAESP-FGV",
+    "founder.num":"01 · Fundador",
+    "founder.h2":"El Dr. Pedro Castro <em>lee</em> cada examen que sale de aquí.",
+    "founder.p1":"Pedro es <b>médico genetista</b> formado por la Unicamp, con especialización en Genética Médica por la <b>FMUSP</b> (Facultad de Medicina de la USP) y MBA por la EAESP-FGV. Hace más de 12 años atiende pacientes en genética médica — con foco en <em>autismo, cáncer familiar y trastornos del desarrollo</em>.",
+    "founder.p2":"Antes de Exon, trabajó en la industria farmacéutica y en laboratorios de análisis molecular. Mantiene su propia clínica, <b>PHS Genética</b> en Jardins, São Paulo, y es co-fundador de <b>GeneID</b>, red de clínicas multidisciplinarias especializadas en autismo y enfermedades raras. En Exon es el <em>analista responsable</em> de todos los exámenes genéticos.",
+    "founder.pull":"“En más de doce años he visto mucho. Pero lo que más me incomoda es ver al paciente volver a casa con un informe de treinta páginas y ninguna conversación.”",
+    "founder.p3":"Esa es la tesis de Exon: <b>genómica sin consultorio es dato</b>, no es medicina. El modelo es el mismo de la clínica de Pedro — cada informe viene con una conversación de ~50 minutos, en video, con un médico genetista. Y los hallazgos importantes llegan al celular del paciente <em>de por vida</em>, con reanálisis gratuito a medida que la ciencia avanza.",
+    "founder.p4":"Pedro también responde por todas las firmas clínicas de Exon ante el <b>CRM-SP</b>. Todos los informes salen con su nombre — no con el sello de un \"laboratorio X\".",
+    "tag.autism":"Autismo & TEA","tag.cancer":"Cáncer familiar","tag.rare":"Enfermedades raras","tag.short":"Talla baja","tag.devel":"Retraso del desarrollo","tag.onco":"Asesoría oncogenética","tag.family":"Planificación familiar",
+    "cred.num":"02 · Formación",
+    "cred.h2":"Tres universidades, doce años de práctica, un <em>hilo conductor</em>: medicina traducida.",
+    "cred.c1.h":"Medicina","cred.c1.p":"Carrera de Medicina en la Universidad Estatal de Campinas — una de las escuelas públicas más rigurosas de Brasil en formación clínica.",
+    "cred.c2.h":"Genética Médica","cred.c2.p":"Especialización en Genética Médica en la Facultad de Medicina de la USP. Formación clínica en autismo, cáncer familiar, enfermedades raras y del desarrollo.",
+    "cred.c3.h":"MBA · Gestión","cred.c3.p":"Especialización en Administración de Empresas en la Escola de Administração de Empresas de São Paulo — la base del modelo operativo de Exon y de PHS.",
+    "philo.num":"03 · Filosofía clínica",
+    "philo.q":"“Solo el mejor conocimiento <em>científico</em> sumado a la sensibilidad y la humanidad entrega el mejor tratamiento.”",
+    "philo.cite":"Fundador & Médico responsable · Exon Genomics",
+    "pil.num":"04 · Método","pil.h2":"Cómo Pedro <em>lee</em> un examen.","pil.tag":"Cada informe pasa<br>por los cuatro pilares",
+    "pil.p1.h":"Anamnesis completa","pil.p1.p":"Ningún examen genético empieza por el ADN. Empieza por la historia del paciente, el árbol genealógico y los exámenes anteriores que ya hizo.",
+    "pil.p2.h":"Análisis con IA","pil.p2.p":"Herramientas de inteligencia artificial cruzan imágenes y hallazgos del paciente con un banco de miles de síndromes — apoyando el diagnóstico.",
+    "pil.p3.h":"Lectura humana","pil.p3.p":"El informe nunca sale directo del software. Pedro lo revisa, contextualiza cada variante y decide qué es clínicamente relevante para ese paciente.",
+    "pil.p4.h":"Conversación con la familia","pil.p4.p":"Cada resultado llega en consulta de ~50 min, en video. La familia entiende el informe en lenguaje claro. Y el panel se actualiza solo a medida que la ciencia avanza.",
+    "cli.num":"05 · Dónde sucede el trabajo",
+    "cli.h2":"Exon <em>no</em> nació en el vacío — nació encima de dos clínicas que ya funcionan.",
+    "cli.c1.tag":"Clínica privada del fundador","cli.c1.h":"PHS <em>Genética</em>",
+    "cli.c1.p":"Consultorio propio del Dr. Pedro, en Jardins, São Paulo. Estructura dedicada a evaluación genética completa, con sala de toma de muestras. Atención en metodología propia, con consultas de hasta 2 horas.",
+    "cli.c1.b1":"Jardins · SP","cli.c1.s1":"Av. REBOUÇAS, 353 · 9º piso",
+    "cli.c1.b2":"Particular + obra social","cli.c1.s2":"Presencial & telemedicina",
+    "cli.c2.tag":"Red multidisciplinaria",
+    "cli.c2.p":"Red de clínicas de atención especializada co-fundada por el Dr. Pedro, bajo su supervisión clínica. Atención en Genética Médica, Pediatría, Ginecología, Neurología, Endocrinología — y terapias ABA con foco en autismo (Fonoaudiología, Psicología, TO).",
+    "cli.c2.b1":"Multidisciplinaria","cli.c2.s1":"5 especialidades + terapias",
+    "cli.c2.b2":"Co-fundador","cli.c2.s2":"Supervisión clínica",
+    "final.h2":"Habla con el <em>médico</em>, no con el PDF.",
+    "final.p":"Todo examen de Exon viene con conversación de ~50 minutos, en video, con un genetista. Incluso con Pedro, cuando el caso lo exige.",
+    "final.cta1":"Ver los seis exámenes","final.cta2":"Ya tengo archivo · reanalizar",
+    "foot.brand":"Medicina genómica brasileña, hecha para el paciente. São Paulo, desde 2022.",
+    "foot.nav":"Navegación","foot.exams":"Nuestros exámenes",
+    "foot.entries":"Entradas","foot.reanalyze":"Reanalizar archivo","foot.testim":"Testimonios","foot.help":"Dudas",
+    "foot.exon":"Exon","foot.about":"Sobre nosotros","foot.science":"Ciencia & Publicaciones","foot.privacy":"Política de Privacidad","foot.lgpd":"LGPD · Datos genéticos","foot.contact":"Contacto",
+    "foot.copy":"© 2026 Exon Genomics · CNPJ 14.xxx.xxx/0001-xx","foot.legal":"Anvisa · CRM-SP responsable · LGPD"
+  }
+};
+function applyLang(lang){
+  var dict = window.I18N[lang] || window.I18N.pt;
+  document.documentElement.lang = lang;
+  document.documentElement.dataset.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if (dict[k] != null) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if (dict[k] != null) el.innerHTML = dict[k];
+  });
+  if (dict['meta.title']) document.title = dict['meta.title'];
+  document.querySelectorAll('.nav-langs button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('exon.lang', lang); }catch(e){}
+}
+document.querySelectorAll('.nav-langs button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+});
+(function(){
+  var saved;
+  try{ saved = localStorage.getItem('exon.lang'); }catch(e){}
+  if (saved && window.I18N[saved]) applyLang(saved);
+})();
+</script>
 
 </body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
