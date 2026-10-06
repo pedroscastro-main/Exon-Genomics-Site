@@ -2,9 +2,13 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/privacy", "destination": "https://app.exongenomics.com/privacy", "permanent": false },
-    { "source": "/privacidade", "destination": "https://app.exongenomics.com/privacy", "permanent": false },
-    { "source": "/terms", "destination": "https://app.exongenomics.com/terms", "permanent": false },
-    { "source": "/termos", "destination": "https://app.exongenomics.com/terms", "permanent": false }
+    { "source": "/privacidade", "destination": "/privacy", "permanent": false },
+    { "source": "/termos", "destination": "/terms", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/privacy", "destination": "https://app.exongenomics.com/privacy" },
+    { "source": "/terms", "destination": "https://app.exongenomics.com/terms" },
+    { "source": "/_next/:path*", "destination": "https://app.exongenomics.com/_next/:path*" },
+    { "source": "/exon-wordmark-blue.svg", "destination": "https://app.exongenomics.com/exon-wordmark-blue.svg" }
   ]
 }
