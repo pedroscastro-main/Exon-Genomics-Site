@@ -1,4 +1,10 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/privacy", "destination": "https://app.exongenomics.com/privacy", "permanent": false },
+    { "source": "/privacidade", "destination": "https://app.exongenomics.com/privacy", "permanent": false },
+    { "source": "/terms", "destination": "https://app.exongenomics.com/terms", "permanent": false },
+    { "source": "/termos", "destination": "https://app.exongenomics.com/terms", "permanent": false }
+  ]
 }
