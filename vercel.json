@@ -8,6 +8,9 @@
   "rewrites": [
     { "source": "/privacy", "destination": "https://app.exongenomics.com/privacy" },
     { "source": "/terms", "destination": "https://app.exongenomics.com/terms" },
+    { "source": "/contrato", "destination": "https://app.exongenomics.com/contrato" },
+    { "source": "/exon/privacy", "destination": "https://app.exongenomics.com/exon/privacy" },
+    { "source": "/exon/terms", "destination": "https://app.exongenomics.com/exon/terms" },
     { "source": "/_next/:path*", "destination": "https://app.exongenomics.com/_next/:path*" },
     { "source": "/exon-wordmark-blue.svg", "destination": "https://app.exongenomics.com/exon-wordmark-blue.svg" }
   ]
